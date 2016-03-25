@@ -1,0 +1,27 @@
+#convidados #part_one{
+ display: inherit; 
+}
+
+#convidados #part_two{
+  display: none;    
+}
+
+#convidados #part_two a{
+  color: #fff;
+  text-align: right;
+  text-decoration: none;
+}
+
+#convidados #part_two a:hover{
+  color: #F8B9B7;
+  text-align: right;
+  text-decoration: none;
+}
+
+#convidados #tableConvidados{
+    text-align: left;
+}
+
+#convidados #tableConvidados tbody tr:hover{
+    /*background-color: #f2836d;*/
+}

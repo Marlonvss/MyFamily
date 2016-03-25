@@ -1,0 +1,172 @@
+*{
+    padding: 0;
+    margin: 0;
+    border: 0;
+    font-family: calibri;
+    text-align: center;
+}
+
+body { overflow-x: hidden; }
+
+@font-face {
+    font-family: "English";
+        src: url("../font/English_.ttf") format("truetype");
+        src: url("./font/English_.ttf") format("truetype");
+}
+
+@font-face {
+    font-family: Champignon;
+    src: url(../font/Champignon.ttf) format(‘truetype’);
+}
+
+nav{
+    width: 100%;
+    height: 20px;
+    text-align: left;
+    padding-left: 10px;
+}
+
+#background{
+    height: 100%;    
+    width: 100%;
+    background-image: url(../img/arvore.png);
+    background-repeat: no-repeat;
+    background-position: center;
+    background-origin: content-box;
+    background-size: contain;
+}
+
+#topo{
+    height: 10%;
+    background-image: url(../img/background.png);
+    font-family: English;
+    font-size: 4em;
+    padding: 2% 0;
+}
+
+#corpo{
+    height: 1000px;
+    background-image: url(../img/background2.png);
+    font-family: English;
+    font-size: 1em;
+    padding: 2% 0;
+}
+
+.container{
+    width: 100%;
+    margin-bottom: 20px;
+    background-image: url(../img/background3.png);
+}
+
+#confirmarPresenca{
+}
+
+#confirmarPresenca form{
+    padding: 2%;
+    margin: 0 auto;
+    width: 20%;
+    //text-align: left;    
+}
+
+#confirmarPresenca input{
+    width: 100%;
+    border: 1px solid #bbb;
+    font-size: 1em;
+}
+
+#confirmarPresenca input[type="text"]{
+    display: block;
+}
+
+#confirmarPresenca input[type="submit"]{
+    background-color: #ddd;    
+    color: #000;
+    width: 50%;
+}
+
+#confirmarPresenca input[type="submit"]:hover{
+    background-color: #bbb;
+    cursor: pointer;
+}
+
+#mapa{
+/*    width: 100%;
+    height: 500px;*/
+}
+
+#mapa .bloco{
+/*    width: calc(50% - 25px);
+    float: left;
+    margin: 10px;
+    border: 1px solid #bbb;*/
+}
+
+#mapa .bloco iframe{
+/*    position: relative;
+    width: 100%;*/
+}
+
+/*Trabalhando com Grupo*/
+#ListaConvidados label{
+    padding: 0 0 0 20px;
+    text-align: left;
+    display: list-item; 
+}
+
+.grupo{
+    border: 2px solid #bbb;    
+    padding: 10px;
+    margin: 20px;
+    position: relative;
+    font-weight: lighter;
+}
+
+.grupo h2{
+    position: absolute;
+    padding: 5px;
+    top: -20px;
+    font-size: 1.3em;
+    background-color: #fff;
+    font-weight: lighter;
+    color: #000;
+}
+
+.grupo ul li{
+    display: block;
+    text-decoration: none;
+    clear: left;
+    margin: 0 auto;
+    width: 5%;
+    text-align: left;
+}
+
+.grupo input, .grupo label{
+    width: 100%;
+    text-align: left;
+    text-decoration: none;    
+}
+
+.grupo table{
+    text-align: left;
+    width: 100%;
+}
+
+.grupo table .cabecalho{
+    font-weight: bold;
+    width: 100%;
+}
+
+.grupo table tr{
+
+}
+
+.grupo table tr a{
+    display: block;
+    text-decoration: none;
+}
+
+.grupo table tr:hover{
+}
+
+.grupo table .cabecalho:hover{
+}
