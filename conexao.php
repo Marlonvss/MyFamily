@@ -10,15 +10,15 @@ function Conecta() {
         $Host = 'localhost';
         $User = 'root';
         $Pass = 'root';
-        $BD = 'casamento';
+        $BD = 'myfamily';
         
     } else {
 
-        // Configuração HOSTINGER...
-        $Host = '127.0.0.1';
-        $User = 'u812671016_casam';
-        $Pass = 'casamento';
-        $BD = 'u812671016_casam';
+        // Configuração Local...
+        $Host = 'localhost';
+        $User = 'root';
+        $Pass = 'root';
+        $BD = 'myfamily';
         
     }
 
