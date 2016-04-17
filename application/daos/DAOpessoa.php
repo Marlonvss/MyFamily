@@ -9,13 +9,13 @@ include_once './conexao.php';
 
 Conecta();
 
-class DAObaixa {
+class DAOpessoa {
 
     private function ModelValid($model) {
-        return (get_class($model) == 'baixa');
+        return (get_class($model) == 'pessoa');
     }
 
-    function GetByID($model) {
+    function GetByID(&$model) {
 
         if ($this->ModelValid($model)) {
 
@@ -34,17 +34,20 @@ class DAObaixa {
                     . ' WHERE ID = ' . $model->id
                     . ' ORDER BY ID ';
             $rs = mysql_query($strsql);
-            echo $strsql;
 
-            while ($row = mysql_fetch_array($rs)) {
-                $model->RefreshByRow($row);
-                break;
+            if (!$rs) {
+                return new CONSTerro(true, mysql_error(), __CLASS__, __FUNCTION__);
+            } else {
+                while ($row = mysql_fetch_array($rs)) {
+                    $model->RefreshByRow($row);
+                    break;
+                }
+                return new CONSTerro(false, '', __CLASS__, __FUNCTION__);
             }
-            return $model;
         }
     }
 
-    function GetList($model, $Where = NULL) {
+    function GetList($model, &$list, $Where = NULL) {
 
         if ($this->ModelValid($model)) {
             $Ar = $model->getArray();
@@ -63,22 +66,29 @@ class DAObaixa {
                     . ' ORDER BY ID ';
             $rs = mysql_query($strsql);
 
+            if (!$rs) {
+                return new CONSTerro(true, mysql_error(), __CLASS__, __FUNCTION__);
+            } else {
+                return new CONSTerro(false, '', __CLASS__, __FUNCTION__);
+            }
+
             // Cria ARRAY
-            $lst = array();
+            $list = array();
             $i = 0;
 
             // Loop pelo RecordSet
             while ($row = mysql_fetch_array($rs)) {
                 $model->RefreshByRow($row);
-                $lst[$i] = clone $model;
+                $list[$i] = clone $model;
                 $i++;
             }
 
-            return $lst;
+        } else {
+            return new CONSTerro(true, 'Modelo inválido!', __CLASS__, __FUNCTION__);
         }
     }
 
-    function Add($model) {
+    function Add(&$model) {
 
         if ($this->ModelValid($model)) {
             $Ar = $model->getArray();
@@ -103,15 +113,15 @@ class DAObaixa {
             $strsql = 'insert into ' . $model->getTable() . ' ( ' . $Fields . ' ) '
                     . 'values (' . $Values . ')';
             if (!mysql_query($strsql)) {
-                return mysql_error();
+                return new CONSTerro(true, mysql_error(), __CLASS__, __FUNCTION__);
             } else {
                 $model->id = mysql_insert_id();
-                return '';
+                return new CONSTerro(false, '', __CLASS__, __FUNCTION__);
             }
         }
     }
 
-    function Update($model) {
+    function Update(&$model) {
 
         if ($this->ModelValid($model)) {
             $Ar = $model->getArray();
@@ -131,9 +141,9 @@ class DAObaixa {
                     . ' where id = ' . $model->id;
 
             if (!mysql_query($strsql)) {
-                return mysql_error();
+                return new CONSTerro(true, mysql_error(), __CLASS__, __FUNCTION__);
             } else {
-                return '';
+                return new CONSTerro(false, '', __CLASS__, __FUNCTION__);
             }
         }
     }
@@ -145,9 +155,9 @@ class DAObaixa {
                     . ' where id = ' . $model->id;
 
             if (!mysql_query($strsql)) {
-                return mysql_error();
+                return new CONSTerro(true, mysql_error(), __CLASS__, __FUNCTION__);
             } else {
-                return '';
+                return new CONSTerro(false, '', __CLASS__, __FUNCTION__);
             }
         }
     }

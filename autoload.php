@@ -1,23 +1,28 @@
 <?php
 
-echo $_SERVER['REQUEST_URI'];
-
 function autoloadModel($className) {
-    $filename = $_SERVER['DOCUMENT_ROOT'] . "/myfamily/models/" . $className . ".php";
+    $filename = $_SERVER['DOCUMENT_ROOT'] . "/myfamily/application/models/" . $className . ".php";
     if (is_readable($filename)) {
         include_once $filename;
     }
 }
 
 function autoloadController($className) {
-    $filename = $_SERVER['DOCUMENT_ROOT'] . "/myfamily/controllers/" . $className . ".php";
+    $filename = $_SERVER['DOCUMENT_ROOT'] . "/myfamily/application/controllers/" . $className . ".php";
     if (is_readable($filename)) {
         include_once $filename;
     }
 }
 
 function autoloadDAO($className) {
-    $filename = $_SERVER['DOCUMENT_ROOT'] . "/myfamily/daos/" . $className . ".php";
+    $filename = $_SERVER['DOCUMENT_ROOT'] . "/myfamily/application/daos/" . $className . ".php";
+    if (is_readable($filename)) {
+        include_once $filename;
+    }
+}
+
+function autoloadCONST($className) {
+    $filename = $_SERVER['DOCUMENT_ROOT'] . "/myfamily/application/consts/" . $className . ".php";
     if (is_readable($filename)) {
         include_once $filename;
     }
@@ -26,3 +31,4 @@ function autoloadDAO($className) {
 spl_autoload_register("autoloadModel");
 spl_autoload_register("autoloadController");
 spl_autoload_register("autoloadDAO");
+spl_autoload_register("autoloadCONST");

@@ -2,6 +2,7 @@
 
 class usuario {
 
+    public $memento;
     public $id;
     public $login;
     public $senha;
@@ -12,8 +13,21 @@ class usuario {
         $this->login = (string) $_login;
         $this->senha = (string) $_senha;
     }
-    
-    function RefreshByRow($row){
+
+    function SaveMemento() {
+        if (isset($memento)) {
+            unset($memento);
+        }
+        $memento = new usuario($this->id, $this->login, $this->senha);
+    }
+
+    function GetMemento() {
+        if (isset($memento)) {
+            return $memento;
+        }
+    }
+
+    function RefreshByRow($row) {
         $this->id = $row['id'];
         $this->login = $row['login'];
         $this->senha = $row['senha'];
@@ -24,9 +38,9 @@ class usuario {
         $arr = array();
 
         $arr['id'] = $this->id;
-        $arr['login'] = '"'. $this->login .'"';
-        $arr['senha'] = '"'. $this->senha .'"';
-        
+        $arr['login'] = '"' . $this->login . '"';
+        $arr['senha'] = '"' . $this->senha . '"';
+
         return $arr;
     }
 
