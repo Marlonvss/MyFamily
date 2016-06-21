@@ -1,23 +1,23 @@
 <?php
 $_IDEDITAR = ($_GET['edit']);
 
-$_DESCRICAO = ($_POST['descricao']);
+$_VENCIMENTO= ($_POST['vencimento']);
 
-$Controll = new CONTROLLERcartao();
+$Controll = new CONTROLLERfatura();
 
-if ($_DESCRICAO <> "") {
+if ($_VENCIMENTO <> "") {
 
-    $Obj = new cartao($_IDEDITAR, $_DESCRICAO);
+    $Obj = new fatura($_IDEDITAR, $_VENCIMENTO, $Obj->id_titulo);
 
     $erro = $Controll->Save($Obj);
     if ($erro->erro) {
         echo $erro->mensagem;
     } else {
-        echo '<META http-equiv="refresh" content="0;URL=?pag=' . $pag_cartoes . '">';
+        echo '<META http-equiv="refresh" content="0;URL=?pag=' . $pag_faturas . '">';
     }
 }
 
-$Obj = new cartao($_IDEDITAR);
+$Obj = new fatura($_IDEDITAR);
 $erro = $Controll->RecuperaByID($Obj);
 if ($erro->erro) {
     echo $erro->mensagem;
@@ -26,13 +26,13 @@ if ($erro->erro) {
 ?>
 <script>
     function Cancelar() {
-        window.location.href = location.href.replace(/\?.*/gi, "") + "?pag=<?php echo $pag_cartoes ?>";
+        window.location.href = location.href.replace(/\?.*/gi, "") + "?pag=<?php echo $pag_faturas ?>";
     }
 </script>
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Editar Cartão de crédito</h1>
+        <h1 class="page-header">Editar Fatura</h1>
     </div>
 </div>
 <div class="panel panel-default">
@@ -45,9 +45,9 @@ if ($erro->erro) {
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">Descrição</label>
+                <label class="col-sm-2 control-label">Vencimento</label>
                 <div class="col-sm-10">
-                    <input type="text" class="form-control" name="descricao" placeholder="Descrição" value="<?php echo $Obj->descricao ?>" required>
+                    <input type="text" class="form-control" name="vencimento" placeholder="Vencimento" value="<?php echo $Obj->vencimento ?>" required>
                 </div>
             </div>
             <div class="form-group">

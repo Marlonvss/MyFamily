@@ -4,7 +4,7 @@ error_reporting(E_ERROR);
 
 include_once './autoload.php';
 
-class CONTROLLERcartao {
+class CONTROLLERcartao extends CONTROLLERbase {
 
     private function GetDAO() {
         return new DAOcartao();

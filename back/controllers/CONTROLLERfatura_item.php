@@ -4,7 +4,7 @@ error_reporting(E_ERROR);
 
 include_once './autoload.php';
 
-class CONTROLLERfatura_item {
+class CONTROLLERfatura_item extends CONTROLLERbase {
 
     private function GetDAO() {
         return new DAOfatura_item();
