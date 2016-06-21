@@ -58,7 +58,7 @@ class rateio {
 
     // FieldsForCrud
     function getTable() {
-        return 'RATEIOS';
+        return 'rateios';
     }
 
 }

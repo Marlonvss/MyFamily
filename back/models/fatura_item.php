@@ -46,7 +46,7 @@ class fatura_item {
 
     // FieldsForCrud
     function getTable() {
-        return 'FATURAS_ITENS';
+        return 'faturas_itens';
     }
 
 }

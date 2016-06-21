@@ -42,7 +42,7 @@ class cartao {
 
     // FieldsForCrud
     function getTable() {
-        return 'CARTOES';
+        return 'cartoes';
     }
 
 }

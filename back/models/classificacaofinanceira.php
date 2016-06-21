@@ -42,7 +42,7 @@ class classificacaofinanceira {
 
     // FieldsForCrud
     function getTable() {
-        return 'CLASSIFICACOESFINANCEIRAS';
+        return 'classificacoesfinanceiras';
     }
 
 }

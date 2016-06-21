@@ -42,7 +42,7 @@ class centrocusto {
 
     // FieldsForCrud
     function getTable() {
-        return 'CENTROSCUSTOS';
+        return 'centroscustos';
     }
 
 }

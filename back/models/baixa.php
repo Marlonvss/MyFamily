@@ -63,7 +63,7 @@ class baixa {
 
     // FieldsForCrud
     function getTable() {
-        return 'BAIXAS';
+        return 'baixas';
     }
     
 }

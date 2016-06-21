@@ -50,7 +50,7 @@ class pessoa {
 
     // FieldsForCrud
     function getTable() {
-        return 'PESSOAS';
+        return 'pessoas';
     }
 
 }

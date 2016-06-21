@@ -33,10 +33,10 @@ abstract class DAObase {
                 }
             }
 
-            $strsql = 'SELECT ' . $Fields
-                    . '  FROM ' . $model->getTable()
-                    . ' WHERE ID = ' . $model->id
-                    . ' ORDER BY ID ';
+            $strsql = 'select ' . $fields
+                    . '  from ' . $model->gettable()
+                    . ' where id = ' . $model->id
+                    . ' order by id ';
             $rs = mysql_query(strtolower($strsql));
 
             if (!$rs) {
@@ -66,10 +66,10 @@ abstract class DAObase {
                 }
             }
 
-            $strsql = 'SELECT ' . $Fields
-                    . '  FROM ' . $model->getTable()
-                    . $Where
-                    . ' ORDER BY ID ';
+            $strsql = 'select ' . $fields
+                    . '  from ' . $model->gettable()
+                    . $where
+                    . ' order by id ';
             $rs = mysql_query(strtolower($strsql));
 
             if (!$rs) {

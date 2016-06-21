@@ -47,7 +47,7 @@ class usuario {
 
     // FieldsForCrud
     function getTable() {
-        return 'USUARIOS';
+        return 'usuarios';
     }
 
 }

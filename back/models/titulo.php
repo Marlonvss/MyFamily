@@ -70,7 +70,7 @@ class titulo {
 
     // FieldsForCrud
     function getTable() {
-        return 'TITULOS';
+        return 'titulos';
     }
 
 }
