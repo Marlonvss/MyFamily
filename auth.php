@@ -2,30 +2,31 @@
 
 error_reporting(E_ALL);
 session_start();
-include_once './model/model_usuario.php';
-include_once './controller/controller_usuario.php';
+include_once './autoload.php';
+include_once './back/consts/links.php';
 
 // Buscando Login e Senha digitados pelo usuario
-$_LOGIN = ($_POST['login']);
+$_LOGIN = ($_POST['usuario']);
 $_SENHA = ($_POST['senha']);
 
-// Limpa Sessão
-unset($_SESSION['adm']);
-unset($_SESSION['msg']);
-
 // Recupera Todos Usuarios
-$ArrayUsuarios = RecuperaTodosUsuarios();
+$userControl = new CONTROLLERusuario();
 
-foreach ($ArrayUsuarios as &$usuario) {
+$erro = $userControl->RecuperaLista($userList);
+if ($erro->erro) {
+    echo $erro->mensagem;
+} else {
+     
+    foreach ($userList as &$user) {
+        if ((strtolower($user->login) == strtolower($_LOGIN)) and ( strtolower($user->senha) == strtolower($_SENHA))) {
+            setcookie("myfamily", $user->id);
+            $_SESSION['userLogged'] = serialize($user);
+            break;
+        }
+    }
 
-    if ((strtolower($usuario->login) == strtolower($_LOGIN)) and ( strtolower($usuario->senha) == strtolower($_SENHA))) {
-
-        setcookie("Casamento", $usuario->id);
-        $_SESSION['adm'] = serialize($usuario);
-        break;
+    if (!isset($_SESSION['userLogged'])) {
+        $_SESSION['alert'] = 'Usuário ou senha nao confere!';
     }
 }
-if (!isset($_SESSION['adm'])) {
-    $_SESSION['msg'] = 'Usuário ou senha nao confere!';
-}
-header("Location:admin.php");
+header('location:'. $pag_index .'.php');

@@ -1,30 +1,62 @@
 <?php
 
+$Path1 = './';
+$Path2 = $Path1 . '../';
+$Path3 = $Path2 . '../';
+
 function autoloadModel($className) {
-    $filename = $_SERVER['DOCUMENT_ROOT'] . "/myfamily/application/models/" . $className . ".php";
-    if (is_readable($filename)) {
-        include_once $filename;
+    global $Path1, $Path2, $Path3;
+    $filename = "back/models/" . $className . ".php";
+    if (is_readable($Path1 . $filename)) {
+        include_once $Path1 . $filename;
+    }
+    if (is_readable($Path2 . $filename)) {
+        include_once $Path2 . $filename;
+    }
+    if (is_readable($Path3 . $filename)) {
+        include_once $Path3 . $filename;
     }
 }
 
 function autoloadController($className) {
-    $filename = $_SERVER['DOCUMENT_ROOT'] . "/myfamily/application/controllers/" . $className . ".php";
-    if (is_readable($filename)) {
-        include_once $filename;
+    global $Path1, $Path2, $Path3;
+    $filename = "back/controllers/" . $className . ".php";
+    if (is_readable($Path1 . $filename)) {
+        include_once $Path1 . $filename;
+    }
+    if (is_readable($Path2 . $filename)) {
+        include_once $Path2 . $filename;
+    }
+    if (is_readable($Path3 . $filename)) {
+        include_once $Path3 . $filename;
     }
 }
 
 function autoloadDAO($className) {
-    $filename = $_SERVER['DOCUMENT_ROOT'] . "/myfamily/application/daos/" . $className . ".php";
-    if (is_readable($filename)) {
-        include_once $filename;
+    global $Path1, $Path2, $Path3;
+    $filename = "back/daos/" . $className . ".php";
+    if (is_readable($Path1 . $filename)) {
+        include_once $Path1 . $filename;
+    }
+    if (is_readable($Path2 . $filename)) {
+        include_once $Path2 . $filename;
+    }
+    if (is_readable($Path3 . $filename)) {
+        include_once $Path3 . $filename;
     }
 }
 
 function autoloadCONST($className) {
-    $filename = $_SERVER['DOCUMENT_ROOT'] . "/myfamily/application/consts/" . $className . ".php";
-    if (is_readable($filename)) {
-        include_once $filename;
+    global $Path1, $Path2, $Path3;
+    $filename = "back/consts/" . $className . ".php";
+    if (is_readable($Path1 . $filename)) {
+        include_once $Path1 . $filename;
+    }
+    if (is_readable($Path2 . $filename)) {
+        include_once $Path2 . $filename;
+    }
+    if (is_readable($Path3 . $filename)) {
+        include_once $Path3 . $filename;
     }
 }
 
