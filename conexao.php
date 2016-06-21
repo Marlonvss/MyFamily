@@ -15,10 +15,10 @@ function Conecta() {
     } else {
 
         // Configuração Local...
-        $Host = 'localhost';
-        $User = 'root';
-        $Pass = 'root';
-        $BD = 'myfamily';
+        $Host = 'mysql.hostinger.com.br';
+        $User = 'u812671016_famil';
+        $Pass = 'familia';
+        $BD = 'u812671016_famil';
         
     }
 
