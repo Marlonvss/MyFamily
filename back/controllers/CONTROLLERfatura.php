@@ -4,10 +4,10 @@ error_reporting(E_ERROR);
 
 include_once './autoload.php';
 
-class CONTROLLERcartao {
+class CONTROLLERfatura {
 
     private function GetDAO() {
-        return new DAOcartao();
+        return new DAOfatura();
     }
 
     function RecuperaByID(&$model) {
@@ -15,7 +15,7 @@ class CONTROLLERcartao {
     }
 
     function RecuperaLista(&$list, $Where = NULL) {
-        $model = new cartao();
+        $model = new fatura();
         return $this->GetDAO()->GetList($model, $list, $Where);
     }
 
@@ -28,7 +28,7 @@ class CONTROLLERcartao {
     }
 
     function Remove($id) {
-        $model = new cartao($id);
+        $model = new fatura($id);
         return $this->GetDAO()->Delete($model);
     }
 
