@@ -37,7 +37,7 @@ abstract class DAObase {
                     . '  FROM ' . $model->getTable()
                     . ' WHERE ID = ' . $model->id
                     . ' ORDER BY ID ';
-            $rs = mysql_query($strsql);
+            $rs = mysql_query(strtolower($strsql));
 
             if (!$rs) {
                 return new CONSTerro(true, mysql_error(), __CLASS__, __FUNCTION__);
@@ -70,7 +70,7 @@ abstract class DAObase {
                     . '  FROM ' . $model->getTable()
                     . $Where
                     . ' ORDER BY ID ';
-            $rs = mysql_query($strsql);
+            $rs = mysql_query(strtolower($strsql));
 
             if (!$rs) {
                 return new CONSTerro(true, mysql_error(), __CLASS__, __FUNCTION__);
@@ -119,7 +119,7 @@ abstract class DAObase {
 
             $strsql = 'insert into ' . $model->getTable() . ' ( ' . $Fields . ' ) '
                     . 'values (' . $Values . ')';
-            if (!mysql_query($strsql)) {
+            if (!mysql_query(strtolower($strsql))) {
                 return new CONSTerro(true, mysql_error(), __CLASS__, __FUNCTION__);
             } else {
                 $model->id = mysql_insert_id();
@@ -149,7 +149,7 @@ abstract class DAObase {
                     . '   set ' . $FieldsAndValues
                     . ' where id = ' . $model->id;
 
-            if (!mysql_query($strsql)) {
+            if (!mysql_query(strtolower($strsql))) {
                 return new CONSTerro(true, mysql_error(), __CLASS__, __FUNCTION__);
             } else {
                 return new CONSTerro(false, '', __CLASS__, __FUNCTION__);
@@ -165,7 +165,7 @@ abstract class DAObase {
                     . '  from ' . $model->getTable()
                     . ' where id = ' . $model->id;
 
-            if (!mysql_query($strsql)) {
+            if (!mysql_query(strtolower($strsql))) {
                 return new CONSTerro(true, mysql_error(), __CLASS__, __FUNCTION__);
             } else {
                 return new CONSTerro(false, '', __CLASS__, __FUNCTION__);
