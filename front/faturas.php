@@ -9,12 +9,12 @@ if (isset($_GET['remove'])) {
     }
 }
 
-function MakeLinkOptions($id) {
+function MakeLinkOptions($id, $id_titulo) {
     return
-            '<a href="?pag=' . $GLOBALS["$pag_titulospagar"] . '&card=' . $id . '"><span class="glyphicon glyphicon-credit-card"></span> Titulo </a>' .
-            '<a href="?pag=' . $GLOBALS["pag_faturas_itens"] . '&card=' . $id . '"><span class="glyphicon glyphicon-credit-card"></span> Itens </a>' .
-            '<a href="?pag=' . $_SESSION['pag'] . '_edit&edit=' . $id . '"><span class="glyphicon glyphicon-pencil"></span> Editar </a>' .
-            '<a href="?pag=' . $_SESSION['pag'] . '&remove=' . $id . '"><span class="glyphicon glyphicon-remove"></span> Excluir </a>';
+//            '<a href="?pag=' . $GLOBALS["$pag_titulospagar"] . '_edit&edit=' . $id_titulo . '"><span class="glyphicon glyphicon-credit-card"></span> Titulo </a>' .
+            '<a href="?pag=' . $GLOBALS["pag_faturas_itens"] . '&fat=' . $id . '"><span class="glyphicon glyphicon-credit-card"></span> Itens </a>' .
+            '<a href="?pag=' . $_SESSION['pag'] . '_edit&edit=' . $id . '&card='.$_GET['card'].'"><span class="glyphicon glyphicon-pencil"></span> Editar </a>' .
+            '<a href="?pag=' . $_SESSION['pag'] . '&card='.$_GET['card'].'&remove=' . $id . '"><span class="glyphicon glyphicon-remove"></span> Excluir </a>';
 }
 ?>
 
@@ -26,7 +26,7 @@ function MakeLinkOptions($id) {
         
 <div class="panel panel-default">
     <div class="panel-heading">
-        <a href="?pag=<?php echo $_SESSION['pag'] ?>_add">Novo</a>
+        <a href="?pag=<?php echo $_SESSION['pag'] ?>_add&card=<?php echo $_GET['card'] ?>">Novo</a>
     </div>
     <div class="panel-body">
         <table class="table table-striped table-bordered table-hover">
@@ -40,7 +40,7 @@ function MakeLinkOptions($id) {
             <tbody>
 
                 <?php
-                $erro = $Controll->RecuperaLista($List);
+                $erro = $Controll->RecuperaLista($List,' where id_cartao = '.$_GET['card']);
                 if ($erro->erro) {
                     echo $erro->mensagem;
                 } else {

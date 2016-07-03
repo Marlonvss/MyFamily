@@ -11,6 +11,7 @@ if (isset($_GET['remove'])) {
 
 function MakeLinkOptions($id) {
     return
+//            '<a href="?pag=' . $_SESSION['pag'] . '_baixar&=' . $id . '"><span class="glyphicon glyphicon-pencil"></span> Baixar </a>' .
             '<a href="?pag=' . $_SESSION['pag'] . '_edit&edit=' . $id . '"><span class="glyphicon glyphicon-pencil"></span> Editar </a>' .
             '<a href="?pag=' . $_SESSION['pag'] . '&remove=' . $id . '"><span class="glyphicon glyphicon-remove"></span> Excluir </a>';
 }
@@ -18,7 +19,7 @@ function MakeLinkOptions($id) {
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Títulos a receber</h1>
+        <h1 class="page-header">Títulos a Pagar</h1>
     </div>
 </div>
         
@@ -30,14 +31,14 @@ function MakeLinkOptions($id) {
         <table class="table table-striped table-bordered table-hover">
             <thead>
                 <tr>
-                    <td>ID</td>
+                    <td class="col-md-1">ID</td>
                     <td>ID_Pessoa</td>
                     <td>Valor</td>
                     <td>Vencimento</td>
                     <td>Parcela</td>
-                    <td>Obs</td>
+                    <td class="col-md-3">Obs</td>
                     <td>Situação</td>
-                    <td>Opções</td>
+                    <td class="col-md-2">Opções</td>
                 </tr>
             </thead>
             <tbody>
@@ -49,14 +50,14 @@ function MakeLinkOptions($id) {
                 } else {
                     foreach ($List as &$obj) {
                         echo '<tr>'
-                        . '<td class="col-md-1">' . $obj->id . '</td>'
+                        . '<td>' . $obj->id . '</td>'
                         . '<td>' . $obj->id_pessoa . '</td>'
                         . '<td>' . $obj->valor . '</td>'
                         . '<td>' . $obj->vencimento . '</td>'
-                        . '<td>' . $obj->parcela_atual . '/ '. $obj->parcela_final .'</td>'
+                        . '<td>' . $obj->parcela_atual . '/'. $obj->parcela_final .'</td>'
                         . '<td>' . $obj->observacao . '</td>'
-                        . '<td>' . $obj->situacao . '</td>'
-                        . '<td class="col-md-2">' . MakeLinkOptions($obj->id) . '</td>'
+                        . '<td>' . $obj->getSituacaoTexto() . '</td>'
+                        . '<td>' . MakeLinkOptions($obj->id) . '</td>'
                         . '</tr>';
                     }
                 }

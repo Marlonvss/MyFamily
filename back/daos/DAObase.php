@@ -48,6 +48,8 @@ abstract class DAObase {
                 }
                 return new CONSTerro(false, '', __CLASS__, __FUNCTION__);
             }
+        } else {
+            return new CONSTerro(true, 'Modelo inválido', __CLASS__, __FUNCTION__);
         }
     }
 
@@ -88,8 +90,8 @@ abstract class DAObase {
 
                 return new CONSTerro(false, '', __CLASS__, __FUNCTION__);
             }
-        } else {
-            return new CONSTerro(true, 'Modelo inválido!', __CLASS__, __FUNCTION__);
+        }  else {
+            return new CONSTerro(true, 'Modelo inválido', __CLASS__, __FUNCTION__);
         }
     }
 
@@ -105,13 +107,9 @@ abstract class DAObase {
                 if ($key <> 'id') {
                     if ($Fields == '') {
                         $Fields = $key;
-                    } else {
-                        $Fields = $Fields . ', ' . $key;
-                    }
-
-                    if ($Values == '') {
                         $Values = $val;
                     } else {
+                        $Fields = $Fields . ', ' . $key;
                         $Values = $Values . ', ' . $val;
                     }
                 }
@@ -119,12 +117,13 @@ abstract class DAObase {
 
             $strsql = 'insert into ' . $model->getTable() . ' ( ' . $Fields . ' ) '
                     . 'values (' . $Values . ')';
-            if (!mysql_query(strtolower($strsql))) {
                 return new CONSTerro(true, mysql_error(), __CLASS__, __FUNCTION__);
             } else {
                 $model->id = mysql_insert_id();
                 return new CONSTerro(false, '', __CLASS__, __FUNCTION__);
             }
+        } else {
+            return new CONSTerro(true, 'Modelo inválido', __CLASS__, __FUNCTION__);
         }
     }
 
@@ -154,6 +153,8 @@ abstract class DAObase {
             } else {
                 return new CONSTerro(false, '', __CLASS__, __FUNCTION__);
             }
+        } else {
+            return new CONSTerro(true, 'Modelo inválido', __CLASS__, __FUNCTION__);
         }
     }
 
@@ -170,6 +171,8 @@ abstract class DAObase {
             } else {
                 return new CONSTerro(false, '', __CLASS__, __FUNCTION__);
             }
+        } else {
+            return new CONSTerro(true, 'Modelo inválido', __CLASS__, __FUNCTION__);
         }
     }
 

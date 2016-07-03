@@ -1,42 +1,39 @@
 <?php
 $_IDEDITAR = ($_GET['edit']);
-$_IDCARTAO = ($_GET['card']);
 
-$_VENCIMENTO = ($_POST['vencimento']);
+$_DESCRICAO = ($_POST['descricao']);
+$_VALOR = ($_POST['valor']);
 
-$Controll = new CONTROLLERfatura();
+$_IDFATURA = ($_GET['fat']);
+
+$Controll = new CONTROLLERfatura_item();
 $Controll_titulo = new CONTROLLERtitulo();
 
-if ($_VENCIMENTO <> "") {
+if (($_DESCRICAO <> "") && ($_VALOR <> "")) {
 
-    $Obj = new fatura($_IDEDITAR);
+    $Obj = new fatura_item($_IDEDITAR);
     $erro = $Controll->RecuperaByID($Obj);
     if ($erro->erro) {
         echo $erro->mensagem;
     } else {
-        $Obj->vencimento = $_VENCIMENTO;
+        $Obj->descricao = $_DESCRICAO;
+        $Obj->valor = $_VALOR;
         $erro = $Controll->Save($Obj);
         if ($erro->erro) {
             echo $erro->mensagem;
         } else {
-            $Obj_titulo = new titulo($Obj->id_titulo);
-            $erro = $Controll_titulo->RecuperaByID($Obj_titulo);
+            $Obj_titulo = new titulo();
+            $erro = $Controll_titulo->AtualizaTituloDeFatura($_IDFATURA);
             if ($erro->erro) {
                 echo $erro->mensagem;
             } else {
-                $Obj_titulo->vencimento = $_VENCIMENTO;
-                $erro = $Controll_titulo->Save($Obj_titulo);
-                if ($erro->erro) {
-                    echo $erro->mensagem;
-                } else {
-                    echo '<META http-equiv="refresh" content="0;URL=?pag=' . $pag_faturas . '&card=' . $_IDCARTAO . '">';
-                }
+                echo '<META http-equiv="refresh" content="0;URL=?pag=' . $pag_faturas_itens . '&fat=' . $_IDFATURA . '">';
             }
         }
     }
 }
 
-$Obj = new fatura($_IDEDITAR);
+$Obj = new fatura_item($_IDEDITAR);
 $erro = $Controll->RecuperaByID($Obj);
 if ($erro->erro) {
     echo $erro->mensagem;
@@ -44,13 +41,13 @@ if ($erro->erro) {
 ?>
 <script>
     function Cancelar() {
-        window.location.href = location.href.replace(/\?.*/gi, "") + "?pag=<?php echo $pag_faturas ?>&card=<?php echo $_GET['card'] ?>";
+        window.location.href = location.href.replace(/\?.*/gi, "") + "?pag=<?php echo $pag_faturas_itens ?>&fat=<?php echo $_GET['fat'] ?>";
     }
 </script>
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Editar Faturas</h1>
+        <h1 class="page-header">Editar Itens de Fatura</h1>
     </div>
 </div>
 <div class="panel panel-default">
@@ -63,9 +60,15 @@ if ($erro->erro) {
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-sm-2 control-label">Vencimento</label>
+                <label class="col-sm-2 control-label">Descrição</label>
                 <div class="col-sm-10">
-                    <input type="date" class="form-control" name="vencimento" placeholder="Vencimento" value="<?php echo $Obj->vencimento ?>" required>
+                    <input type="text" class="form-control" name="descricao" placeholder="Descricao" value="<?php echo $Obj->descricao ?>" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Valor</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="valor" placeholder="Valor" value="<?php echo $Obj->valor ?>" required>
                 </div>
             </div>
             <div class="form-group">
