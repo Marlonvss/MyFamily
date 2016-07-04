@@ -19,7 +19,7 @@ function MakeLinkOptions($id) {
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Títulos a Pagar</h1>
+        <h1 class="page-header">Títulos a Receber</h1>
     </div>
 </div>
         
@@ -44,7 +44,7 @@ function MakeLinkOptions($id) {
             <tbody>
 
                 <?php
-                $erro = $Controll->RecuperaListaPagar($List);
+                $erro = $Controll->RecuperaListaReceber($List);
                 if ($erro->erro) {
                     echo $erro->mensagem;
                 } else {

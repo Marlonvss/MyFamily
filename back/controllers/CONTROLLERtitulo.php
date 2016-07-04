@@ -65,7 +65,7 @@ class CONTROLLERtitulo extends CONTROLLERbase {
     }
 
     function Remove($id) {
-        $model = new t($id);
+        $model = new titulo($id);
         return $this->GetDAO()->Delete($model);
     }
 

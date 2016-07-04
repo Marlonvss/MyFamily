@@ -6,19 +6,19 @@ function Conecta() {
 
 //    if ($_SERVER['HTTP_HOST'] == 'localhost') {
 //
-        // Configuração Local...
-        $Host = 'localhost';
-        $User = 'root';
-        $Pass = 'root';
-        $BD = 'myfamily';
+//        // Configuração Local...
+//        $Host = 'localhost';
+//        $User = 'root';
+//        $Pass = 'root';
+//        $BD = 'myfamily';
 //        
 //    } else {
 
         // Configuração Local...
-//        $Host = 'mysql.hostinger.com.br';
-//        $User = 'u812671016_famil';
-//        $Pass = 'familia';
-//        $BD = 'u812671016_famil';
+        $Host = 'mysql.hostinger.com.br';
+        $User = 'u812671016_famil';
+        $Pass = 'familia';
+        $BD = 'u812671016_famil';
         
 //    }
 

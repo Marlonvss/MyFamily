@@ -86,9 +86,6 @@ if (!isset($_SESSION['userLogged'])) {
                                 <a href="?pag=<?php echo $pag_dashboard ?>"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
                             </li>
                             <li>
-                                <a href="?pag=<?php echo $pag_beneficiarios ?>"><i class="fa fa-users fa-fw"></i> Beneficiário / Devedor</a>
-                            </li>
-                            <li>
                                 <a href="#"><i class="fa fa-usd fa-fw"></i> Títulos<span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
                                     <li>

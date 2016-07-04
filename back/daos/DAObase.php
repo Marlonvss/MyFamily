@@ -33,11 +33,11 @@ abstract class DAObase {
                 }
             }
 
-            $strsql = 'select ' . $Fields
-                    . '  from ' . $model->getTable()
+            $strsql = 'select ' . strtolower($Fields)
+                    . '  from ' . strtolower($model->getTable())
                     . ' where id = ' . $model->id
                     . ' order by id ';
-            $rs = mysql_query(strtolower($strsql));
+            $rs = mysql_query($strsql);
 
             if (!$rs) {
                 return new CONSTerro(true, mysql_error(), __CLASS__, __FUNCTION__);
@@ -68,11 +68,11 @@ abstract class DAObase {
                 }
             }
 
-            $strsql = 'select ' . $Fields
-                    . '  from ' . $model->getTable()
+            $strsql = 'select ' . strtolower($Fields)
+                    . '  from ' . strtolower($model->getTable())
                     . $Where
                     . ' order by id ';
-            $rs = mysql_query(strtolower($strsql));
+            $rs = mysql_query($strsql);
 
             if (!$rs) {
                 return new CONSTerro(true, mysql_error(), __CLASS__, __FUNCTION__);
@@ -115,8 +115,10 @@ abstract class DAObase {
                 }
             }
 
-            $strsql = 'insert into ' . $model->getTable() . ' ( ' . $Fields . ' ) '
+            $strsql = 'insert into ' . strtolower($model->getTable()) . ' ( ' . strtolower($Fields) . ' ) '
                     . 'values (' . $Values . ')';
+            
+            if (!mysql_query($strsql)) {
                 return new CONSTerro(true, mysql_error(), __CLASS__, __FUNCTION__);
             } else {
                 $model->id = mysql_insert_id();
@@ -137,18 +139,18 @@ abstract class DAObase {
             foreach ($Ar as $key => $val) {
                 if ($key <> 'id') {
                     if ($FieldsAndValues == '') {
-                        $FieldsAndValues = $key . ' = ' . $val;
+                        $FieldsAndValues = strtolower($key) . ' = ' . $val;
                     } else {
                         $FieldsAndValues = $FieldsAndValues . ', ' . $key . ' = ' . $val;
                     }
                 }
             }
 
-            $strsql = 'update ' . $model->getTable()
+            $strsql = 'update ' . strtolower($model->getTable())
                     . '   set ' . $FieldsAndValues
                     . ' where id = ' . $model->id;
 
-            if (!mysql_query(strtolower($strsql))) {
+            if (!mysql_query($strsql)) {
                 return new CONSTerro(true, mysql_error(), __CLASS__, __FUNCTION__);
             } else {
                 return new CONSTerro(false, '', __CLASS__, __FUNCTION__);
@@ -163,10 +165,10 @@ abstract class DAObase {
             $this->Conect();
 
             $strsql = 'delete '
-                    . '  from ' . $model->getTable()
+                    . '  from ' . strtolower($model->getTable())
                     . ' where id = ' . $model->id;
 
-            if (!mysql_query(strtolower($strsql))) {
+            if (!mysql_query($strsql)) {
                 return new CONSTerro(true, mysql_error(), __CLASS__, __FUNCTION__);
             } else {
                 return new CONSTerro(false, '', __CLASS__, __FUNCTION__);

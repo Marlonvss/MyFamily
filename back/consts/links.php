@@ -3,7 +3,6 @@
 $pag_index = 'index';
 
 $pag_dashboard = 'dashboard';
-$pag_beneficiarios = 'pessoas';
 $pag_titulosreceber = 'titulosreceber';
 $pag_titulospagar = 'titulospagar';
 $pag_usuarios = 'usuarios';
