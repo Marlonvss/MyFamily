@@ -35,11 +35,14 @@ unset($_SESSION['userLogged']);
         <!-- Custom Fonts -->
         <link href="./front/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
+        <!-- Angular -->
+        <script type="text/javascript" src="./front/js/angular.js"></script>
+
     </head>
 
-    <body>
+    <body ng-app="myFamilly">
 
-        <div class="container">
+        <div class="container" ng-controller="myFamillyController">
             <div class="row">
                 <div class="col-md-4 col-md-offset-4">
                     <div class="login-panel panel panel-default">

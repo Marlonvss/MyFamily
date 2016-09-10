@@ -1,60 +1,49 @@
-<?php
+<script src="../front/_usuarios/usuariosController.js"></script>
+<script src="../front/_usuarios/usuariosService.js"></script>
 
-$Controll = new CONTROLLERusuario();
-
-if (isset($_GET['remove'])) {
-    $erro = $Controll->Remove($_GET['remove']);
-    if ($erro->erro) {
-        echo $erro->mensagem;
-    }
-}
-
-function MakeLinkOptions($id) {
-    return
-            '<a href="?pag=' . $_SESSION['pag'] . '_edit&edit=' . $id . '"><span class="glyphicon glyphicon-pencil"></span> Editar </a>' .
-            '<a href="?pag=' . $_SESSION['pag'] . '&remove=' . $id . '"><span class="glyphicon glyphicon-remove"></span> Excluir </a>';
-}
-?>
-
-<div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header">Usuários</h1>
-    </div>
-</div>
-
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <a href="?pag=<?php echo $_SESSION['pag'] ?>_add">Novo</a>
-    </div>
-    <div class="panel-body">
-        <table class="table table-striped table-bordered table-hover">
-            <thead>
-                <tr>
-                    <td>ID</td>
-                    <td>Login</td>
-                    <td>Senha</td>
-                    <td>Opções</td>
-                </tr>
-            </thead>
-            <tbody>
-
-                <?php
-                $erro = $Controll->RecuperaLista($List);
-                if ($erro->erro) {
-                    echo $erro->mensagem;
-                } else {
-
-                    foreach ($List as &$obj) {
-                        echo '<tr>'
-                        . '<td class="col-md-1">' . $obj->id . '</td>'
-                        . '<td class="col-md-5">' . $obj->login . '</td>'
-                        . '<td>' . $obj->senha . '</td>'
-                        . '<td class="col-md-2">' . MakeLinkOptions($obj->id) . '</td>'
-                        . '</tr>';
-                    }
-                }
-                ?>
-            </tbody>
-        </table>   
+<div class="row" ng-controller="usuariosController">
+    <h3 ng-bind="title"></h3>
+    <div class="panel">
+        <div class="panel-menu admin-form theme-primary">
+            <div class="row" data-animate="['500','fadeIn']">
+                <div class="col-md-9">
+                    <label class="append-icon">
+                        <button href="#" class="btn btn-primary btn-alt fs13 active-animation" data-effect="mfp-flipInX" ng-click="exibirModal('novoContato.html')">
+                            Novo &nbsp;
+                            <i class="fa fa-plus right"></i>
+                        </button>
+                    </label>
+                </div>
+                <div>
+                    <label class="append-icon">
+                        <input type="text" class="gui-input" placeholder="Buscar..." ng-model="filtro" />
+                        <label class="field-icon">
+                            <i class="fa fa-search"></i>
+                        </label>
+                    </label>
+                </div>
+            </div>
+        </div>
+        <div class="panel-body pn">
+            <div class="table-responsive">
+                <table class="table admin-form theme-warning tc-checkbox-1 fs13">
+                    <thead>
+                        <tr class="bg-light">
+                            <th class="col-md-3">Login</th>
+                            <th class="col-md-1">Ações</th>
+                        </tr>
+                    </thead>
+                    <tbody ng-repeat="item in listAll| filter : filtro">
+                        <tr>
+                            <td ng-bind="item.login"></td>
+                            <td>
+                                <button class="btn btn-primary" href="#" ng-click="msg('editando')"><i class="fa fa-pencil" aria-hidden="true"></i></button>
+                                <button class="btn btn-danger" ng-click="msg('excluindo')"><i class="fa fa-trash-o" aria-hidden="true"></i></button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>

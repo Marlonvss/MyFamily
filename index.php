@@ -2,18 +2,18 @@
 error_reporting(E_ERROR);
 session_start();
 
-include './autoload.php';
-include './../autoload.php';
+include_once './autoload.php';
+include_once './../autoload.php';
 
-include './back/consts/links.php';
-include './../back/consts/links.php';
+include_once './back/consts/links.php';
+include_once './../back/consts/links.php';
 
 if (!isset($_SESSION['userLogged'])) {
     header('location:./login.php');
 }
 ?>
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br" ng-app="myFamilyApp">
 
     <head>
 
@@ -44,7 +44,6 @@ if (!isset($_SESSION['userLogged'])) {
         <!-- Custom Fonts -->
         <link href="./front/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
         <link href="./../front/bower_components/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
-
     </head>
 
     <body>
@@ -167,4 +166,11 @@ if (!isset($_SESSION['userLogged'])) {
     <script src="./front/dist/js/sb-admin-2.js"></script>
     <script src="./../front/dist/js/sb-admin-2.js"></script>
 
+    <!-- Angular -->
+    <script src="./front/js/angular.js"></script>
+    <script>
+        angular.module("myFamilyApp", []);
+    </script>    
+    <script src="./front/_usuarios/usuariosController.js"></script>
+    <script src="./front/_usuarios/usuariosService.js"></script>
 </html>
