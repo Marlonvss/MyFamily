@@ -1,6 +1,6 @@
 <?php
 
-$Controll = new CONTROLLERusuario();
+$Controll = new CONTROLLERtitulo();
 
 if (isset($_GET['remove'])) {
     $erro = $Controll->Remove($_GET['remove']);
@@ -11,6 +11,7 @@ if (isset($_GET['remove'])) {
 
 function MakeLinkOptions($id) {
     return
+            '<a href="?pag=' . $_SESSION['pag'] . '_baixar&=' . $id . '"><span class="glyphicon glyphicon-save"></span> Baixar </a>' .
             '<a href="?pag=' . $_SESSION['pag'] . '_edit&edit=' . $id . '"><span class="glyphicon glyphicon-pencil"></span> Editar </a>' .
             '<a href="?pag=' . $_SESSION['pag'] . '&remove=' . $id . '"><span class="glyphicon glyphicon-remove"></span> Excluir </a>';
 }
@@ -18,10 +19,10 @@ function MakeLinkOptions($id) {
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Usuários</h1>
+        <h1 class="page-header">Títulos a Receber</h1>
     </div>
 </div>
-
+        
 <div class="panel panel-default">
     <div class="panel-heading">
         <a href="?pag=<?php echo $_SESSION['pag'] ?>_add">Novo</a>
@@ -30,26 +31,33 @@ function MakeLinkOptions($id) {
         <table class="table table-striped table-bordered table-hover">
             <thead>
                 <tr>
-                    <td>ID</td>
-                    <td>Login</td>
-                    <td>Senha</td>
-                    <td>Opções</td>
+                    <td class="col-md-1">ID</td>
+                    <td>ID_Pessoa</td>
+                    <td>Valor</td>
+                    <td>Vencimento</td>
+                    <td>Parcela</td>
+                    <td class="col-md-3">Obs</td>
+                    <td>Situação</td>
+                    <td class="col-md-3">Opções</td>
                 </tr>
             </thead>
             <tbody>
 
                 <?php
-                $erro = $Controll->RecuperaLista($List);
+                $erro = $Controll->RecuperaListaReceber($List);
                 if ($erro->erro) {
                     echo $erro->mensagem;
                 } else {
-
                     foreach ($List as &$obj) {
                         echo '<tr>'
-                        . '<td class="col-md-1">' . $obj->id . '</td>'
-                        . '<td class="col-md-5">' . $obj->login . '</td>'
-                        . '<td>' . $obj->senha . '</td>'
-                        . '<td class="col-md-2">' . MakeLinkOptions($obj->id) . '</td>'
+                        . '<td>' . $obj->id . '</td>'
+                        . '<td>' . $obj->pessoa . '</td>'
+                        . '<td>' . $obj->valor . '</td>'
+                        . '<td>' . $obj->vencimento . '</td>'
+                        . '<td>' . $obj->parcela_atual . '/'. $obj->parcela_final .'</td>'
+                        . '<td>' . $obj->observacao . '</td>'
+                        . '<td>' . $obj->getSituacaoTexto() . '</td>'
+                        . '<td>' . MakeLinkOptions($obj->id) . '</td>'
                         . '</tr>';
                     }
                 }

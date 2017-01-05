@@ -1,6 +1,6 @@
 <?php
 
-$Controll = new CONTROLLERusuario();
+$Controll = new CONTROLLERclassificacaofinanceira();
 
 if (isset($_GET['remove'])) {
     $erro = $Controll->Remove($_GET['remove']);
@@ -18,10 +18,10 @@ function MakeLinkOptions($id) {
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Usuários</h1>
+        <h1 class="page-header">Classificações Financeiras</h1>
     </div>
 </div>
-
+        
 <div class="panel panel-default">
     <div class="panel-heading">
         <a href="?pag=<?php echo $_SESSION['pag'] ?>_add">Novo</a>
@@ -31,8 +31,7 @@ function MakeLinkOptions($id) {
             <thead>
                 <tr>
                     <td>ID</td>
-                    <td>Login</td>
-                    <td>Senha</td>
+                    <td>Descrição</td>
                     <td>Opções</td>
                 </tr>
             </thead>
@@ -47,8 +46,7 @@ function MakeLinkOptions($id) {
                     foreach ($List as &$obj) {
                         echo '<tr>'
                         . '<td class="col-md-1">' . $obj->id . '</td>'
-                        . '<td class="col-md-5">' . $obj->login . '</td>'
-                        . '<td>' . $obj->senha . '</td>'
+                        . '<td>' . $obj->descricao . '</td>'
                         . '<td class="col-md-2">' . MakeLinkOptions($obj->id) . '</td>'
                         . '</tr>';
                     }

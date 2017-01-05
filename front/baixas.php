@@ -1,24 +1,17 @@
 <?php
 
-$Controll = new CONTROLLERusuario();
+$Controll = new CONTROLLERbaixa();
 
-if (isset($_GET['remove'])) {
-    $erro = $Controll->Remove($_GET['remove']);
-    if ($erro->erro) {
-        echo $erro->mensagem;
-    }
-}
-
-function MakeLinkOptions($id) {
-    return
-            '<a href="?pag=' . $_SESSION['pag'] . '_edit&edit=' . $id . '"><span class="glyphicon glyphicon-pencil"></span> Editar </a>' .
-            '<a href="?pag=' . $_SESSION['pag'] . '&remove=' . $id . '"><span class="glyphicon glyphicon-remove"></span> Excluir </a>';
-}
+//function MakeLinkOptions($id) {
+//    return
+//            '<a href="?pag=' . $_SESSION['pag'] . '_edit&edit=' . $id . '"><span class="glyphicon glyphicon-pencil"></span> Editar </a>' .
+//            '<a href="?pag=' . $_SESSION['pag'] . '&remove=' . $id . '"><span class="glyphicon glyphicon-remove"></span> Excluir </a>';
+//}
 ?>
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Usuários</h1>
+        <h1 class="page-header">Baixa de título</h1>
     </div>
 </div>
 

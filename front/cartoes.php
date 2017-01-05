@@ -1,6 +1,6 @@
 <?php
 
-$Controll = new CONTROLLERusuario();
+$Controll = new CONTROLLERcartao();
 
 if (isset($_GET['remove'])) {
     $erro = $Controll->Remove($_GET['remove']);
@@ -11,6 +11,7 @@ if (isset($_GET['remove'])) {
 
 function MakeLinkOptions($id) {
     return
+            '<a href="?pag=' . $GLOBALS["pag_faturas"] . '&card=' . $id . '"><span class="glyphicon glyphicon-credit-card"></span> Faturas </a>' .
             '<a href="?pag=' . $_SESSION['pag'] . '_edit&edit=' . $id . '"><span class="glyphicon glyphicon-pencil"></span> Editar </a>' .
             '<a href="?pag=' . $_SESSION['pag'] . '&remove=' . $id . '"><span class="glyphicon glyphicon-remove"></span> Excluir </a>';
 }
@@ -18,10 +19,10 @@ function MakeLinkOptions($id) {
 
 <div class="row">
     <div class="col-lg-12">
-        <h1 class="page-header">Usuários</h1>
+        <h1 class="page-header">Cartões</h1>
     </div>
 </div>
-
+        
 <div class="panel panel-default">
     <div class="panel-heading">
         <a href="?pag=<?php echo $_SESSION['pag'] ?>_add">Novo</a>
@@ -31,8 +32,7 @@ function MakeLinkOptions($id) {
             <thead>
                 <tr>
                     <td>ID</td>
-                    <td>Login</td>
-                    <td>Senha</td>
+                    <td>Descrição</td>
                     <td>Opções</td>
                 </tr>
             </thead>
@@ -47,9 +47,8 @@ function MakeLinkOptions($id) {
                     foreach ($List as &$obj) {
                         echo '<tr>'
                         . '<td class="col-md-1">' . $obj->id . '</td>'
-                        . '<td class="col-md-5">' . $obj->login . '</td>'
-                        . '<td>' . $obj->senha . '</td>'
-                        . '<td class="col-md-2">' . MakeLinkOptions($obj->id) . '</td>'
+                        . '<td>' . $obj->descricao . '</td>'
+                        . '<td class="col-md-3">' . MakeLinkOptions($obj->id) . '</td>'
                         . '</tr>';
                     }
                 }
