@@ -1,6 +1,25 @@
 <?php
+$_LOGIN = ($_POST['login']);
+$_SENHA = ($_POST['senha']);
 
-$Controll = new CONTROLLERusuario();
+
+if (($_LOGIN <> "") && ($_SENHA <> "")) {
+
+    var_dump($_LOGIN . 'meu segundo ex');
+    $Obj = new usuario(0, $_LOGIN, $_SENHA);
+
+    $Controll = new CONTROLLERusuarios();
+    $erro = $Controll->Save($Obj);
+
+    if ($erro->erro) {
+        echo $erro->mensagem;
+    } else {
+        echo '<META http-equiv="refresh" content="0;URL=?pag=' . $pag_usuarios . '">';
+    }
+}
+?>
+<?php
+$Controll = new CONTROLLERusuarios();
 
 if (isset($_GET['remove'])) {
     $erro = $Controll->Remove($_GET['remove']);
@@ -11,8 +30,9 @@ if (isset($_GET['remove'])) {
 
 function MakeLinkOptions($id) {
     return
-            '<a href="?pag=' . $_SESSION['pag'] . '_edit&edit=' . $id . '"><span class="glyphicon glyphicon-pencil"></span> Editar </a>' .
-            '<a href="?pag=' . $_SESSION['pag'] . '&remove=' . $id . '"><span class="glyphicon glyphicon-remove"></span> Excluir </a>';
+      '<button type="button" class="btn btn-sm btn-link" id="botao" value="'. $id .'" data-toggle="modal" data-target="#editar">Editar</button>';
+//            '<a href="?pag=' . $_SESSION['pag'] . '_edit&edit=' . $id . '"><span class="glyphicon glyphicon-pencil"></span> Editar </a>' .
+//            '<a href="?pag=' . $_SESSION['pag'] . '&remove=' . $id . '"><span class="glyphicon glyphicon-remove"></span> Excluir </a>';
 }
 ?>
 
@@ -24,7 +44,7 @@ function MakeLinkOptions($id) {
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        <a href="?pag=<?php echo $_SESSION['pag'] ?>_add">Novo</a>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#novo">Novo</button>
     </div>
     <div class="panel-body">
         <table class="table table-striped table-bordered table-hover">
@@ -56,5 +76,44 @@ function MakeLinkOptions($id) {
                 ?>
             </tbody>
         </table>   
+    </div>
+</div>
+
+<!-- Modal -->
+<div class="modal fade" id="novo" tabindex="-1" role="dialog" aria-labelledby="novoLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                </button>
+                <h4 class="modal-title" id="novoLabel">Novo</h4>
+            </div>
+            <div class="modal-body">
+                <?php include 'usuarios_add.php'; ?>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="save()" class="btn btn-primary" data-dismiss="modal">Salvar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="editar" tabindex="-1" role="dialog" aria-labelledby="editarLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                </button>
+                <h4 class="modal-title" id="editarLabel">Editar</h4>
+            </div>
+            <div class="modal-body">
+                <?php include 'usuarios_edit.php'; ?>
+            </div>
+            <div class="modal-footer">
+                <button type="button" onclick="save()" class="btn btn-primary" data-dismiss="modal">Salvar</button>
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
+            </div>
+        </div>
     </div>
 </div>
