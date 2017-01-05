@@ -1,6 +1,6 @@
 <?php
 
-$Controll = new CONTROLLERcartao();
+$Controll = new CONTROLLERcartoes();
 
 if (isset($_GET['remove'])) {
     $erro = $Controll->Remove($_GET['remove']);

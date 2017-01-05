@@ -3,11 +3,13 @@ $_IDEDITAR = ($_GET['edit']);
 
 $_DESCRICAO = ($_POST['descricao']);
 $_VALOR = ($_POST['valor']);
+$_PARCELAATUAL = ($_POST['parcelaatual']);
+$_PARCELAFINAL = ($_POST['parcelafinal']);
 
 $_IDFATURA = ($_GET['fat']);
 
-$Controll = new CONTROLLERfatura_item();
-$Controll_titulo = new CONTROLLERtitulo();
+$Controll = new CONTROLLERfaturas_itens();
+$Controll_titulo = new CONTROLLERtitulos();
 
 if (($_DESCRICAO <> "") && ($_VALOR <> "")) {
 
@@ -18,6 +20,8 @@ if (($_DESCRICAO <> "") && ($_VALOR <> "")) {
     } else {
         $Obj->descricao = $_DESCRICAO;
         $Obj->valor = $_VALOR;
+        $Obj->parcelaatual = $_PARCELAATUAL;
+        $Obj->parcelafinal = $_PARCELAFINAL;
         $erro = $Controll->Save($Obj);
         if ($erro->erro) {
             echo $erro->mensagem;
@@ -69,6 +73,18 @@ if ($erro->erro) {
                 <label class="col-sm-2 control-label">Valor</label>
                 <div class="col-sm-10">
                     <input type="text" class="form-control" name="valor" placeholder="Valor" value="<?php echo $Obj->valor ?>" required>
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Parcela atual</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="parcelaatual" placeholder="Parcela inicial" value="<?php echo $Obj->parcelaatual ?>">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="col-sm-2 control-label">Parcela final</label>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" name="parcelafinal" placeholder="Parcela final" value="<?php echo $Obj->parcelafinal ?>">
                 </div>
             </div>
             <div class="form-group">

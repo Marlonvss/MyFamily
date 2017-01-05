@@ -2,7 +2,7 @@
 $_DESCRICAO = ($_POST['descricao']);
 $_SENHA = ($_POST['senha']);
 
-$Controll = new CONTROLLERcentrocusto();
+$Controll = new CONTROLLERcentroscustos();
 
 if ($_DESCRICAO <> "") {
 

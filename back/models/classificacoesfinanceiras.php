@@ -1,9 +1,11 @@
+<!--
+Classe gerada pelo Gerenciador de Classes da WebLick Sistemas
+-->
+
+
 <?php
 
-class classificacaofinanceira {
-
-    private $memento;
-    
+class classificacoesfinanceiras {
     public $id;
     public $descricao;
 
@@ -12,22 +14,9 @@ class classificacaofinanceira {
         $this->descricao = (string)$_descricao;
     }
 
-    function SaveMemento() {
-        if (isset($memento)) {
-            unset($memento);
-        }
-        $memento = new classificacaofinanceira($this->id, $this->descricao);
-    }
-
-    function GetMemento() {
-        if (isset($memento)) {
-            return $memento;
-        }
-    }
-    
     function RefreshByRow($row) {
-        $this->id = $row['id'];
-        $this->descricao = $row['descricao'];
+        $this->id = (int)$row['id'];
+        $this->descricao = (string)$row['descricao'];
     }
 
     // FieldsForCrud
@@ -43,6 +32,7 @@ class classificacaofinanceira {
     // FieldsForCrud
     function getTable() {
         return 'classificacoesfinanceiras';
+
     }
 
 }

@@ -3,7 +3,7 @@ $_IDEDITAR = ($_GET['edit']);
 
 $_DESCRICAO = ($_POST['descricao']);
 
-$Controll = new CONTROLLERcentrocusto();
+$Controll = new CONTROLLERcentroscustos();
 
 if ($_DESCRICAO <> "") {
 

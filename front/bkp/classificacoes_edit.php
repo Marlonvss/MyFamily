@@ -3,7 +3,7 @@ $_IDEDITAR = ($_GET['edit']);
 
 $_DESCRICAO = ($_POST['descricao']);
 
-$Controll = new CONTROLLERclassificacaofinanceira();
+$Controll = new CONTROLLERclassificacoesfinanceiras();
 
 if ($_DESCRICAO <> "") {
 

@@ -1,6 +1,6 @@
 <?php
 
-$Controll = new CONTROLLERcentrocusto();
+$Controll = new CONTROLLERcentroscustos();
 
 if (isset($_GET['remove'])) {
     $erro = $Controll->Remove($_GET['remove']);

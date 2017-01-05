@@ -1,7 +1,7 @@
 <?php
 $_DESCRICAO = ($_POST['descricao']);
 
-$Controll = new CONTROLLERcartao();
+$Controll = new CONTROLLERcartoes();
 
 if ($_DESCRICAO <> "") {
 

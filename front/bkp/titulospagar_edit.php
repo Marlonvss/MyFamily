@@ -9,7 +9,7 @@ $_PARCELAFINAL = ($_POST['parcelafinal']);
 $_OBS = ($_POST['obs']);
 $_SITUACAO = ($_POST['situacao']);
 
-$Controll = new CONTROLLERtitulo();
+$Controll = new CONTROLLERtitulos();
 
 if (($_VALOR <> "") && ($_VENCIMENTO <> "") && ($_PARCELAATUAL <> "") && ($_PARCELAFINAL <> "")) {
 

@@ -11,7 +11,7 @@ if (($_VALOR <> "") && ($_VENCIMENTO <> "") && ($_PARCELAATUAL <> "") && ($_PARC
 
     $Obj = new titulo(0, $_PESSOA, $_VALOR, $_VENCIMENTO, $_PARCELAATUAL, $_PARCELAFINAL, 0, $_OBS, 0);
 
-    $Controll = new CONTROLLERtitulo();
+    $Controll = new CONTROLLERtitulos();
     $erro = $Controll->Save($Obj);
     if ($erro->erro) {
         echo $erro->mensagem;

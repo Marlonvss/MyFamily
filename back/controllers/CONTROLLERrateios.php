@@ -1,13 +1,18 @@
+<!--
+CONTROLLER gerado pelo Gerenciador da WebLick Sistemas
+-->
+
+
 <?php
 
 error_reporting(E_ERROR);
 
 include_once './autoload.php';
 
-class CONTROLLERrateio extends CONTROLLERbase {
+class CONTROLLERrateios extends CONTROLLERbase {
 
     private function GetDAO() {
-        return new DAOrateio();
+        return new DAOrateios();
     }
 
     function RecuperaByID(&$model) {
@@ -15,7 +20,7 @@ class CONTROLLERrateio extends CONTROLLERbase {
     }
 
     function RecuperaLista(&$list, $Where = NULL) {
-        $model = new rateio();
+        $model = new rateios();
         return $this->GetDAO()->GetList($model, $list, $Where);
     }
 
@@ -28,7 +33,7 @@ class CONTROLLERrateio extends CONTROLLERbase {
     }
 
     function Remove($id) {
-        $model = new rateio($id);
+        $model = new rateios($id);
         return $this->GetDAO()->Delete($model);
     }
 

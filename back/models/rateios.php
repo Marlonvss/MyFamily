@@ -1,9 +1,11 @@
+<!--
+Classe gerada pelo Gerenciador de Classes da WebLick Sistemas
+-->
+
+
 <?php
 
-class rateio {
-
-    private $memento;
-    
+class rateios {
     public $id;
     public $id_centrocusto;
     public $id_classificacao;
@@ -16,30 +18,17 @@ class rateio {
         $this->id_centrocusto = (int)$_id_centrocusto;
         $this->id_classificacao = (int)$_id_classificacao;
         $this->id_titulo = (int)$_id_titulo;
-        $this->descricao = (string)$_descricao;
         $this->valor = (float)$_valor;
+        $this->descricao = (string)$_descricao;
     }
 
-    function SaveMemento() {
-        if (isset($memento)) {
-            unset($memento);
-        }
-        $memento = new rateio($this->id, $this->id_centrocusto, $this->id_classificacao, $this->id_titulo, $this->valor, $this->descricao);
-    }
-
-    function GetMemento() {
-        if (isset($memento)) {
-            return $memento;
-        }
-    }    
-    
-    function RefreshByRow($row){
-        $this->id = $row['id'];
-        $this->id_centrocusto = $row['id_centrocusto'];
-        $this->id_classificacao = $row['id_classificacao'];
-        $this->id_titulo = $row['id_titulo'];
-        $this->descricao = $row['descricao'];
-        $this->valor = $row['valor'];
+    function RefreshByRow($row) {
+        $this->id = (int)$row['id'];
+        $this->id_centrocusto = (int)$row['id_centrocusto'];
+        $this->id_classificacao = (int)$row['id_classificacao'];
+        $this->id_titulo = (int)$row['id_titulo'];
+        $this->valor = (float)$row['valor'];
+        $this->descricao = (string)$row['descricao'];
     }
 
     // FieldsForCrud
@@ -50,15 +39,16 @@ class rateio {
         $arr['id_centrocusto'] = $this->id_centrocusto;
         $arr['id_classificacao'] = $this->id_classificacao;
         $arr['id_titulo'] = $this->id_titulo;
-        $arr['descricao'] = '"'.$this->descricao.'"';
         $arr['valor'] = $this->valor;
-        
+        $arr['descricao'] = '"' . $this->descricao . '"';
+
         return $arr;
     }
 
     // FieldsForCrud
     function getTable() {
         return 'rateios';
+
     }
 
 }

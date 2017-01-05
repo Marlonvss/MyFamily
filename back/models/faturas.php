@@ -1,9 +1,11 @@
+<!--
+Classe gerada pelo Gerenciador de Classes da WebLick Sistemas
+-->
+
+
 <?php
 
-class fatura {
-
-    private $memento;
-    
+class faturas {
     public $id;
     public $id_cartao;
     public $vencimento;
@@ -12,28 +14,15 @@ class fatura {
     function __construct($_id = 0, $_id_cartao = 0, $_vencimento = '', $_id_titulo = 0) {
         $this->id = (int)$_id;
         $this->id_cartao = (int)$_id_cartao;
-        $this->vencimento = (string) $_vencimento;
+        $this->vencimento = (string)$_vencimento;
         $this->id_titulo = (int)$_id_titulo;
     }
 
-    function SaveMemento() {
-        if (isset($memento)) {
-            unset($memento);
-        }
-        $memento = new fatura($this->id, $this->id_cartao, $this->vencimento, $this->id_titulo);
-    }
-
-    function GetMemento() {
-        if (isset($memento)) {
-            return $memento;
-        }
-    }
-    
     function RefreshByRow($row) {
-        $this->id = $row['id'];
-        $this->id_cartao = $row['id_cartao'];
-        $this->vencimento = $row['vencimento'];
-        $this->id_titulo = $row['id_titulo'];
+        $this->id = (int)$row['id'];
+        $this->id_cartao = (int)$row['id_cartao'];
+        $this->vencimento = (string)$row['vencimento'];
+        $this->id_titulo = (int)$row['id_titulo'];
     }
 
     // FieldsForCrud
@@ -51,6 +40,7 @@ class fatura {
     // FieldsForCrud
     function getTable() {
         return 'faturas';
+
     }
 
 }

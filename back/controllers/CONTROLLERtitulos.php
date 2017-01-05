@@ -1,17 +1,40 @@
+<!--
+CONTROLLER gerado pelo Gerenciador da WebLick Sistemas
+-->
+
+
 <?php
 
 error_reporting(E_ERROR);
 
 include_once './autoload.php';
 
-class CONTROLLERtitulo extends CONTROLLERbase {
+class CONTROLLERtitulos extends CONTROLLERbase {
 
     private function GetDAO() {
-        return new DAOtitulo();
+        return new DAOtitulos();
     }
 
     function RecuperaByID(&$model) {
         return $this->GetDAO()->GetByID($model);
+    }
+
+    function RecuperaLista(&$list, $Where = NULL) {
+        $model = new titulos();
+        return $this->GetDAO()->GetList($model, $list, $Where);
+    }
+
+    function Save(&$model) {
+        if ($model->id == 0) {
+            return $this->GetDAO()->Add($model);
+        } else {
+            return $this->GetDAO()->Update($model);
+        }
+    }
+
+    function Remove($id) {
+        $model = new titulos($id);
+        return $this->GetDAO()->Delete($model);
     }
 
     function RecuperaByFaturaID($fatura_id, &$model) {
@@ -31,13 +54,8 @@ class CONTROLLERtitulo extends CONTROLLERbase {
         return $this->GetDAO()->RefreshTituloDeFatura($fatura_id);
     }
 
-    function RecuperaLista(&$list, $Where = NULL) {
-        $model = new titulo();
-        return $this->GetDAO()->GetList($model, $list, $Where);
-    }
-
     function RecuperaListaPagar(&$list, $Where = NULL) {
-        $model = new titulo();
+        $model = new titulos();
         if ($Where == NULL) {
             $Where = ' where sinal = 0';
         } else {
@@ -47,26 +65,13 @@ class CONTROLLERtitulo extends CONTROLLERbase {
     }
 
     function RecuperaListaReceber(&$list, $Where = NULL) {
-        $model = new titulo();
+        $model = new titulos();
         if ($Where == NULL) {
             $Where = ' where sinal = 1';
         } else {
             $Where = $Where + ' and sinal = 1';
         }
         return $this->GetDAO()->GetList($model, $list, $Where);
-    }
-
-    function Save(&$model) {
-        if ($model->id == 0) {
-            return $this->GetDAO()->Add($model);
-        } else {
-            return $this->GetDAO()->Update($model);
-        }
-    }
-
-    function Remove($id) {
-        $model = new titulo($id);
-        return $this->GetDAO()->Delete($model);
     }
 
 }

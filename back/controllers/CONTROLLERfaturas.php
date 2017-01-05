@@ -1,13 +1,18 @@
-    <?php
+<!--
+CONTROLLER gerado pelo Gerenciador da WebLick Sistemas
+-->
+
+
+<?php
 
 error_reporting(E_ERROR);
 
 include_once './autoload.php';
 
-class CONTROLLERfatura_item extends CONTROLLERbase {
+class CONTROLLERfaturas extends CONTROLLERbase {
 
     private function GetDAO() {
-        return new DAOfatura_item();
+        return new DAOfaturas();
     }
 
     function RecuperaByID(&$model) {
@@ -15,7 +20,7 @@ class CONTROLLERfatura_item extends CONTROLLERbase {
     }
 
     function RecuperaLista(&$list, $Where = NULL) {
-        $model = new fatura_item();
+        $model = new faturas();
         return $this->GetDAO()->GetList($model, $list, $Where);
     }
 
@@ -28,7 +33,7 @@ class CONTROLLERfatura_item extends CONTROLLERbase {
     }
 
     function Remove($id) {
-        $model = new fatura_item($id);
+        $model = new faturas($id);
         return $this->GetDAO()->Delete($model);
     }
 

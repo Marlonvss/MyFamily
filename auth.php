@@ -10,7 +10,7 @@ $_LOGIN = ($_POST['usuario']);
 $_SENHA = ($_POST['senha']);
 
 // Recupera Todos Usuarios
-$userControl = new CONTROLLERusuario();
+$userControl = new CONTROLLERusuarios();
 
 $erro = $userControl->RecuperaLista($userList);
 if ($erro->erro) {

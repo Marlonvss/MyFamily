@@ -1,9 +1,11 @@
+<!--
+Classe gerada pelo Gerenciador de Classes da WebLick Sistemas
+-->
+
+
 <?php
 
-class cartao {
-
-    private $memento;
-    
+class centroscustos {
     public $id;
     public $descricao;
 
@@ -12,22 +14,9 @@ class cartao {
         $this->descricao = (string)$_descricao;
     }
 
-    function SaveMemento() {
-        if (isset($memento)) {
-            unset($memento);
-        }
-        $memento = new cartao($this->id, $this->descricao);
-    }
-
-    function GetMemento() {
-        if (isset($memento)) {
-            return $memento;
-        }
-    }
-    
     function RefreshByRow($row) {
-        $this->id = $row['id'];
-        $this->descricao = $row['descricao'];
+        $this->id = (int)$row['id'];
+        $this->descricao = (string)$row['descricao'];
     }
 
     // FieldsForCrud
@@ -42,7 +31,8 @@ class cartao {
 
     // FieldsForCrud
     function getTable() {
-        return 'cartoes';
+        return 'centroscustos';
+
     }
 
 }

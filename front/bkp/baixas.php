@@ -1,6 +1,6 @@
 <?php
 
-$Controll = new CONTROLLERbaixa();
+$Controll = new CONTROLLERbaixas();
 
 //function MakeLinkOptions($id) {
 //    return

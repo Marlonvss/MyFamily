@@ -1,13 +1,18 @@
+<!--
+CONTROLLER gerado pelo Gerenciador da WebLick Sistemas
+-->
+
+
 <?php
 
 error_reporting(E_ERROR);
 
 include_once './autoload.php';
 
-class CONTROLLERcartao extends CONTROLLERbase {
+class CONTROLLERclassificacoesfinanceiras extends CONTROLLERbase {
 
     private function GetDAO() {
-        return new DAOcartao();
+        return new DAOclassificacoesfinanceiras();
     }
 
     function RecuperaByID(&$model) {
@@ -15,7 +20,7 @@ class CONTROLLERcartao extends CONTROLLERbase {
     }
 
     function RecuperaLista(&$list, $Where = NULL) {
-        $model = new cartao();
+        $model = new classificacoesfinanceiras();
         return $this->GetDAO()->GetList($model, $list, $Where);
     }
 
@@ -28,7 +33,7 @@ class CONTROLLERcartao extends CONTROLLERbase {
     }
 
     function Remove($id) {
-        $model = new cartao($id);
+        $model = new classificacoesfinanceiras($id);
         return $this->GetDAO()->Delete($model);
     }
 

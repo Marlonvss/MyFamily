@@ -1,6 +1,6 @@
 <?php
 
-$Controll = new CONTROLLERfatura();
+$Controll = new CONTROLLERfaturas();
 
 if (isset($_GET['remove'])) {
     $erro = $Controll->Remove($_GET['remove']);

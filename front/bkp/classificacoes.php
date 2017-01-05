@@ -1,6 +1,6 @@
 <?php
 
-$Controll = new CONTROLLERclassificacaofinanceira();
+$Controll = new CONTROLLERclassificacoesfinanceiras();
 
 if (isset($_GET['remove'])) {
     $erro = $Controll->Remove($_GET['remove']);

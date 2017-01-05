@@ -2,8 +2,8 @@
 $_VENCIMENTO = ($_POST['vencimento']);
 $_IDCARTAO = ($_GET['card']);
 
-$Controll = new CONTROLLERfatura();
-$Controll_titulo = new CONTROLLERtitulo();
+$Controll = new CONTROLLERfaturas();
+$Controll_titulo = new CONTROLLERtitulos();
 
 if ($_VENCIMENTO <> "") {
 

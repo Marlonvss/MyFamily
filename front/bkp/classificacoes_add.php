@@ -2,7 +2,7 @@
 $_DESCRICAO = ($_POST['descricao']);
 $_SENHA = ($_POST['senha']);
 
-$Controll = new CONTROLLERclassificacaofinanceira();
+$Controll = new CONTROLLERclassificacoesfinanceiras();
 
 if ($_DESCRICAO <> "") {
 
