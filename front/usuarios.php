@@ -1,24 +1,4 @@
 <?php
-$_LOGIN = ($_POST['login']);
-$_SENHA = ($_POST['senha']);
-
-
-if (($_LOGIN <> "") && ($_SENHA <> "")) {
-
-    var_dump($_LOGIN . 'meu segundo ex');
-    $Obj = new usuario(0, $_LOGIN, $_SENHA);
-
-    $Controll = new CONTROLLERusuarios();
-    $erro = $Controll->Save($Obj);
-
-    if ($erro->erro) {
-        echo $erro->mensagem;
-    } else {
-        echo '<META http-equiv="refresh" content="0;URL=?pag=' . $pag_usuarios . '">';
-    }
-}
-?>
-<?php
 $Controll = new CONTROLLERusuarios();
 
 if (isset($_GET['remove'])) {
@@ -30,17 +10,17 @@ if (isset($_GET['remove'])) {
 
 function MakeLinkOptions($id) {
     return
-      '<button type="button" class="btn btn-sm btn-link" id="botao" value="'. $id .'" data-toggle="modal" data-target="#editar">Editar</button>';
-//            '<a href="?pag=' . $_SESSION['pag'] . '_edit&edit=' . $id . '"><span class="glyphicon glyphicon-pencil"></span> Editar </a>' .
-//            '<a href="?pag=' . $_SESSION['pag'] . '&remove=' . $id . '"><span class="glyphicon glyphicon-remove"></span> Excluir </a>';
+            '<button type="button" class="btn btn-link btn-xs" id="botao" value="' . $id . '" data-toggle="modal" data-target="#editar"><i class="fa fa-folder-open-o" aria-hidden="true"></i></button>' .
+            '<div class="btn-group">' .
+            '  <button type="button" class="btn btn-link btn-xs dropdown-toggle" data-toggle="dropdown">' .
+            '    <i class="fa fa-angle-down" aria-hidden="true"></i>' .
+            '  </button>' .
+            '  <ul class="dropdown-menu" role="menu">' .
+            '    <button type="button" class="btn btn-link btn-md" id="botao" value="' . $id . '" data-toggle="modal" data-target="#deletar"><i class="fa fa-trash-o" aria-hidden="true"></i> - Deletar</button>' .
+            '  </ul>' .
+            '</div>';
 }
 ?>
-
-<div class="row">
-    <div class="col-lg-12">
-        <h1 class="page-header">Usuários</h1>
-    </div>
-</div>
 
 <div class="panel panel-default">
     <div class="panel-heading">
@@ -69,7 +49,7 @@ function MakeLinkOptions($id) {
                         . '<td class="col-md-1">' . $obj->id . '</td>'
                         . '<td class="col-md-5">' . $obj->login . '</td>'
                         . '<td>' . $obj->senha . '</td>'
-                        . '<td class="col-md-2">' . MakeLinkOptions($obj->id) . '</td>'
+                        . '<td class="col-md-1">' . MakeLinkOptions($obj->id) . '</td>'
                         . '</tr>';
                     }
                 }
@@ -83,18 +63,7 @@ function MakeLinkOptions($id) {
 <div class="modal fade" id="novo" tabindex="-1" role="dialog" aria-labelledby="novoLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                </button>
-                <h4 class="modal-title" id="novoLabel">Novo</h4>
-            </div>
-            <div class="modal-body">
-                <?php include 'usuarios_add.php'; ?>
-            </div>
-            <div class="modal-footer">
-                <button type="button" onclick="save()" class="btn btn-primary" data-dismiss="modal">Salvar</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-            </div>
+            <?php include 'usuarios_add.php'; ?>
         </div>
     </div>
 </div>
@@ -102,18 +71,15 @@ function MakeLinkOptions($id) {
 <div class="modal fade" id="editar" tabindex="-1" role="dialog" aria-labelledby="editarLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <div class="modal-header">
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                </button>
-                <h4 class="modal-title" id="editarLabel">Editar</h4>
-            </div>
-            <div class="modal-body">
-                <?php include 'usuarios_edit.php'; ?>
-            </div>
-            <div class="modal-footer">
-                <button type="button" onclick="save()" class="btn btn-primary" data-dismiss="modal">Salvar</button>
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
-            </div>
+            <?php include 'usuarios_edit.php'; ?>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" id="deletar" tabindex="-1" role="dialog" aria-labelledby="deletarLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <?php include 'usuarios_del.php'; ?>
         </div>
     </div>
 </div>
