@@ -155,8 +155,9 @@ if (!isset($_SESSION['userLogged'])) {
     <script src="./../front/bower_components/jquery/dist/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="./front/bower_components/bootstrap/dist/js/bootstrap.js"></script>
-    <script src="./../front/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<!--    <script src="./../front/bower_components/bootstrap/dist/js/bootstrap.js"></script>-->
+    
 
     <!-- Metis Menu Plugin JavaScript -->
     <script src="./front/bower_components/metisMenu/dist/metisMenu.min.js"></script>
