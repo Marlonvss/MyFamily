@@ -7,6 +7,8 @@ include_once './../autoload.php';
 
 include_once './back/consts/links.php';
 include_once './../back/consts/links.php';
+include_once './back/consts/parameters.php';
+include_once './../back/consts/parameters.php';
 
 if (!isset($_SESSION['userLogged'])) {
     header('location:./login.php');
@@ -150,13 +152,24 @@ if (!isset($_SESSION['userLogged'])) {
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
-    <!-- jQuery -->
-    <script src="./front/bower_components/jquery/dist/jquery.js"></script>
-    <script src="./../front/bower_components/jquery/dist/jquery.js"></script>
+    <?php
+        if ($GLOBALS['IsLocal']){
+            // JQuery
+            echo '<script src="./front/bower_components/jquery/dist/jquery.min.js"></script>';
+            echo '<script src="./../front/bower_components/jquery/dist/jquery.min.js"></script>';
 
-    <!-- Bootstrap Core JavaScript -->
-    <script src="./front/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="./../front/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+            //Bootstrap Core JavaScript
+            echo '<script src="./front/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>';
+            echo '<script src="./../front/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>';
+        } else {
+            // JQuery
+            echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>';
+
+            //Bootstrap Core JavaScript
+            echo '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>';
+        }
+      
+    ?>
 
     <!-- Metis Menu Plugin JavaScript -->
     <script src="./front/bower_components/metisMenu/dist/metisMenu.min.js"></script>
