@@ -151,12 +151,12 @@ if (!isset($_SESSION['userLogged'])) {
     <![endif]-->
 
     <!-- jQuery -->
-    <script src="./front/bower_components/jquery/dist/jquery.min.js"></script>
-    <script src="./../front/bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="./front/bower_components/jquery/dist/jquery.js"></script>
+    <script src="./../front/bower_components/jquery/dist/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="./front/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
-    <script src="./../front/bower_components/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script src="./front/bower_components/bootstrap/dist/js/bootstrap.js"></script>
+    <script src="./../front/bower_components/bootstrap/dist/js/bootstrap.js"></script>
 
     <!-- Metis Menu Plugin JavaScript -->
     <script src="./front/bower_components/metisMenu/dist/metisMenu.min.js"></script>
@@ -166,11 +166,4 @@ if (!isset($_SESSION['userLogged'])) {
     <script src="./front/dist/js/sb-admin-2.js"></script>
     <script src="./../front/dist/js/sb-admin-2.js"></script>
 
-    <!-- Angular -->
-    <script src="./front/js/angular.js"></script>
-    <script>
-        angular.module("myFamilyApp", []);
-    </script>    
-    <script src="./front/_usuarios/usuariosController.js"></script>
-    <script src="./front/_usuarios/usuariosService.js"></script>
 </html>
