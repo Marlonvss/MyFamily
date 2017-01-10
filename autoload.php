@@ -1,5 +1,7 @@
 <?php
 
+error_reporting(0);
+
 $Path1 = './';
 $Path2 = $Path1 . '../';
 $Path3 = $Path2 . '../';

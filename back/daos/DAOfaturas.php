@@ -1,8 +1,3 @@
-<!--
-DAO gerada pelo Gerenciador da WebLick Sistemas
--->
-
-
 <?php
 
 error_reporting(E_ERROR);

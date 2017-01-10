@@ -1,8 +1,3 @@
-<!--
-Classe gerada pelo Gerenciador de Classes da WebLick Sistemas
--->
-
-
 <?php
 
 class titulos {
@@ -69,7 +64,7 @@ class titulos {
         switch ($this->situacao){
             case 0: {return 'Aberto'; break;}
             case 1: {return 'Quitado'; break;}
-            case 2: {return 'Em débito'; break;}
+            case 2: {return 'Em dï¿½bito'; break;}
         }        
     }
     

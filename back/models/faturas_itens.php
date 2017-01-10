@@ -1,8 +1,3 @@
-<!--
-Classe gerada pelo Gerenciador de Classes da WebLick Sistemas
--->
-
-
 <?php
 
 class faturas_itens {

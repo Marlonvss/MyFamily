@@ -1,30 +1,30 @@
-<?php
-if (isset($_POST['metodo'])) {
-    $metodo = $_POST['metodo'];
-}
-
-if ($metodo == "remove") {
-    $_ID = ($_POST['id']);
-
-    $Controll = new CONTROLLERusuarios();
-    $erro = $Controll->Remove($_ID);
-
-    if ($erro->erro) {
-        echo $erro->mensagem;
-    }
-}
-?>
-
 <script>
+    function loadDelete(id) {
+        $.ajax({
+            url: 'front/usuarios_services.php',
+            type: 'post',
+            dataType: 'json',
+            data: {
+                'metodo': 'load',
+                'id': id
+            }
+        }).done(function (data) {
+            $("#del_id").val(data.id);
+            $("#del_login").val(data.login);
+            $("#del_senha").val(data.senha);
+        });
+    }
+    
     function remove() {
         $.ajax({
+            url: 'front/usuarios_services.php',
             type: 'post',
             dataType: 'html',
             data: {
                 'metodo': 'remove',
-                'id': $('#id').val()
+                'id': $('#del_id').val()
             }
-        }).done(function () {
+        }).done(function(){
             location.reload();
         });
     }
@@ -40,19 +40,19 @@ if ($metodo == "remove") {
         <div class="form-group">
             <label class="col-sm-2 control-label">ID</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="id" placeholder="ID" value="<?php echo $Obj->id ?>" readonly="readonly">
+                <input type="text" class="form-control" id="del_id" name="id" placeholder="ID" value="<?php echo $Obj->id ?>" readonly="readonly">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">Login</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="login" placeholder="Login" value="<?php echo $Obj->login ?>" readonly="readonly">
+                <input type="text" class="form-control" id="del_login" name="login" placeholder="Login" value="<?php echo $Obj->login ?>" readonly="readonly">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">Senha</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" name="senha" placeholder="Senha" value="<?php echo $Obj->senha ?>" readonly="readonly">
+                <input type="text" class="form-control" id="del_senha" name="senha" placeholder="Senha" value="<?php echo $Obj->senha ?>" readonly="readonly">
             </div>
         </div>
     </div>

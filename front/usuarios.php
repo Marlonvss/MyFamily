@@ -1,5 +1,7 @@
 <?php
 $Controll = new CONTROLLERusuarios();
+error_reporting(E_ERROR);
+session_start();
 
 if (isset($_GET['remove'])) {
     $erro = $Controll->Remove($_GET['remove']);
@@ -10,17 +12,24 @@ if (isset($_GET['remove'])) {
 
 function MakeLinkOptions($id) {
     return
-            '<button type="button" class="btn btn-link btn-xs" id="botao" value="' . $id . '" data-toggle="modal" data-target="#editar"><i class="fa fa-folder-open-o" aria-hidden="true"></i></button>' .
+            '<button type="button" class="btn btn-link btn-xs" onclick="loadEdit('. $id .')" data-toggle="modal" data-target="#editar"><i class="fa fa-folder-open-o" aria-hidden="true"></i></button>' .
             '<div class="btn-group">' .
             '  <button type="button" class="btn btn-link btn-xs dropdown-toggle" data-toggle="dropdown">' .
             '    <i class="fa fa-angle-down" aria-hidden="true"></i>' .
             '  </button>' .
             '  <ul class="dropdown-menu" role="menu">' .
-            '    <button type="button" class="btn btn-link btn-md" id="botao" value="' . $id . '" data-toggle="modal" data-target="#deletar"><i class="fa fa-trash-o" aria-hidden="true"></i> - Deletar</button>' .
+            '    <button type="button" class="btn btn-link btn-md" onclick="loadDelete('. $id .')" data-toggle="modal" data-target="#deletar"><i class="fa fa-trash-o" aria-hidden="true"></i> - Deletar</button>' .
             '  </ul>' .
             '</div>';
 }
 ?>
+
+
+<div class="row">
+    <div class="col-xs-12">
+        <span class="page-title red"><h2>Usuários</h2></span>
+    </div>
+</div>
 
 <div class="panel panel-default">
     <div class="panel-heading">

@@ -1,8 +1,3 @@
-<!--
-Classe gerada pelo Gerenciador de Classes da WebLick Sistemas
--->
-
-
 <?php
 
 class usuarios {
@@ -23,12 +18,18 @@ class usuarios {
     }
 
     // FieldsForCrud
-    function getFields() {
+    function getFields($Formatado = true) {
         $arr = array();
 
+        if ($Formatado) {
+            $Separador = '"';
+        } else {
+            $Separador = '';
+        }   
+        
         $arr['id'] = $this->id;
-        $arr['login'] = '"' . $this->login . '"';
-        $arr['senha'] = '"' . $this->senha . '"';
+        $arr['login'] = $Separador . $this->login . $Separador;
+        $arr['senha'] = $Separador . $this->senha . $Separador;
 
         return $arr;
     }
