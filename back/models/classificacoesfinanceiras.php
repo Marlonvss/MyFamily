@@ -15,11 +15,17 @@ class classificacoesfinanceiras {
     }
 
     // FieldsForCrud
-    function getFields() {
+    function getFields($Formatado = true) {
         $arr = array();
 
+        if ($Formatado) {
+            $Separador = '"';
+        } else {
+            $Separador = '';
+        }
+
         $arr['id'] = $this->id;
-        $arr['descricao'] = '"' . $this->descricao . '"';
+        $arr['descricao'] = $Separador . $this->descricao . $Separador;
 
         return $arr;
     }

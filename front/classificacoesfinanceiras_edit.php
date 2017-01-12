@@ -3,7 +3,7 @@
         $("#edt_id").prop('readonly', true).val('Carregando...');
         $("#edt_descricao").prop('readonly', true).val('Carregando...');
         $.ajax({
-            url: 'front/cartoes_services.php',
+            url: 'front/classificacoesfinanceiras_services.php',
             type: 'post',
             dataType: 'json',
             data: {
@@ -18,7 +18,7 @@
     
     function edit() {
         $.ajax({
-            url: 'front/cartoes_services.php',
+            url: 'front/classificacoesfinanceiras_services.php',
             type: 'post',
             dataType: 'html',
             data: {
@@ -46,9 +46,9 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">descricao</label>
+            <label class="col-sm-2 control-label">Descrição</label>
             <div class="col-sm-10">
-                <input type="text" id="edt_descricao" class="form-control" name="descricao" placeholder="descricao"  readonly="readonly">
+                <input type="text" id="edt_descricao" class="form-control" name="descricao" placeholder="Descrição"  readonly="readonly">
             </div>
         </div>
     </div>

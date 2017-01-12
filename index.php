@@ -118,7 +118,7 @@ if (!isset($_SESSION['userLogged'])) {
                             <a href="?pag=<?php echo $pag_classificacoes ?>">
                                 <div>
                                     <i class="menu-icon fa fa-list-alt"></i>
-                                    <span class="menu-sub-title">Classificacões</span>
+                                    <span class="menu-sub-title">Classificacões Financeiras</span>
                                 </div>
                             </a>
                         </li>

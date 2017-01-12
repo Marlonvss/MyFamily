@@ -25,8 +25,8 @@ class usuarios {
             $Separador = '"';
         } else {
             $Separador = '';
-        }   
-        
+        }
+
         $arr['id'] = $this->id;
         $arr['login'] = $Separador . $this->login . $Separador;
         $arr['senha'] = $Separador . $this->senha . $Separador;

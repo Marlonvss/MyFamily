@@ -1,9 +1,9 @@
 <script>
-    function loadEdit(id) {
-        $("#edt_id").prop('readonly', true).val('Carregando...');
-        $("#edt_descricao").prop('readonly', true).val('Carregando...');
+    function loadDelete(id) {
+        $("#del_id").val('Carregando...');
+        $("#del_descricao").val('Carregando...');
         $.ajax({
-            url: 'front/centroscustos_services.php',
+            url: 'front/classificacoesfinanceiras_services.php',
             type: 'post',
             dataType: 'json',
             data: {
@@ -11,22 +11,21 @@
                 'metodo': 'load'
             }
         }).done(function (data) {
-            $("#edt_id").val(data.id);
-            $("#edt_descricao").prop('readonly', false).val(data.descricao);
+            $("#del_id").val(data.id);
+            $("#del_descricao").val(data.descricao);
         });
     }
-    
-    function edit() {
+
+    function remove() {
         $.ajax({
-            url: 'front/centroscustos_services.php',
+            url: 'front/classificacoesfinanceiras_services.php',
             type: 'post',
             dataType: 'html',
             data: {
-                'id': $('#edt_id').val(),
-                'descricao': $('#edt_descricao').val(),
-                'metodo': 'edit'
+                'metodo': 'remove',
+                'id': $('#del_id').val()
             }
-        }).done(function(){
+        }).done(function () {
             location.reload();
         });
     }
@@ -36,24 +35,25 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         </button>
-        <h4 class="modal-title" id="editarLabel">Editar</h4>
+        <h4 class="modal-title" id="editarLabel">Confirma exclusão desta Classificação Financeira?</h4>
     </div>
     <div class="modal-body">
         <div class="form-group">
             <label class="col-sm-2 control-label">ID</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="edt_id" name="id" placeholder="ID" value="Carregando..." readonly="readonly">
+                <input type="text" class="form-control" id="del_id" name="id" placeholder="ID" value="<?php echo $Obj->id ?>" readonly="readonly">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">Descrição</label>
             <div class="col-sm-10">
-                <input type="text" id="edt_descricao" class="form-control" name="descricao" placeholder="Descrição"  readonly="readonly">
+                <input type="text" id="del_descricao" class="form-control" name="descricao" placeholder="Descrição"  readonly="readonly">
             </div>
         </div>
     </div>
     <div class="modal-footer">
-        <button type="submit" onclick="edit()" class="btn btn-primary" data-dismiss="modal">Salvar</button>
+        <button type="submit" onclick="remove()" class="btn btn-primary" data-dismiss="modal">Salvar</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
     </div>
+
 </form>

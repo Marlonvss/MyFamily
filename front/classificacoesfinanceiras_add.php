@@ -1,7 +1,7 @@
 <script>
     function add() {
         $.ajax({
-            url: 'front/centroscustos_services.php',
+            url: 'front/classificacoesfinanceiras_services.php',
             type: 'post',
             dataType: 'text',
             data: {

@@ -1,5 +1,5 @@
 <?php
-$Controll = new CONTROLLERcentroscustos();
+$Controll = new CONTROLLERclassificacoesfinanceiras();
 error_reporting(E_ERROR);
 session_start();
 
@@ -27,7 +27,7 @@ function MakeLinkOptions($id) {
 
 <div class="row">
     <div class="col-xs-12">
-        <span class="page-title red"><h2>Centro de Custos</h2></span>
+        <span class="page-title red"><h2>Classificações Financeiras</h2></span>
     </div>
 </div>
 
@@ -70,7 +70,7 @@ function MakeLinkOptions($id) {
 <div class="modal fade" id="novo" tabindex="-1" role="dialog" aria-labelledby="novoLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <?php include 'centroscustos_add.php'; ?>
+            <?php include 'classificacoesfinanceiras_add.php'; ?>
         </div>
     </div>
 </div>
@@ -78,7 +78,7 @@ function MakeLinkOptions($id) {
 <div class="modal fade" id="editar" tabindex="-1" role="dialog" aria-labelledby="editarLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <?php include 'centroscustos_edit.php'; ?>
+            <?php include 'classificacoesfinanceiras_edit.php'; ?>
         </div>
     </div>
 </div>
@@ -86,7 +86,7 @@ function MakeLinkOptions($id) {
 <div class="modal fade" id="deletar" tabindex="-1" role="dialog" aria-labelledby="deletarLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <?php include 'centroscustos_del.php'; ?>
+            <?php include 'classificacoesfinanceiras_del.php'; ?>
         </div>
     </div>
 </div>
