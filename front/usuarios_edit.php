@@ -1,5 +1,8 @@
 <script>
     function loadEdit(id) {
+        $("#edt_id").prop('readonly', true).val('Carregando...');
+        $("#edt_login").prop('readonly', true).val('Carregando...');
+        $("#edt_senha").prop('readonly', true).val('Carregando...');
         $.ajax({
             url: 'front/usuarios_services.php',
             type: 'post',

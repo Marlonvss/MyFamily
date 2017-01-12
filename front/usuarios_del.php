@@ -1,5 +1,8 @@
 <script>
     function loadDelete(id) {
+        $("#del_id").prop('readonly', true).val('Carregando...');
+        $("#del_login").prop('readonly', true).val('Carregando...');
+        $("#del_senha").prop('readonly', true).val('Carregando...');
         $.ajax({
             url: 'front/usuarios_services.php',
             type: 'post',
@@ -14,7 +17,7 @@
             $("#del_senha").val(data.senha);
         });
     }
-    
+
     function remove() {
         $.ajax({
             url: 'front/usuarios_services.php',
@@ -24,7 +27,7 @@
                 'metodo': 'remove',
                 'id': $('#del_id').val()
             }
-        }).done(function(){
+        }).done(function () {
             location.reload();
         });
     }
