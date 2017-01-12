@@ -28,7 +28,7 @@ if ($metodo == "login") {
 
             foreach ($userList as &$user) {
                 if ((strtolower($user->login) == strtolower($_LOGIN)) and ( strtolower($user->senha) == strtolower($_SENHA))) {
-                    setcookie("myfamily", $user->id);
+                    setcookie("myfamily", $user->id );
                     $_SESSION['userLogged'] = serialize($user);
                     break;
                 }

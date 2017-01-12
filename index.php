@@ -10,6 +10,9 @@ include_once './../back/consts/links.php';
 include_once './back/consts/parameters.php';
 include_once './../back/consts/parameters.php';
 
+if (!isset($_COOKIE["myfamily"])) {
+    header('location:./login.php');
+} 
 if (!isset($_SESSION['userLogged'])) {
     header('location:./login.php');
 }
@@ -20,10 +23,10 @@ if (!isset($_SESSION['userLogged'])) {
     <head>
         <title>WebLick Sistemas - Finance</title>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
-        <meta name="description" content="Free Flat Admin Bootstrap Themes">
-        <meta name="author" content="Charuwit Nodthaisong">
+        <meta name="description" content="WebLick">
+        <meta name="author" content="Marlon Vitor - WebLick">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-<!--        <link href='http://fonts.googleapis.com/css?family=Lato:300,400,700,900' rel='stylesheet' type='text/css'>-->
+        <!--<meta http-equiv="refresh" content = "5; url='./login.php'">-->
 
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/animate.css">

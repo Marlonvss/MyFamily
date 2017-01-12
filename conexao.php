@@ -15,9 +15,9 @@ function Conecta() {
     } else {
         // Configuração Local...
         $Host = 'mysql.hostinger.com.br';
-        $User = 'u812671016_famil';
-        $Pass = 'familia';
-        $BD = 'u812671016_famil';
+        $User = 'u221687359_famil';
+        $Pass = 'family123';
+        $BD = 'u221687359_famil';
     }
 
     $connect = mysql_connect($Host, $User, $Pass) or die(mysql_error());
