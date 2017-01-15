@@ -1,5 +1,5 @@
 <?php
-$Controll = new CONTROLLERcentroscustos();
+$Controll = new CONTROLLERcartoes_itens();
 error_reporting(E_ERROR);
 session_start();
 
@@ -27,7 +27,7 @@ function MakeLinkOptions($id) {
 
 <div class="row">
     <div class="col-xs-12">
-        <span class="page-title red"><h2>Centro de Custos</h2></span>
+        <span class="page-title red"><h2>Movimentações</h2></span>
     </div>
 </div>
 
@@ -40,14 +40,17 @@ function MakeLinkOptions($id) {
             <thead>
                 <tr>
                     <td>#</td>
+                    <td>Data da compra</td>
                     <td>Descrição</td>
+                    <td>Valor da parcela</td>
+                    <td>Parcela</td>
                     <td>Opções</td>
                 </tr>
             </thead>
             <tbody>
 
                 <?php
-                $erro = $Controll->RecuperaLista($List, 'where id_familia = ' . unserialize($_SESSION['userLogged'])->id_familia);
+                $erro = $Controll->RecuperaLista($List,'where id_cartao = '.$_GET['id']);
                 if ($erro->erro) {
                     echo $erro->mensagem;
                 } else {
@@ -55,7 +58,10 @@ function MakeLinkOptions($id) {
                     foreach ($List as &$obj) {
                         echo '<tr>'
                         . '<td>' . $obj->id . '</td>'
+                        . '<td>' . $obj->datacompra . '</td>'
                         . '<td>' . $obj->descricao . '</td>'
+                        . '<td>' . $obj->valor . '</td>'
+                        . '<td>' . $obj->parcelas . '</td>'
                         . '<td class="col-md-1">' . MakeLinkOptions($obj->id) . '</td>'
                         . '</tr>';
                     }
@@ -70,7 +76,7 @@ function MakeLinkOptions($id) {
 <div class="modal fade" id="novo" tabindex="-1" role="dialog" aria-labelledby="novoLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <?php include 'centroscustos_add.php'; ?>
+            <?php include 'cartoes_itens_add.php'; ?>
         </div>
     </div>
 </div>
@@ -78,7 +84,7 @@ function MakeLinkOptions($id) {
 <div class="modal fade" id="editar" tabindex="-1" role="dialog" aria-labelledby="editarLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <?php include 'centroscustos_edit.php'; ?>
+            <?php include 'cartoes_itens_edit.php'; ?>
         </div>
     </div>
 </div>
@@ -86,7 +92,7 @@ function MakeLinkOptions($id) {
 <div class="modal fade" id="deletar" tabindex="-1" role="dialog" aria-labelledby="deletarLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
-            <?php include 'centroscustos_del.php'; ?>
+            <?php include 'cartoes_itens_del.php'; ?>
         </div>
     </div>
 </div>

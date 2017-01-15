@@ -1,10 +1,9 @@
 <script>
     function loadDelete(id) {
         $("#del_id").val('Carregando...');
-        $("#del_descricao").val('Carregando...');
-        $("#del_numero").val('Carregando...');
+        $("#del_nome").val('Carregando...');
         $.ajax({
-            url: 'front/cartoes_services.php',
+            url: 'front/familias_services.php',
             type: 'post',
             dataType: 'json',
             data: {
@@ -13,14 +12,13 @@
             }
         }).done(function (data) {
             $("#del_id").val(data.id);
-            $("#del_descricao").val(data.descricao);
-            $("#del_numero").val(data.numero);
+            $("#del_nome").val(data.nome);
         });
     }
 
     function remove() {
         $.ajax({
-            url: 'front/cartoes_services.php',
+            url: 'front/familias_services.php',
             type: 'post',
             dataType: 'html',
             data: {
@@ -37,7 +35,7 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         </button>
-        <h4 class="modal-title" id="editarLabel">Confirma exclusão deste cartoes?</h4>
+        <h4 class="modal-title" id="editarLabel">Confirma exclusão deste familias?</h4>
     </div>
     <div class="modal-body">
         <div class="form-group">
@@ -47,15 +45,9 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">Descrição</label>
+            <label class="col-sm-2 control-label">Nome</label>
             <div class="col-sm-10">
-                <input type="text" id="del_descricao" class="form-control" name="descricao" placeholder="Descrição"  readonly="readonly">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Num. Cartão</label>
-            <div class="col-sm-10">
-                <input type="text" id="del_numero" class="form-control" name="numero" placeholder="Num. Cartão"  readonly="readonly">
+                <input type="text" id="del_nome" class="form-control" name="nome" placeholder="Nome"  readonly="readonly">
             </div>
         </div>
     </div>

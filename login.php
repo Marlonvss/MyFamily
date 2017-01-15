@@ -1,9 +1,9 @@
 <?php
-// Verifica se existe uma mensagem na sessão
 error_reporting(E_ALL);
 session_start();
 
-unset($_SESSION['userLogged']);
+// Destroi todas as sessoes :)
+session_destroy();
 ?>  
 
 <!DOCTYPE html>
@@ -31,27 +31,30 @@ unset($_SESSION['userLogged']);
 
         <div class="container">
             <div class="login-box">
-                <div class="title"><h3><i class="fa fa-cubes"></i>  WebLick Sistemas</h3></div>
+                <div class="title"><h3><i class="fa fa-cubes"></i> WebLick Sistemas</h3></div>
                 <div class="progress hidden" id="login-progress">
                     <div class="progress-bar progress-bar-success progress-bar-striped active" role="progressbar" aria-valuenow="100" aria-valuemin="0" aria-valuemax="100" style="width: 100%">
                         Logando...
                     </div>
                 </div>
                 <div class="alert alert-success hidden" id="login-message" role="alert">
-                    <i class="fa fa-check"></i> Login efetuado com sucesso!
+                    <i class="fa fa-check-square-o"></i> Login efetuado com sucesso.
                 </div>
                 <div class="alert alert-danger hidden" id="login-message-fail" role="alert">
-                    <i class="fa fa-close"></i> Usuário ou senha não confere!
+                    <i class="fa fa-warning"></i> Usuário ou senha não confere.
+                </div>
+                <div class="alert alert-danger <?php if (!isset($_GET["ativ"])) { echo 'hidden'; }; ?>" id="login-message-ativ" role="alert">
+                    <i class="fa fa-warning"></i> Usuário desconectado por falta de atividade.
                 </div>
                 <div class="box">
                     <form id="login-form" autocomplete="off">
                         <div class="control">
                             <div class="label">Email</div>
-                            <input type="text" id="login" class="form-control" placeholder="admin@gmail.com" />
+                            <input type="text" id="email" class="form-control" placeholder="fulano@weblick.com.br" />
                         </div>
                         <div class="control">
                             <div class="label">Senha</div>
-                            <input type="password" id="password" class="form-control" placeholder="123456" />
+                            <input type="password" id="senha" class="form-control" placeholder="123456" />
                         </div>
                         <div class="login-button">
                             <input type="submit" class="btn btn-orange" value="Login">
@@ -59,7 +62,7 @@ unset($_SESSION['userLogged']);
                     </form>
                 </div>
                 <div class="info-box">
-                    <span class="text-left"><a href="register.html">Criar uma conta</a></span>
+                    <span class="text-left"><a href="#">Criar uma conta</a></span>
                     <span class="text-right"><a href="#">Esqueceu sua senha?</a></span>
                     <div class="clear-both"></div>
                 </div>
@@ -67,20 +70,20 @@ unset($_SESSION['userLogged']);
         </div>
         <script type="text/javascript">
             $(function () {
-
                 $("#login-form").submit(function () {
                     $("#login-progress").removeClass("hidden");
                     $("#login-message").addClass("hidden");
                     $("#login-message-fail").addClass("hidden");
+                    $("#login-message-ativ").addClass("hidden");
                     setTimeout(function () {
                         $.ajax({
                             url: 'auth.php',
                             type: 'post',
                             dataType: 'json',
                             data: {
-                                'metodo': 'login',
-                                'login': $('#login').val(),
-                                'senha': $('#password').val()
+                                'metodo': 'logar',
+                                'email': $('#email').val(),
+                                'senha': $('#senha').val()
                             }
                         }).done(function (data) {
                             $("#login-progress").addClass("hidden");

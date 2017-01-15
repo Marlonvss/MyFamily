@@ -10,9 +10,11 @@ include_once './../back/consts/links.php';
 include_once './back/consts/parameters.php';
 include_once './../back/consts/parameters.php';
 
+
+
 if (!isset($_COOKIE["myfamily"])) {
     header('location:./login.php');
-} 
+}
 if (!isset($_SESSION['userLogged'])) {
     header('location:./login.php');
 }
@@ -22,11 +24,12 @@ if (!isset($_SESSION['userLogged'])) {
 
     <head>
         <title>WebLick Sistemas - Finance</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="description" content="WebLick">
         <meta name="author" content="Marlon Vitor - WebLick">
         <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
-        <!--<meta http-equiv="refresh" content = "5; url='./login.php'">-->
+        <meta http-equiv="refresh" content = "3600; url='./login.php?ativ">
 
         <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
         <link rel="stylesheet" type="text/css" href="css/animate.css">
@@ -80,23 +83,6 @@ if (!isset($_SESSION['userLogged'])) {
                         </div>
                     </a>
                 </li>
-                <!-- <li class="submenu"> -->
-                <!-- <a href="table.html"> -->
-                <!-- <div> -->
-                    <!-- <i class="menu-icon fa fa-table"></i> -->
-                    <!-- <span class="menu-title">Table</span> -->
-                <!-- </div> -->
-                <!-- </a> -->
-                <!-- </li> -->
-                <!-- <li class="submenu"> -->
-                <!-- <a href="form.html"> -->
-                <!-- <div> -->
-                    <!-- <i class="menu-icon fa fa-file-text-o"></i> -->
-                    <!-- <span class="menu-title">Form</span> -->
-                <!-- </div> -->
-                <!-- </a> -->
-                <!-- </li> -->
-
                 <li class="submenu dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 
@@ -118,7 +104,7 @@ if (!isset($_SESSION['userLogged'])) {
                             <a href="?pag=<?php echo $pag_classificacoes ?>">
                                 <div>
                                     <i class="menu-icon fa fa-list-alt"></i>
-                                    <span class="menu-sub-title">Classificacões Financeiras</span>
+                                    <span class="menu-sub-title">Classificações Financeiras</span>
                                 </div>
                             </a>
                         </li>
@@ -150,66 +136,19 @@ if (!isset($_SESSION['userLogged'])) {
                             <a class="navbar-brand" href="./"><i class="fa fa-cubes"></i> Finance</a>
                         </div>
                         <ul class="nav navbar-nav navbar-right">
-                            <!--                        <li class="dropdown">
-                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa fa-comments"></i> 0</a>
-                                                        <ul class="dropdown-menu">
-                                                            <li class="dropdown-title-bar">
-                                                                Notification ( 0 )
-                                                            </li>
-                                                            <li class="message">
-                                                                No new notification
-                                                            </li>
-                                                        </ul>
-                                                    </li>
-                                                    <li class="dropdown notification-alert">
-                                                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><i class="fa fa-exclamation-circle"></i> 3</a>
-                                                        <ul class="dropdown-menu">
-                                                            <li class="dropdown-title-bar">
-                                                                Notification ( 3 )
-                                                            </li>
-                                                            <li>
-                                                                <ul class="notification-list">
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <div class="noti-icon noti-alert">
-                                                                                <i class="fa fa-exclamation-circle fa-2x"></i>
-                                                                            </div>
-                                                                            <div class="noti-message">1 new registration</div>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <div class="noti-icon noti-success">
-                                                                                <i class="fa fa-check fa-2x"></i>
-                                                                            </div>
-                                                                            <div class="noti-message">3 new orders</div>
-                                                                        </a>
-                                                                    </li>
-                                                                    <li>
-                                                                        <a href="#">
-                                                                            <div class="noti-icon noti-primary">
-                                                                                <i class="fa fa-comments fa-2x"></i>
-                                                                            </div>
-                                                                            <div class="noti-message">2 customers messages</div>
-                                                                        </a>
-                                                                    </li>
-                                                                </ul>
-                                                            </li>
-                                                        </ul>
-                                                    </li>-->
                             <li class="dropdown">
-                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo (unserialize($_SESSION['userLogged'])->login); ?><span class="caret"></span></a>
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false"><?php echo (unserialize($_SESSION['userLogged'])->nome); ?> <span class="caret"></span></a>
                                 <ul class="dropdown-menu user-info">
                                     <li class="dropdown-title-bar">
                                         <img src="images/profile.jpg" class="profile-img">
                                     </li>
                                     <li>
                                         <div class="navbar-login">
-                                            <h4 class="user-name"><?php echo (unserialize($_SESSION['userLogged'])->login); ?></h4>
-                                            <p><?php echo (unserialize($_SESSION['userLogged'])->senha); ?></p>
+                                            <h4 class="user-name"><?php echo (unserialize($_SESSION['userLogged'])->nome); ?></h4>
+                                            <p><?php echo (unserialize($_SESSION['userLogged'])->email); ?></p>
+                                            <p><?php echo (unserialize($_SESSION['userLogged'])->familia); ?></p>
                                             <div class="btn-group margin-bottom-2x" role="group">
-                                                <button type="button" class="btn btn-default"><i class="fa fa-user"></i> Profile</button>
-                                                <a href="login.php"><button type="button" class="btn btn-default"><i class="fa fa-sign-out"></i> Logout</button></a>
+                                                <a href="login.php"><button type="button" class="btn btn-default"><i class="fa fa-sign-out"></i> Sair</button></a>
                                             </div>
                                         </div>
                                     </li>

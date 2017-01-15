@@ -35,7 +35,7 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         </button>
-        <h4 class="modal-title" id="editarLabel">Confirma exclusão deste Centro de Custo?</h4>
+        <h4 class="modal-title" id="editarLabel">Confirma exclusão deste centroscustos?</h4>
     </div>
     <div class="modal-body">
         <div class="form-group">

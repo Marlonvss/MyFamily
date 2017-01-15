@@ -1,25 +1,26 @@
 <?php
 
 error_reporting(0);
-session_start();
 
 include_once './autoload.php';
 include_once './../autoload.php';
 
 
-$Controll = new CONTROLLERusuarios();
+$Controll = new CONTROLLERcartoes_itens();
 $_ID = ($_POST['id']);
-$_EMAIL = ($_POST['email']);
-$_SENHA = ($_POST['senha']);
-$_NOME = ($_POST['nome']);
-$_ID_FAMILIA = unserialize($_SESSION['userLogged'])->id_familia;
+$_ID_CARTAO = ($_POST['id_cartao']);
+$_DATACOMPRA = ($_POST['datacompra']);
+$_DESCRICAO = ($_POST['descricao']);
+$_VALOR = ($_POST['valor']);
+$_PARCELAS = ($_POST['parcelas']);
+$_ID_CENTROCUSTO = ($_POST['id_centrocusto']);
 
 if (isset($_POST['metodo'])) {
     $metodo = $_POST['metodo'];
 }
 
 if ($metodo == 'add') {
-    $Obj = new usuarios(0, $_EMAIL, $_SENHA, $_NOME, $_ID_FAMILIA);
+    $Obj = new cartoes_itens(0, $_ID_CARTAO, $_DATACOMPRA, $_DESCRICAO, $_VALOR, $_PARCELAS, $_ID_CENTROCUSTO);
     $erro = $Controll->Save($Obj);
     if ($erro->erro) {
         echo $erro->mensagem;
@@ -27,7 +28,7 @@ if ($metodo == 'add') {
 }
 
 if ($metodo == "edit") {
-    $Obj = new usuarios($_ID, $_EMAIL, $_SENHA, $_NOME, $_ID_FAMILIA);
+    $Obj = new cartoes_itens($_ID, $_ID_CARTAO, $_DATACOMPRA, $_DESCRICAO, $_VALOR, $_PARCELAS, $_ID_CENTROCUSTO);
     $erro = $Controll->Save($Obj);
     if ($erro->erro) {
         echo $erro->mensagem;
@@ -42,7 +43,7 @@ if ($metodo == "remove") {
 }
 
 if ($metodo == "load") {
-    $Obj = new usuarios($_ID);
+    $Obj = new cartoes_itens($_ID);
     $erro = $Controll->RecuperaByID($Obj);
     if ($erro->erro) {
         echo $erro->mensagem;

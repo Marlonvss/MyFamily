@@ -12,13 +12,13 @@ if (isset($_GET['remove'])) {
 
 function MakeLinkOptions($id) {
     return
-            '<button type="button" class="btn btn-link btn-xs" onclick="loadEdit('. $id .')" data-toggle="modal" data-target="#editar"><i class="fa fa-folder-open-o" aria-hidden="true"></i></button>' .
+            '<button type="button" class="btn btn-link btn-xs" onclick="loadEdit(' . $id . ')" data-toggle="modal" data-target="#editar"><i class="fa fa-folder-open-o" aria-hidden="true"></i></button>' .
             '<div class="btn-group">' .
             '  <button type="button" class="btn btn-link btn-xs dropdown-toggle" data-toggle="dropdown">' .
             '    <i class="fa fa-angle-down" aria-hidden="true"></i>' .
             '  </button>' .
             '  <ul class="dropdown-menu" role="menu">' .
-            '    <button type="button" class="btn btn-link btn-md" onclick="loadDelete('. $id .')" data-toggle="modal" data-target="#deletar"><i class="fa fa-trash-o" aria-hidden="true"></i> - Deletar</button>' .
+            '    <button type="button" class="btn btn-link btn-md" onclick="loadDelete(' . $id . ')" data-toggle="modal" data-target="#deletar"><i class="fa fa-trash-o" aria-hidden="true"></i> - Deletar</button>' .
             '  </ul>' .
             '</div>';
 }
@@ -39,32 +39,32 @@ function MakeLinkOptions($id) {
         <table class="table table-striped table-bordered table-hover">
             <thead>
                 <tr>
-                    <td>ID</td>
-                    <td>Login</td>
-                    <td>Senha</td>
+                    <td>#</td>
+                    <td>Email</td>
+                    <td>Nome</td>
                     <td>Opções</td>
                 </tr>
             </thead>
             <tbody>
 
                 <?php
-                $erro = $Controll->RecuperaLista($List);
+                $erro = $Controll->RecuperaLista($List, 'where id_familia = ' . unserialize($_SESSION['userLogged'])->id_familia);
                 if ($erro->erro) {
                     echo $erro->mensagem;
                 } else {
 
                     foreach ($List as &$obj) {
                         echo '<tr>'
-                        . '<td class="col-md-1">' . $obj->id . '</td>'
-                        . '<td class="col-md-5">' . $obj->login . '</td>'
-                        . '<td>' . $obj->senha . '</td>'
+                        . '<td>' . $obj->id . '</td>'
+                        . '<td>' . $obj->email . '</td>'
+                        . '<td>' . $obj->nome . '</td>'
                         . '<td class="col-md-1">' . MakeLinkOptions($obj->id) . '</td>'
                         . '</tr>';
                     }
                 }
                 ?>
             </tbody>
-        </table>   
+        </table>
     </div>
 </div>
 

@@ -27,7 +27,7 @@ function MakeLinkOptions($id) {
 
 <div class="row">
     <div class="col-xs-12">
-        <span class="page-title red"><h2>Classificações Financeiras</h2></span>
+        <span class="page-title red"><h2>Classificações financeiras</h2></span>
     </div>
 </div>
 
@@ -39,7 +39,7 @@ function MakeLinkOptions($id) {
         <table class="table table-striped table-bordered table-hover">
             <thead>
                 <tr>
-                    <td>id</td>
+                    <td>#</td>
                     <td>Descrição</td>
                     <td>Opções</td>
                 </tr>
@@ -47,7 +47,7 @@ function MakeLinkOptions($id) {
             <tbody>
 
                 <?php
-                $erro = $Controll->RecuperaLista($List);
+                $erro = $Controll->RecuperaLista($List, 'where id_familia = ' . unserialize($_SESSION['userLogged'])->id_familia);
                 if ($erro->erro) {
                     echo $erro->mensagem;
                 } else {

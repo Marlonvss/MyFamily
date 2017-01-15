@@ -70,7 +70,7 @@ abstract class DAObase {
 
             $strsql = 'select ' . strtolower($Fields)
                     . '  from ' . strtolower($model->getTable())
-                    . $Where
+                    . ' ' . $Where
                     . ' order by id ';
             $rs = mysql_query($strsql);
 

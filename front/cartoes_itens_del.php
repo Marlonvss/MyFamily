@@ -1,10 +1,12 @@
 <script>
     function loadDelete(id) {
         $("#del_id").val('Carregando...');
+        $("#del_datacompra").val('Carregando...');
         $("#del_descricao").val('Carregando...');
-        $("#del_numero").val('Carregando...');
+        $("#del_valor").val('Carregando...');
+        $("#del_parcelas").val('Carregando...');
         $.ajax({
-            url: 'front/cartoes_services.php',
+            url: 'front/cartoes_itens_services.php',
             type: 'post',
             dataType: 'json',
             data: {
@@ -13,14 +15,16 @@
             }
         }).done(function (data) {
             $("#del_id").val(data.id);
+            $("#del_datacompra").val(data.datacompra);
             $("#del_descricao").val(data.descricao);
-            $("#del_numero").val(data.numero);
+            $("#del_valor").val(data.valor);
+            $("#del_parcelas").val(data.parcelas);
         });
     }
 
     function remove() {
         $.ajax({
-            url: 'front/cartoes_services.php',
+            url: 'front/cartoes_itens_services.php',
             type: 'post',
             dataType: 'html',
             data: {
@@ -37,7 +41,7 @@
     <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
         </button>
-        <h4 class="modal-title" id="editarLabel">Confirma exclusão deste cartoes?</h4>
+        <h4 class="modal-title" id="editarLabel">Confirma exclusão deste cartoes_itens?</h4>
     </div>
     <div class="modal-body">
         <div class="form-group">
@@ -47,15 +51,27 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="col-sm-2 control-label">Data da compra</label>
+            <div class="col-sm-10">
+                <input type="text" id="del_datacompra" class="form-control" name="datacompra" placeholder="Data da compra"  readonly="readonly">
+            </div>
+        </div>
+        <div class="form-group">
             <label class="col-sm-2 control-label">Descrição</label>
             <div class="col-sm-10">
                 <input type="text" id="del_descricao" class="form-control" name="descricao" placeholder="Descrição"  readonly="readonly">
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">Num. Cartão</label>
+            <label class="col-sm-2 control-label">Valor da parcela</label>
             <div class="col-sm-10">
-                <input type="text" id="del_numero" class="form-control" name="numero" placeholder="Num. Cartão"  readonly="readonly">
+                <input type="text" id="del_valor" class="form-control" name="valor" placeholder="Valor da parcela"  readonly="readonly">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Parcela</label>
+            <div class="col-sm-10">
+                <input type="text" id="del_parcelas" class="form-control" name="parcelas" placeholder="Parcela"  readonly="readonly">
             </div>
         </div>
     </div>

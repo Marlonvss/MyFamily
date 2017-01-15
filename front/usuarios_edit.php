@@ -1,20 +1,22 @@
 <script>
     function loadEdit(id) {
         $("#edt_id").prop('readonly', true).val('Carregando...');
-        $("#edt_login").prop('readonly', true).val('Carregando...');
+        $("#edt_email").prop('readonly', true).val('Carregando...');
         $("#edt_senha").prop('readonly', true).val('Carregando...');
+        $("#edt_nome").prop('readonly', true).val('Carregando...');
         $.ajax({
             url: 'front/usuarios_services.php',
             type: 'post',
             dataType: 'json',
             data: {
-                'metodo': 'load',
-                'id': id
+                'id': id,
+                'metodo': 'load'
             }
         }).done(function (data) {
             $("#edt_id").val(data.id);
-            $("#edt_login").prop('readonly', false).val(data.login);
+            $("#edt_email").prop('readonly', false).val(data.email);
             $("#edt_senha").prop('readonly', false).val(data.senha);
+            $("#edt_nome").prop('readonly', false).val(data.nome);
         });
     }
     
@@ -24,10 +26,11 @@
             type: 'post',
             dataType: 'html',
             data: {
-                'metodo': 'edit',
                 'id': $('#edt_id').val(),
-                'login': $('#edt_login').val(),
-                'senha': $('#edt_senha').val()
+                'email': $('#edt_email').val(),
+                'senha': $('#edt_senha').val(),
+                'nome': $('#edt_nome').val(),
+                'metodo': 'edit'
             }
         }).done(function(){
             location.reload();
@@ -49,21 +52,26 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">Login</label>
+            <label class="col-sm-2 control-label">Email</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="edt_login" name="login" placeholder="Login" value="Carregando..." required readonly="readonly">
+                <input type="text" id="edt_email" class="form-control" name="email" placeholder="Email"  readonly="readonly">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">Senha</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="edt_senha" name="senha" placeholder="Senha" value="Carregando..." required readonly="readonly">
+                <input type="password" id="edt_senha" class="form-control" name="senha" placeholder="Senha"  readonly="readonly">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Nome</label>
+            <div class="col-sm-10">
+                <input type="text" id="edt_nome" class="form-control" name="nome" placeholder="Nome"  readonly="readonly">
             </div>
         </div>
     </div>
     <div class="modal-footer">
-        <button type="button" onclick="edit()" class="btn btn-primary" data-dismiss="modal">Salvar</button>
+        <button type="submit" onclick="edit()" class="btn btn-primary" data-dismiss="modal">Salvar</button>
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Fechar</button>
     </div>
 </form>
-

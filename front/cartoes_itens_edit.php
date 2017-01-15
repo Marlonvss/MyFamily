@@ -1,13 +1,12 @@
 <script>
     function loadEdit(id) {
         $("#edt_id").prop('readonly', true).val('Carregando...');
+        $("#edt_datacompra").prop('readonly', true).val('Carregando...');
         $("#edt_descricao").prop('readonly', true).val('Carregando...');
-        $("#edt_numero").prop('readonly', true).val('Carregando...');
-        $("#edt_limite").prop('readonly', true).val('Carregando...');
-        $("#edt_dia_fechamento").prop('readonly', true).val('Carregando...');
-        $("#edt_dia_vencimento").prop('readonly', true).val('Carregando...');
+        $("#edt_valor").prop('readonly', true).val('Carregando...');
+        $("#edt_parcelas").prop('readonly', true).val('Carregando...');
         $.ajax({
-            url: 'front/cartoes_services.php',
+            url: 'front/cartoes_itens_services.php',
             type: 'post',
             dataType: 'json',
             data: {
@@ -16,26 +15,24 @@
             }
         }).done(function (data) {
             $("#edt_id").val(data.id);
+            $("#edt_datacompra").prop('readonly', false).val(data.datacompra);
             $("#edt_descricao").prop('readonly', false).val(data.descricao);
-            $("#edt_numero").prop('readonly', false).val(data.numero);
-            $("#edt_limite").prop('readonly', false).val(data.limite);
-            $("#edt_dia_fechamento").prop('readonly', false).val(data.dia_fechamento);
-            $("#edt_dia_vencimento").prop('readonly', false).val(data.dia_vencimento);
+            $("#edt_valor").prop('readonly', false).val(data.valor);
+            $("#edt_parcelas").prop('readonly', false).val(data.parcelas);
         });
     }
     
     function edit() {
         $.ajax({
-            url: 'front/cartoes_services.php',
+            url: 'front/cartoes_itens_services.php',
             type: 'post',
             dataType: 'html',
             data: {
                 'id': $('#edt_id').val(),
+                'datacompra': $('#edt_datacompra').val(),
                 'descricao': $('#edt_descricao').val(),
-                'numero': $('#edt_numero').val(),
-                'limite': $('#edt_limite').val(),
-                'dia_fechamento': $('#edt_dia_fechamento').val(),
-                'dia_vencimento': $('#edt_dia_vencimento').val(),
+                'valor': $('#edt_valor').val(),
+                'parcelas': $('#edt_parcelas').val(),
                 'metodo': 'edit'
             }
         }).done(function(){
@@ -58,33 +55,27 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="col-sm-2 control-label">Data da compra</label>
+            <div class="col-sm-10">
+                <input type="text" id="edt_datacompra" class="form-control" name="datacompra" placeholder="Data da compra"  readonly="readonly">
+            </div>
+        </div>
+        <div class="form-group">
             <label class="col-sm-2 control-label">Descrição</label>
             <div class="col-sm-10">
                 <input type="text" id="edt_descricao" class="form-control" name="descricao" placeholder="Descrição"  readonly="readonly">
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">Num. Cartão</label>
+            <label class="col-sm-2 control-label">Valor da parcela</label>
             <div class="col-sm-10">
-                <input type="text" id="edt_numero" class="form-control" name="numero" placeholder="Num. Cartão"  readonly="readonly">
+                <input type="text" id="edt_valor" class="form-control" name="valor" placeholder="Valor da parcela"  readonly="readonly">
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">Limite</label>
+            <label class="col-sm-2 control-label">Parcela</label>
             <div class="col-sm-10">
-                <input type="text" id="edt_limite" class="form-control" name="limite" placeholder="Limite"  readonly="readonly">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Dia de fechamento</label>
-            <div class="col-sm-10">
-                <input type="text" id="edt_dia_fechamento" class="form-control" name="dia_fechamento" placeholder="Dia de fechamento"  readonly="readonly">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Dia de vencimento</label>
-            <div class="col-sm-10">
-                <input type="text" id="edt_dia_vencimento" class="form-control" name="dia_vencimento" placeholder="Dia de vencimento"  readonly="readonly">
+                <input type="text" id="edt_parcelas" class="form-control" name="parcelas" placeholder="Parcela"  readonly="readonly">
             </div>
         </div>
     </div>
