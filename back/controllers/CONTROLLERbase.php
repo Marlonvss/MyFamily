@@ -7,7 +7,14 @@ include_once './autoload.php';
 class CONTROLLERbase {
 
     function LocateIDInList($ID, $List, &$model) {
-        return $model;
+        if ($ID <> 0) {
+            foreach ($List as &$obj) {
+                if ($obj->id == $ID) {
+                    $model = $obj;
+                    break;
+                }
+            }
+        }
     }
 
 }

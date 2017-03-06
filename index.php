@@ -39,6 +39,7 @@ if (!isset($_SESSION['userLogged'])) {
         <link rel="stylesheet" type="text/css" href="css/select2.css">
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link rel="stylesheet" type="text/css" href="css/theme.css">
+        <link rel="stylesheet" type="text/css" href="css/mystyle.css">
 
 
         <?php
@@ -58,6 +59,18 @@ if (!isset($_SESSION['userLogged'])) {
         <script type="text/javascript" src="js/bootstrap-select.min.js"></script>
         <script type="text/javascript" src="js/main.js"></script> <!--Responsável pelo menu-->
         <script type="text/javascript" src="js/index.js"></script>
+
+        <link rel="stylesheet" type="text/css" href="css/bootstrap-datepicker.css">
+        <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
+        <script type="text/javascript" src="js/bootstrap-datepicker.pt-BR.js"></script>
+        <script>
+            $(document).ready(function () {
+                $('.datepicker').datepicker({
+                    language: 'pt-BR',
+                    format: 'dd/mm/yyyy'
+                });
+            });
+        </script>        
     </head>
 
     <body class="flat-blue sidebar-collapse">
@@ -76,10 +89,10 @@ if (!isset($_SESSION['userLogged'])) {
                     </a>
                 </li>
                 <li class="submenu">
-                    <a href="?pag=<?php echo $pag_cartoes ?>">
+                    <a href="?pag=<?php echo $pag_dashboard_cartoes ?>">
                         <div>
                             <i class="menu-icon fa fa-credit-card fa-fw"></i>
-                            <span class="menu-title">Cartões de crédito</span>
+                            <span class="menu-title">Faturas dos cartões</span>
                         </div>
                     </a>
                 </li>
@@ -97,6 +110,14 @@ if (!isset($_SESSION['userLogged'])) {
                                 <div>
                                     <i class="menu-icon fa fa-user"></i>
                                     <span class="menu-sub-title">Usuários</span>
+                                </div>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="?pag=<?php echo $pag_cartoes ?>">
+                                <div>
+                                    <i class="menu-icon fa fa-credit-card fa-fw"></i>
+                                    <span class="menu-sub-title">Cartões de crédito</span>
                                 </div>
                             </a>
                         </li>

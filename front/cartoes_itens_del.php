@@ -5,6 +5,8 @@
         $("#del_descricao").val('Carregando...');
         $("#del_valor").val('Carregando...');
         $("#del_parcelas").val('Carregando...');
+        $("#del_id_centrocusto").val('Carregando...');
+        $("#del_id_classificacaofinanceira").val('Carregando...');
         $.ajax({
             url: 'front/cartoes_itens_services.php',
             type: 'post',
@@ -19,6 +21,8 @@
             $("#del_descricao").val(data.descricao);
             $("#del_valor").val(data.valor);
             $("#del_parcelas").val(data.parcelas);
+            $("#del_id_centrocusto").val(data.id_centrocusto);
+            $("#del_id_classificacaofinanceira").val(data.id_classificacaofinanceira);
         });
     }
 

@@ -2,6 +2,7 @@
     function loadEdit(id) {
         $("#edt_id").prop('readonly', true).val('Carregando...');
         $("#edt_descricao").prop('readonly', true).val('Carregando...');
+        $("#edt_imagem").prop('readonly', true).val('Carregando...');
         $.ajax({
             url: 'front/classificacoesfinanceiras_services.php',
             type: 'post',
@@ -13,6 +14,7 @@
         }).done(function (data) {
             $("#edt_id").val(data.id);
             $("#edt_descricao").prop('readonly', false).val(data.descricao);
+            $("#edt_imagem").prop('readonly', false).val(data.imagem);
         });
     }
     
@@ -24,6 +26,7 @@
             data: {
                 'id': $('#edt_id').val(),
                 'descricao': $('#edt_descricao').val(),
+                'imagem': $('#edt_imagem').val(),
                 'metodo': 'edit'
             }
         }).done(function(){
@@ -49,6 +52,19 @@
             <label class="col-sm-2 control-label">Descrição</label>
             <div class="col-sm-10">
                 <input type="text" id="edt_descricao" class="form-control" name="descricao" placeholder="Descrição"  readonly="readonly">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Imagem</label>
+            <div class="col-sm-10">
+                <select name="imagem" class="fonte-fa form-control" id="edt_imagem">
+                    <?php
+                    include 'helper_imagens.php';
+                    foreach ($MyArrImagens as $key => $value) {
+                        echo '<option value="' . $key . '">' . $value . '; - ' . $key . '</option>';
+                    }
+                    ?>
+                </select>
             </div>
         </div>
     </div>

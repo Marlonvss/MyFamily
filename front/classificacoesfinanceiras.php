@@ -12,15 +12,8 @@ if (isset($_GET['remove'])) {
 
 function MakeLinkOptions($id) {
     return
-            '<button type="button" class="btn btn-link btn-xs" onclick="loadEdit('. $id .')" data-toggle="modal" data-target="#editar"><i class="fa fa-folder-open-o" aria-hidden="true"></i></button>' .
-            '<div class="btn-group">' .
-            '  <button type="button" class="btn btn-link btn-xs dropdown-toggle" data-toggle="dropdown">' .
-            '    <i class="fa fa-angle-down" aria-hidden="true"></i>' .
-            '  </button>' .
-            '  <ul class="dropdown-menu" role="menu">' .
-            '    <button type="button" class="btn btn-link btn-md" onclick="loadDelete('. $id .')" data-toggle="modal" data-target="#deletar"><i class="fa fa-trash-o" aria-hidden="true"></i> - Deletar</button>' .
-            '  </ul>' .
-            '</div>';
+            '<button type="button" class="my_btn btn btn-link btn-md" onclick="loadEdit(' . $id . ')" data-toggle="modal" data-target="#editar"><i class="fa fa-folder-open-o" aria-hidden="true"></i></button>' .
+            '<button type="button" class="my_btnbtn btn-link btn-md" onclick="loadDelete(' . $id . ')" data-toggle="modal" data-target="#deletar"><i class="fa fa-trash-o" aria-hidden="true"></i></button>';
 }
 ?>
 
@@ -36,33 +29,37 @@ function MakeLinkOptions($id) {
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#novo">Novo</button>
     </div>
     <div class="panel-body">
-        <table class="table table-striped table-bordered table-hover">
-            <thead>
-                <tr>
-                    <td>#</td>
-                    <td>Descrição</td>
-                    <td>Opções</td>
-                </tr>
-            </thead>
-            <tbody>
+        <div class="table-responsive">
+            <table class="table table-striped table-bordered table-hover">
+                <thead>
+                    <tr>
+                        <td>#</td>
+                        <td>Descrição</td>
+                        <td class="col-md-1">Imagem</td>
+                        <td class="col-md-1">Opções</td>
+                    </tr>
+                </thead>
+                <tbody>
 
-                <?php
-                $erro = $Controll->RecuperaLista($List, 'where id_familia = ' . unserialize($_SESSION['userLogged'])->id_familia);
-                if ($erro->erro) {
-                    echo $erro->mensagem;
-                } else {
+                    <?php
+                    $erro = $Controll->RecuperaLista($List);
+                    if ($erro->erro) {
+                        echo $erro->mensagem;
+                    } else {
 
-                    foreach ($List as &$obj) {
-                        echo '<tr>'
-                        . '<td>' . $obj->id . '</td>'
-                        . '<td>' . $obj->descricao . '</td>'
-                        . '<td class="col-md-1">' . MakeLinkOptions($obj->id) . '</td>'
-                        . '</tr>';
+                        foreach ($List as &$obj) {
+                            echo '<tr>'
+                            . '<td>' . $obj->id . '</td>'
+                            . '<td>' . $obj->descricao . '</td>'
+                            . '<td><i class="fa ' . $obj->imagem . '"</i></td>'
+                            . '<td>' . MakeLinkOptions($obj->id) . '</td>'
+                            . '</tr>';
+                        }
                     }
-                }
-                ?>
-            </tbody>
-        </table>
+                    ?>
+                </tbody>
+            </table>
+        </div>
     </div>
 </div>
 

@@ -16,6 +16,12 @@ class CONTROLLERclassificacoesfinanceiras extends CONTROLLERbase {
 
     function RecuperaLista(&$list, $Where = NULL) {
         $model = new classificacoesfinanceiras();
+
+        if ($Where == NULL) {
+            $Where = 'where id_familia = ' . unserialize($_SESSION['userLogged'])->id_familia;
+        } else {
+            $Where = $Where.' and id_familia = ' . unserialize($_SESSION['userLogged'])->id_familia;
+        }
         return $this->GetDAO()->GetList($model, $list, $Where);
     }
 

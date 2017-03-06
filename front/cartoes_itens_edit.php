@@ -5,6 +5,8 @@
         $("#edt_descricao").prop('readonly', true).val('Carregando...');
         $("#edt_valor").prop('readonly', true).val('Carregando...');
         $("#edt_parcelas").prop('readonly', true).val('Carregando...');
+        $("#edt_id_centrocusto").prop('readonly', true).val('Carregando...');
+        $("#edt_id_classificacaofinanceira").prop('readonly', true).val('Carregando...');
         $.ajax({
             url: 'front/cartoes_itens_services.php',
             type: 'post',
@@ -19,6 +21,8 @@
             $("#edt_descricao").prop('readonly', false).val(data.descricao);
             $("#edt_valor").prop('readonly', false).val(data.valor);
             $("#edt_parcelas").prop('readonly', false).val(data.parcelas);
+            $("#edt_id_centrocusto").prop('readonly', false).val(data.id_centrocusto);
+            $("#edt_id_classificacaofinanceira").prop('readonly', false).val(data.id_classificacaofinanceira);
         });
     }
     
@@ -33,6 +37,8 @@
                 'descricao': $('#edt_descricao').val(),
                 'valor': $('#edt_valor').val(),
                 'parcelas': $('#edt_parcelas').val(),
+                'id_centrocusto': $('#edt_id_centrocusto').val(),
+                'id_classificacaofinanceira': $('#edt_id_classificacaofinanceira').val(),
                 'metodo': 'edit'
             }
         }).done(function(){
@@ -78,6 +84,19 @@
                 <input type="text" id="edt_parcelas" class="form-control" name="parcelas" placeholder="Parcela"  readonly="readonly">
             </div>
         </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Centro de Custo</label>
+            <div class="col-sm-10">
+                <input type="text" id="edt_id_centrocusto" class="form-control" name="id_centrocusto" placeholder="Centro de Custo"  readonly="readonly">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Classificação</label>
+            <div class="col-sm-10">
+                <input type="text" id="edt_id_classificacaofinanceira" class="form-control" name="id_classificacaofinanceira" placeholder="Classificação"  readonly="readonly">
+            </div>
+        </div>
+	
     </div>
     <div class="modal-footer">
         <button type="submit" onclick="edit()" class="btn btn-primary" data-dismiss="modal">Salvar</button>

@@ -23,9 +23,8 @@ if ($metodo == "logar") {
 
         $erro = $userControl->RecuperaLista($userList);
         if ($erro->erro) {
-//            echo $erro->mensagem;
+            echo $erro->mensagem;
         } else {
-
             foreach ($userList as &$user) {
                 if ((strtolower($user->email) == strtolower($_EMAIL)) and ( strtolower($user->senha) == strtolower($_SENHA))) {
                     setcookie("myfamily", $user->id );

@@ -11,6 +11,7 @@ $Controll = new CONTROLLERclassificacoesfinanceiras();
 $_ID = ($_POST['id']);
 $_DESCRICAO = ($_POST['descricao']);
 $_ID_FAMILIA = unserialize($_SESSION['userLogged'])->id_familia;
+$_IMAGEM = ($_POST['imagem']);
 
 
 if (isset($_POST['metodo'])) {
@@ -18,7 +19,7 @@ if (isset($_POST['metodo'])) {
 }
 
 if ($metodo == 'add') {
-    $Obj = new classificacoesfinanceiras(0, $_DESCRICAO, $_ID_FAMILIA);
+    $Obj = new classificacoesfinanceiras(0, $_DESCRICAO, $_ID_FAMILIA, $_IMAGEM);
     $erro = $Controll->Save($Obj);
     if ($erro->erro) {
         echo $erro->mensagem;
@@ -26,7 +27,7 @@ if ($metodo == 'add') {
 }
 
 if ($metodo == "edit") {
-    $Obj = new classificacoesfinanceiras($_ID, $_DESCRICAO, $_ID_FAMILIA);
+    $Obj = new classificacoesfinanceiras($_ID, $_DESCRICAO, $_ID_FAMILIA, $_IMAGEM);
     $erro = $Controll->Save($Obj);
     if ($erro->erro) {
         echo $erro->mensagem;
