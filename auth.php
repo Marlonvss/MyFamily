@@ -14,7 +14,7 @@ if ($metodo == "logar") {
 
 // Buscando Login e Senha digitados pelo usuario
     $_EMAIL = ($_POST['email']);
-    $_SENHA = ($_POST['senha']);
+    $_SENHA = md5($_POST['senha']);
 
     if (($_EMAIL == "") or ( $_SENHA == "")) {
         echo 'false';

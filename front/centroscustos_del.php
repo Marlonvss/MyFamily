@@ -2,6 +2,7 @@
     function loadDelete(id) {
         $("#del_id").val('Carregando...');
         $("#del_descricao").val('Carregando...');
+        $("#del_controladespesa").val('Carregando...');
         $.ajax({
             url: 'front/centroscustos_services.php',
             type: 'post',
@@ -13,6 +14,7 @@
         }).done(function (data) {
             $("#del_id").val(data.id);
             $("#del_descricao").val(data.descricao);
+            $("#del_controladespesa").val(data.controladespesa);
         });
     }
 
@@ -48,6 +50,12 @@
             <label class="col-sm-2 control-label">Descrição</label>
             <div class="col-sm-10">
                 <input type="text" id="del_descricao" class="form-control" name="descricao" placeholder="Descrição"  readonly="readonly">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Controla despesa?</label>
+            <div class="col-sm-10">
+                <input type="text" id="del_controladespesa" class="form-control" name="controladespesa" placeholder="Controla despesa?"  readonly="readonly">
             </div>
         </div>
     </div>

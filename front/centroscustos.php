@@ -35,6 +35,7 @@ function MakeLinkOptions($id) {
                     <tr>
                         <td>#</td>
                         <td>Descrição</td>
+                        <td>Controla despesa?</td>
                         <td>Opções</td>
                     </tr>
                 </thead>
@@ -50,6 +51,7 @@ function MakeLinkOptions($id) {
                             echo '<tr>'
                             . '<td>' . $obj->id . '</td>'
                             . '<td>' . $obj->descricao . '</td>'
+                        . '<td>' . $obj->controladespesa . '</td>'
                             . '<td class="col-md-1">' . MakeLinkOptions($obj->id) . '</td>'
                             . '</tr>';
                         }

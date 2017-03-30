@@ -2,6 +2,7 @@
     function loadEdit(id) {
         $("#edt_id").prop('readonly', true).val('Carregando...');
         $("#edt_descricao").prop('readonly', true).val('Carregando...');
+        $("#edt_controladespesa").prop('readonly', true).val('Carregando...');
         $.ajax({
             url: 'front/centroscustos_services.php',
             type: 'post',
@@ -13,6 +14,7 @@
         }).done(function (data) {
             $("#edt_id").val(data.id);
             $("#edt_descricao").prop('readonly', false).val(data.descricao);
+            $("#edt_controladespesa").prop('readonly', false).val(data.controladespesa);
         });
     }
     
@@ -24,6 +26,7 @@
             data: {
                 'id': $('#edt_id').val(),
                 'descricao': $('#edt_descricao').val(),
+                'controladespesa': $('#edt_controladespesa').val(),
                 'metodo': 'edit'
             }
         }).done(function(){
@@ -48,7 +51,13 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">Descrição</label>
             <div class="col-sm-10">
-                <input type="text" id="edt_descricao" class="form-control" name="descricao" placeholder="Descrição"  readonly="readonly">
+                <input type="text" id="edt_descricao" class="form-control" name="descricao" placeholder=""  readonly="readonly">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Controla despesa?</label>
+            <div class="col-sm-10">
+                <input type="text" id="edt_controladespesa" class="form-control" name="controladespesa" placeholder="Controla despesa?"  readonly="readonly">
             </div>
         </div>
     </div>
