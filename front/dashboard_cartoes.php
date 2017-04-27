@@ -30,6 +30,7 @@ if ($erro->erro) {
         echo '<div class="panel panel-default">';
         echo '<div class="panel-heading">';
         echo '<strong>' . $cartao->descricao . '</strong>';
+        echo '<div class="btn btn-xs pull-right"><i class="fa fa-refresh" aria-hidden="true"></i></div>';
         echo '</div>';
         echo '<div class="table-responsive">';
         echo '<table class="table table-striped table-bordered table-hover">';
@@ -90,17 +91,9 @@ if ($erro->erro) {
 }
 ?>
 
-
 <a href="#" class="btn btn-primary btn-circle dashboard-float-button" data-toggle="modal" data-target="#novo"><i class="glyphicon glyphicon-plus"></i></a>
 <!-- Modal -->
-<div class="modal fade" id="novo" tabindex="-1" role="dialog" aria-labelledby="novoLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <?php include 'cartoes_itens_add.php'; ?>
-        </div>
-    </div>
-</div>
-<div class="modal fade" id="pagar" tabindex="-1" role="dialog" aria-labelledby="novoLabel" aria-hidden="true">
+<div class="modal fade" data-backdrop="static" id="novo" tabindex="-1" role="dialog" aria-labelledby="novoLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <?php include 'cartoes_itens_add.php'; ?>

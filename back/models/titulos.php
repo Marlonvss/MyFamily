@@ -1,41 +1,41 @@
 <?php
 
 class titulos {
-    public $ID;
-    public $Descricao;
-    public $Vencimento;
-    public $Valor;
-    public $ValorPago;
-    public $Quitado;
-    public $Observacao;
-    public $ID_ClassificacaoFinanceira;
-    public $ID_CentroCusto;
-    public $ID_Familia;
+    public $id;
+    public $descricao;
+    public $vencimento;
+    public $valor;
+    public $valorpago;
+    public $quitado;
+    public $observacao;
+    public $id_classificacaofinanceira;
+    public $id_centrocusto;
+    public $id_familia;
 
-    function __construct($_ID = 0, $_Descricao = '', $_Vencimento = '', $_Valor = 0, $_ValorPago = 0, $_Quitado = '', $_Observacao = '', $_ID_ClassificacaoFinanceira = 0, $_ID_CentroCusto = 0, $_ID_Familia = 0) {
-        $this->ID = (int)$_ID;
-        $this->Descricao = (string)$_Descricao;
-        $this->Vencimento = (string)$_Vencimento;
-        $this->Valor = (float)$_Valor;
-        $this->ValorPago = (float)$_ValorPago;
-        $this->Quitado = (string)$_Quitado;
-        $this->Observacao = (string)$_Observacao;
-        $this->ID_ClassificacaoFinanceira = (int)$_ID_ClassificacaoFinanceira;
-        $this->ID_CentroCusto = (int)$_ID_CentroCusto;
-        $this->ID_Familia = (int)$_ID_Familia;
+    function __construct($_id = 0, $_descricao = '', $_vencimento = '', $_valor = 0, $_valorpago = 0, $_quitado = 0, $_observacao = '', $_id_classificacaofinanceira = 0, $_id_centrocusto = 0, $_id_familia = 0) {
+        $this->id = (int)$_id;
+        $this->descricao = (string)$_descricao;
+        $this->vencimento = (string)$_vencimento;
+        $this->valor = (float)$_valor;
+        $this->valorpago = (float)$_valorpago;
+        $this->quitado = (int)$_quitado;
+        $this->observacao = (string)$_observacao;
+        $this->id_classificacaofinanceira = (int)$_id_classificacaofinanceira;
+        $this->id_centrocusto = (int)$_id_centrocusto;
+        $this->id_familia = (int)$_id_familia;
     }
 
     function RefreshByRow($row) {
-        $this->ID = (int)$row['ID'];
-        $this->Descricao = (string)$row['Descricao'];
-        $this->Vencimento = (string)$row['Vencimento'];
-        $this->Valor = (float)$row['Valor'];
-        $this->ValorPago = (float)$row['ValorPago'];
-        $this->Quitado = (string)$row['Quitado'];
-        $this->Observacao = (string)$row['Observacao'];
-        $this->ID_ClassificacaoFinanceira = (int)$row['ID_ClassificacaoFinanceira'];
-        $this->ID_CentroCusto = (int)$row['ID_CentroCusto'];
-        $this->ID_Familia = (int)$row['ID_Familia'];
+        $this->id = (int)$row['id'];
+        $this->descricao = (string)$row['descricao'];
+        $this->vencimento = (string)$row['vencimento'];
+        $this->valor = (float)$row['valor'];
+        $this->valorpago = (float)$row['valorpago'];
+        $this->quitado = (int)$row['quitado'];
+        $this->observacao = (string)$row['observacao'];
+        $this->id_classificacaofinanceira = (int)$row['id_classificacaofinanceira'];
+        $this->id_centrocusto = (int)$row['id_centrocusto'];
+        $this->id_familia = (int)$row['id_familia'];
     }
 
     // FieldsForCrud
@@ -48,16 +48,16 @@ class titulos {
             $Separador = '';
         }
 
-        $arr['ID'] = $this->ID;
-        $arr['Descricao'] = $Separador . $this->Descricao . $Separador;
-        $arr['Vencimento'] = $Separador . $this->Vencimento . $Separador;
-        $arr['Valor'] = $this->Valor;
-        $arr['ValorPago'] = $this->ValorPago;
-        $arr['Quitado'] = $Separador . $this->Quitado . $Separador;
-        $arr['Observacao'] = $Separador . $this->Observacao . $Separador;
-        $arr['ID_ClassificacaoFinanceira'] = $this->ID_ClassificacaoFinanceira;
-        $arr['ID_CentroCusto'] = $this->ID_CentroCusto;
-        $arr['ID_Familia'] = $this->ID_Familia;
+        $arr['id'] = $this->id;
+        $arr['descricao'] = $Separador . $this->descricao . $Separador;
+        $arr['vencimento'] = $Separador . date('Y-m-d', strtotime(str_replace('/', '-', $this->vencimento))) . $Separador;
+        $arr['valor'] = $this->valor;
+        $arr['valorpago'] = $this->valorpago;
+        $arr['quitado'] = $this->quitado;
+        $arr['observacao'] = $Separador . $this->observacao . $Separador;
+        $arr['id_classificacaofinanceira'] = $this->id_classificacaofinanceira;
+        $arr['id_centrocusto'] = $this->id_centrocusto;
+        $arr['id_familia'] = $this->id_familia;
 
         return $arr;
     }
@@ -65,7 +65,6 @@ class titulos {
     // FieldsForCrud
     function getTable() {
         return 'titulos';
-
     }
 
 }

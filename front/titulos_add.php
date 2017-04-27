@@ -16,7 +16,8 @@
                 'id_familia': $('#add_id_familia').val(),
                 'metodo': 'add'
             }
-        }).done(function(){
+        }).done(function(e){
+            alert(e);
             location.reload();
         });
     }
@@ -33,43 +34,37 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">Descrição</label>
             <div class="col-sm-10">
-                <input type="text" id="add_Descricao" class="form-control" name="Descricao" placeholder="Descrição" required>
+                <input type="text" id="add_descricao" class="form-control" name="Descricao" placeholder="Descrição" required>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">Vencimento</label>
             <div class="col-sm-10">
-                <input type="text" id="add_Vencimento" class="form-control" name="Vencimento" placeholder="Vencimento" required>
+                <input type="text" data-format="dd/MM/yyyy" id="add_vencimento" class="form-control datepicker" name="Vencimento" placeholder="Vencimento" value="<?php echo date('d/m/Y') ?>" required>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">Valor</label>
             <div class="col-sm-10">
-                <input type="text" id="add_Valor" class="form-control" name="Valor" placeholder="Valor" required>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Valor pago</label>
-            <div class="col-sm-10">
-                <input type="text" id="add_ValorPago" class="form-control" name="ValorPago" placeholder="Valor pago" required>
+                <input type="text" id="add_valor" class="form-control" name="Valor" placeholder="Valor" required>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">Quitado?</label>
             <div class="col-sm-10">
-                <input type="text" id="add_Quitado" class="form-control" name="Quitado" placeholder="Quitado?" required>
+                <input type="text" id="add_quitado" class="form-control" name="Quitado" placeholder="Quitado?" required>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">Obs</label>
             <div class="col-sm-10">
-                <input type="text" id="add_Observacao" class="form-control" name="Observacao" placeholder="Obs" required>
+                <input type="text" id="add_observacao" class="form-control" name="Observacao" placeholder="Obs" required>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">Cl. Financeira</label>
             <div class="col-sm-10">
-                <select name="ID_ClassificacaoFinanceira" class="form-control" id="add_ID_ClassificacaoFinanceira">
+                <select name="id_classificacaofinanceira" class="form-control" id="add_id_classificacaofinanceira">
                     <?php
                     $Controll = new CONTROLLERclassificacoesfinanceiras;
                     $erro = $Controll->RecuperaLista($List);

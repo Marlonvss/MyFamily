@@ -1,15 +1,15 @@
 <script>
     function loadDelete(id) {
-        $("#del_ID").val('Carregando...');
-        $("#del_Descricao").val('Carregando...');
-        $("#del_Vencimento").val('Carregando...');
-        $("#del_Valor").val('Carregando...');
-        $("#del_ValorPago").val('Carregando...');
-        $("#del_Quitado").val('Carregando...');
-        $("#del_Observacao").val('Carregando...');
-        $("#del_ID_ClassificacaoFinanceira").val('Carregando...');
-        $("#del_ID_CentroCusto").val('Carregando...');
-        $("#del_ID_Familia").val('Carregando...');
+        $("#del_id").val('Carregando...');
+        $("#del_descricao").val('Carregando...');
+        $("#del_vencimento").val('Carregando...');
+        $("#del_valor").val('Carregando...');
+        $("#del_valorpago").val('Carregando...');
+        $("#del_quitado").val('Carregando...');
+        $("#del_observacao").val('Carregando...');
+        $("#del_id_classificacaofinanceira").val('Carregando...');
+        $("#del_id_centrocusto").val('Carregando...');
+        $("#del_id_familia").val('Carregando...');
         $.ajax({
             url: 'front/titulos_services.php',
             type: 'post',
@@ -19,16 +19,16 @@
                 'metodo': 'load'
             }
         }).done(function (data) {
-            $("#del_ID").val(data.ID);
-            $("#del_Descricao").val(data.Descricao);
-            $("#del_Vencimento").val(data.Vencimento);
-            $("#del_Valor").val(data.Valor);
-            $("#del_ValorPago").val(data.ValorPago);
-            $("#del_Quitado").val(data.Quitado);
-            $("#del_Observacao").val(data.Observacao);
-            $("#del_ID_ClassificacaoFinanceira").val(data.ID_ClassificacaoFinanceira);
-            $("#del_ID_CentroCusto").val(data.ID_CentroCusto);
-            $("#del_ID_Familia").val(data.ID_Familia);
+            $("#del_id").val(data.id);
+            $("#del_descricao").val(data.descricao);
+            $("#del_vencimento").val(data.vencimento);
+            $("#del_valor").val(data.valor);
+            $("#del_valorpago").val(data.valorpago);
+            $("#del_quitado").val(data.quitado);
+            $("#del_observacao").val(data.observacao);
+            $("#del_id_classificacaofinanceira").val(data.id_classificacaofinanceira);
+            $("#del_id_centrocusto").val(data.id_centrocusto);
+            $("#del_id_familia").val(data.id_familia);
         });
     }
 
@@ -41,7 +41,8 @@
                 'metodo': 'remove',
                 'id': $('#del_id').val()
             }
-        }).done(function () {
+        }).done(function (e) {
+            alert(e);
             location.reload();
         });
     }
@@ -63,55 +64,49 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">Descrição</label>
             <div class="col-sm-10">
-                <input type="text" id="del_Descricao" class="form-control" name="Descricao" placeholder="Descrição"  readonly="readonly">
+                <input type="text" id="del_descricao" class="form-control" name="Descricao" placeholder="Descrição"  readonly="readonly">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">Vencimento</label>
             <div class="col-sm-10">
-                <input type="text" id="del_Vencimento" class="form-control" name="Vencimento" placeholder="Vencimento"  readonly="readonly">
+                <input type="text" id="del_vencimento" class="form-control" name="Vencimento" placeholder="Vencimento"  readonly="readonly">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">Valor</label>
             <div class="col-sm-10">
-                <input type="text" id="del_Valor" class="form-control" name="Valor" placeholder="Valor"  readonly="readonly">
+                <input type="text" id="del_valor" class="form-control" name="Valor" placeholder="Valor"  readonly="readonly">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">Valor pago</label>
             <div class="col-sm-10">
-                <input type="text" id="del_ValorPago" class="form-control" name="ValorPago" placeholder="Valor pago"  readonly="readonly">
+                <input type="text" id="del_valorpago" class="form-control" name="ValorPago" placeholder="Valor pago"  readonly="readonly">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">Quitado?</label>
             <div class="col-sm-10">
-                <input type="text" id="del_Quitado" class="form-control" name="Quitado" placeholder="Quitado?"  readonly="readonly">
+                <input type="text" id="del_quitado" class="form-control" name="Quitado" placeholder="Quitado?"  readonly="readonly">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">Obs</label>
             <div class="col-sm-10">
-                <input type="text" id="del_Observacao" class="form-control" name="Observacao" placeholder="Obs"  readonly="readonly">
+                <input type="text" id="del_observacao" class="form-control" name="Observacao" placeholder="Obs"  readonly="readonly">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">Cl. Financeira</label>
             <div class="col-sm-10">
-                <input type="text" id="del_ID_ClassificacaoFinanceira" class="form-control" name="ID_ClassificacaoFinanceira" placeholder="Cl. Financeira"  readonly="readonly">
+                <input type="text" id="del_id_classificacaofinanceira" class="form-control" name="ID_ClassificacaoFinanceira" placeholder="Cl. Financeira"  readonly="readonly">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">C. Custo</label>
             <div class="col-sm-10">
-                <input type="text" id="del_ID_CentroCusto" class="form-control" name="ID_CentroCusto" placeholder="C. Custo"  readonly="readonly">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Familia</label>
-            <div class="col-sm-10">
-                <input type="text" id="del_ID_Familia" class="form-control" name="ID_Familia" placeholder="Familia"  readonly="readonly">
+                <input type="text" id="del_id_centrocusto" class="form-control" name="ID_CentroCusto" placeholder="C. Custo"  readonly="readonly">
             </div>
         </div>
     </div>

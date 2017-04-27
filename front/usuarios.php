@@ -64,7 +64,7 @@ function MakeLinkOptions($id) {
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="novo" tabindex="-1" role="dialog" aria-labelledby="novoLabel" aria-hidden="true">
+<div class="modal fade" data-backdrop="static" id="novo" tabindex="-1" role="dialog" aria-labelledby="novoLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <?php include 'usuarios_add.php'; ?>
@@ -72,7 +72,7 @@ function MakeLinkOptions($id) {
     </div>
 </div>
 
-<div class="modal fade" id="editar" tabindex="-1" role="dialog" aria-labelledby="editarLabel" aria-hidden="true">
+<div class="modal fade" data-backdrop="static" id="editar" tabindex="-1" role="dialog" aria-labelledby="editarLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <?php include 'usuarios_edit.php'; ?>
@@ -80,7 +80,7 @@ function MakeLinkOptions($id) {
     </div>
 </div>
 
-<div class="modal fade" id="deletar" tabindex="-1" role="dialog" aria-labelledby="deletarLabel" aria-hidden="true">
+<div class="modal fade" data-backdrop="static" id="deletar" tabindex="-1" role="dialog" aria-labelledby="deletarLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <?php include 'usuarios_del.php'; ?>

@@ -25,7 +25,7 @@
                 'metodo': 'remove',
                 'id': $('#del_id').val()
             }
-        }).done(function () {
+        }).done(function (e) {
             location.reload();
         });
     }

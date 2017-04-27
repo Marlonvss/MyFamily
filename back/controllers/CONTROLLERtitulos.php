@@ -31,5 +31,11 @@ class CONTROLLERtitulos extends CONTROLLERbase {
         $model = new titulos($id);
         return $this->GetDAO()->Delete($model);
     }
+    
+    function RecuperaListaFaturaCorrente(&$list) {
+        $model = new titulos();
+        $Where = ' where YEAR(vencimento) = 20' . $_SESSION['ano'] . ' and Month(vencimento) = ' . $_SESSION['mes'];
+        return $this->GetDAO()->GetList($model, $list, $Where);
+    }
 
 }

@@ -12,29 +12,13 @@ if (isset($_GET['remove'])) {
 
 function MakeLinkOptions($id) {
     return
-            '<button type="button" class="btn btn-link btn-xs" onclick="loadEdit('. $id .')" data-toggle="modal" data-target="#editar"><i class="fa fa-folder-open-o" aria-hidden="true"></i></button>' .
-            '<div class="btn-group">' .
-            '  <button type="button" class="btn btn-link btn-xs dropdown-toggle" data-toggle="dropdown">' .
-            '    <i class="fa fa-angle-down" aria-hidden="true"></i>' .
-            '  </button>' .
-            '  <ul class="dropdown-menu" role="menu">' .
-            '    <button type="button" class="btn btn-link btn-md" onclick="loadDelete('. $id .')" data-toggle="modal" data-target="#deletar"><i class="fa fa-trash-o" aria-hidden="true"></i> - Deletar</button>' .
-            '  </ul>' .
-            '</div>';
+            '<button type="button" class="my_btn btn btn-link btn-md" onclick="loadEdit(' . $id . ')" data-toggle="modal" data-target="#editar"><i class="fa fa-folder-open-o" aria-hidden="true"></i></button>' .
+            '<button type="button" class="my_btn btn btn-link btn-md" onclick="loadQuitar(' . $id . ')" data-toggle="modal" data-target="#quitar"><i class="fa fa-usd" aria-hidden="true"></i></button>' .
+            '<button type="button" class="my_btnbtn btn-link btn-md" onclick="loadDelete(' . $id . ')" data-toggle="modal" data-target="#deletar"><i class="fa fa-trash-o" aria-hidden="true"></i></button>';
 }
 ?>
 
-
-<div class="row">
-    <div class="col-xs-12">
-        <span class="page-title red"><h2>Titulos</h2></span>
-    </div>
-</div>
-
 <div class="panel panel-default">
-    <div class="panel-heading">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#novo">Novo</button>
-    </div>
     <div class="panel-body">
         <table class="table table-striped table-bordered table-hover">
             <thead>
@@ -45,33 +29,31 @@ function MakeLinkOptions($id) {
                     <td>Valor</td>
                     <td>Valor pago</td>
                     <td>Quitado?</td>
-                    <td>Obs</td>
-                    <td>Cl. Financeira</td>
-                    <td>C. Custo</td>
-                    <td>Familia</td>
                     <td>Opções</td>
                 </tr>
             </thead>
             <tbody>
 
                 <?php
-                $erro = $Controll->RecuperaLista($List);
+                $erro = $Controll->RecuperaListaFaturaCorrente($List);
                 if ($erro->erro) {
                     echo $erro->mensagem;
                 } else {
 
+                    if ($obj->quitado == '0') {
+                        $txtQuitado = 'Não';
+                    } else {
+                        $txtQuitado = 'Sim';
+                    }                    
+                    
                     foreach ($List as &$obj) {
                         echo '<tr>'
-                        . '<td>' . $obj->ID . '</td>'
-                        . '<td>' . $obj->Descricao . '</td>'
-                        . '<td>' . $obj->Vencimento . '</td>'
-                        . '<td>' . $obj->Valor . '</td>'
-                        . '<td>' . $obj->ValorPago . '</td>'
-                        . '<td>' . $obj->Quitado . '</td>'
-                        . '<td>' . $obj->Observacao . '</td>'
-                        . '<td>' . $obj->ID_ClassificacaoFinanceira . '</td>'
-                        . '<td>' . $obj->ID_CentroCusto . '</td>'
-                        . '<td>' . $obj->ID_Familia . '</td>'
+                        . '<td>' . $obj->id . '</td>'
+                        . '<td>' . $obj->descricao . '</td>'
+                        . '<td>' . $obj->vencimento . '</td>'
+                        . '<td>' . $obj->valor . '</td>'
+                        . '<td>' . $obj->valorpago . '</td>'
+                        . '<td>' . $txtQuitado . '</td>'
                         . '<td class="col-md-1">' . MakeLinkOptions($obj->id) . '</td>'
                         . '</tr>';
                     }
@@ -83,7 +65,7 @@ function MakeLinkOptions($id) {
 </div>
 
 <!-- Modal -->
-<div class="modal fade" id="novo" tabindex="-1" role="dialog" aria-labelledby="novoLabel" aria-hidden="true">
+<div class="modal fade" data-backdrop="static" id="novo" tabindex="-1" role="dialog" aria-labelledby="novoLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <?php include 'titulos_add.php'; ?>
@@ -91,7 +73,7 @@ function MakeLinkOptions($id) {
     </div>
 </div>
 
-<div class="modal fade" id="editar" tabindex="-1" role="dialog" aria-labelledby="editarLabel" aria-hidden="true">
+<div class="modal fade" data-backdrop="static" id="editar" tabindex="-1" role="dialog" aria-labelledby="editarLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <?php include 'titulos_edit.php'; ?>
@@ -99,10 +81,21 @@ function MakeLinkOptions($id) {
     </div>
 </div>
 
-<div class="modal fade" id="deletar" tabindex="-1" role="dialog" aria-labelledby="deletarLabel" aria-hidden="true">
+<div class="modal fade" data-backdrop="static" id="deletar" tabindex="-1" role="dialog" aria-labelledby="deletarLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <?php include 'titulos_del.php'; ?>
         </div>
     </div>
 </div>
+
+<div class="modal fade" data-backdrop="static" id="quitar" tabindex="-1" role="dialog" aria-labelledby="deletarLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <?php include 'titulos_quitar.php'; ?>
+        </div>
+    </div>
+</div>
+
+
+<a href="#" class="btn btn-primary btn-circle dashboard-float-button" data-toggle="modal" data-target="#novo"><i class="glyphicon glyphicon-plus"></i></a>

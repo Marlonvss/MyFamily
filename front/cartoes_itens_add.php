@@ -15,7 +15,8 @@
                 'id_cartao': $('#add_cartao').val(),
                 'metodo': 'add'
             }
-        }).done(function () {
+        }).done(function (e) {
+            alert(e);
             location.reload();
         });
     }
@@ -68,86 +69,15 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">Parcelas</label>
             <div class="col-sm-10">
-                <input type="number" id="add_parcelas" class="form-control" name="parcelas" placeholder="Parcela" required>
+                <input type="number" id="add_parcelas" class="form-control" name="parcelas" placeholder="Parcela" value="1" min="1" max="99" required>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">Mês da 1ª parcela</label>
             <div class="col-sm-10">
                 <select class="form-control" name="mes_fatura_inicio" id="add_mes_fatura_inicio">
-                    <?php
-                    if ($_SESSION['mes'] == 1) {
-                        echo '<option value="1" selected>Janeiro</option>';
-                    } else {
-                        echo '<option value="1">Janeiro</option>';
-                    }
-
-                    if ($_SESSION['mes'] == 2) {
-                        echo '<option value="2" selected>Fevereiro</option>';
-                    } else {
-                        echo '<option value="2">Fevereiro</option>';
-                    }
-
-                    if ($_SESSION['mes'] == 3) {
-                        echo '<option value="3" selected>Março</option>';
-                    } else {
-                        echo '<option value="3">Março</option>';
-                    }
-
-                    if ($_SESSION['mes'] == 4) {
-                        echo '<option value="4" selected>Abril</option>';
-                    } else {
-                        echo '<option value="4">Abril</option>';
-                    }
-
-                    if ($_SESSION['mes'] == 5) {
-                        echo '<option value="5" selected>Maio</option>';
-                    } else {
-                        echo '<option value="5">Maio</option>';
-                    }
-
-                    if ($_SESSION['mes'] == 6) {
-                        echo '<option value="6" selected>Junho</option>';
-                    } else {
-                        echo '<option value="6">Junho</option>';
-                    }
-
-                    if ($_SESSION['mes'] == 7) {
-                        echo '<option value="7" selected>Julho</option>';
-                    } else {
-                        echo '<option value="7">Julho</option>';
-                    }
-
-                    if ($_SESSION['mes'] == 8) {
-                        echo '<option value="8" selected>Agosto</option>';
-                    } else {
-                        echo '<option value="8">Agosto</option>';
-                    }
-
-                    if ($_SESSION['mes'] == 9) {
-                        echo '<option value="9" selected>Setembro</option>';
-                    } else {
-                        echo '<option value="9">Setembro</option>';
-                    }
-
-                    if ($_SESSION['mes'] == 10) {
-                        echo '<option value="10" selected>Outubro</option>';
-                    } else {
-                        echo '<option value="10">Outubro</option>';
-                    }
-
-                    if ($_SESSION['mes'] == 11) {
-                        echo '<option value="1" selected>Novembro</option>';
-                    } else {
-                        echo '<option value="11">Novembro</option>';
-                    }
-
-                    if ($_SESSION['mes'] == 12) {
-                        echo '<option value="12" selected>Dezembro</option>';
-                    } else {
-                        echo '<option value="12">Dezembro</option>';
-                    }
-                    ?>
+                    <option value="0">Mês da compra</option>
+                    <option value="1">Mês após a compra</option>
                 </select>
             </div>
         </div>

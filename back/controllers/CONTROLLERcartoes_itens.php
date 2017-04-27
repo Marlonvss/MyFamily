@@ -35,7 +35,7 @@ class CONTROLLERcartoes_itens extends CONTROLLERbase {
         if ($erro->erro) {
             return $erro;
         }
-
+        
         // Salva o item
         if ($model->id == 0) {
             $erro = $this->GetDAO()->Add($model);
@@ -55,7 +55,10 @@ class CONTROLLERcartoes_itens extends CONTROLLERbase {
 
         // Aplica regra de negócio para salvar os itens da fatura
         // mes_fatura_inicio
-        $MesBase = date('Y', strtotime(str_replace('/', '-', $model->datacompra))) . "-" . $model->mes_fatura_inicio . "-01";
+        $MesBase = date('Y-m-d', strtotime(str_replace('/', '-', $model->datacompra)));
+        if ($model->mes_fatura_inicio == "1") {
+            $MesBase = date('Y-m-d', strtotime("+1 months", strtotime($MesBase)));
+        };
         $Mes = date('m', strtotime($MesBase));
         $Ano = date('Y', strtotime($MesBase));
 
