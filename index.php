@@ -24,7 +24,7 @@ if (!isset($_SESSION['userLogged'])) {
 
     <head>
         <title>WebLick Sistemas - Finance</title>
-        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">
+<!--        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">-->
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="description" content="WebLick">
         <meta name="author" content="Marlon Vitor - WebLick">
@@ -43,6 +43,8 @@ if (!isset($_SESSION['userLogged'])) {
 
 
         <?php
+        header('Content-Type: text/html; charset=UTF-8');
+        
         if ($GLOBALS['IsLocal']) {
             echo '<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>';
             echo '<script type="text/javascript" src="js/bootstrap.min.js"></script>';
