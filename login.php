@@ -11,6 +11,9 @@ session_destroy();
 
     <head>
         <title>WebLick Sistemas - Login</title>
+        <?php
+            header('Content-Type: text/html; charset=UTF-8');
+        ?>
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="description" content="">
         <meta name="author" content="">
@@ -38,12 +41,14 @@ session_destroy();
                     </div>
                 </div>
                 <div class="alert alert-success hidden" id="login-message" role="alert">
-                    <i class="fa fa-check-square-o"></i> Login efetuado com sucesso.
+                    <i class="fa fa-check-square-o"></i> Login efetuado com sucesso...
                 </div>
                 <div class="alert alert-danger hidden" id="login-message-fail" role="alert">
                     <i class="fa fa-warning"></i> Usuário ou senha não confere.
                 </div>
-                <div class="alert alert-danger <?php if (!isset($_GET["ativ"])) { echo 'hidden'; }; ?>" id="login-message-ativ" role="alert">
+                <div class="alert alert-danger <?php if (!isset($_GET["ativ"])) {
+            echo 'hidden';
+        }; ?>" id="login-message-ativ" role="alert">
                     <i class="fa fa-warning"></i> Usuário desconectado por falta de atividade.
                 </div>
                 <div class="box">

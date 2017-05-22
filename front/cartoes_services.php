@@ -52,3 +52,14 @@ if ($metodo == "load") {
     header('Content-Type: application/json');
     echo json_encode($Obj->getFields(false));
 }
+
+
+if ($metodo == "refresh_cartoes") {
+    $erro = $Controll->RefreshFaturaByCartaoMesAno($_ID);
+    if ($erro->erro) {
+        echo $erro->mensagem;
+    }
+
+//    header('Content-Type: application/json');
+//    echo json_encode($Obj->getFields(false));
+}

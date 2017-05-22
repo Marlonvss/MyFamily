@@ -50,18 +50,6 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">Quitado?</label>
-            <div class="col-sm-10">
-                <input type="text" id="add_quitado" class="form-control" name="Quitado" placeholder="Quitado?" required>
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Obs</label>
-            <div class="col-sm-10">
-                <input type="text" id="add_observacao" class="form-control" name="Observacao" placeholder="Obs" required>
-            </div>
-        </div>
-        <div class="form-group">
             <label class="col-sm-2 control-label">Cl. Financeira</label>
             <div class="col-sm-10">
                 <select name="id_classificacaofinanceira" class="form-control" id="add_id_classificacaofinanceira">

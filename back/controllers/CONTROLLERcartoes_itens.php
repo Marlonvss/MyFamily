@@ -15,6 +15,10 @@ class CONTROLLERcartoes_itens extends CONTROLLERbase {
         return new DAOcartoes_itens_fatura();
     }
 
+    private function GetCONTROLLERCartao() {
+        return new CONTROLLERcartoes();
+    }
+
     function RecuperaByID(&$model) {
         return $this->GetDAO()->GetByID($model);
     }
@@ -35,7 +39,7 @@ class CONTROLLERcartoes_itens extends CONTROLLERbase {
         if ($erro->erro) {
             return $erro;
         }
-        
+
         // Salva o item
         if ($model->id == 0) {
             $erro = $this->GetDAO()->Add($model);
@@ -68,6 +72,11 @@ class CONTROLLERcartoes_itens extends CONTROLLERbase {
                 $erro = $DAOcartoes_itens_fatura->Add($itemFatura);
                 if ($erro->erro) {
                     return $erro;
+                } else {
+                    $erro = $this->GetCONTROLLERCartao()->RefreshFaturaByCartaoMesAno($cartao->id, $Mes, $Ano);
+                    if ($erro->erro) {
+                        return $erro;
+                    }
                 }
 
                 // Avança um mês para gravar o próximo registro...
@@ -80,7 +89,15 @@ class CONTROLLERcartoes_itens extends CONTROLLERbase {
 
     function Remove($id) {
         $model = new cartoes_itens($id);
-        return $this->GetDAO()->Delete($model);
+        $erro = $this->GetDAO()->Delete($model);
+        if ($erro->erro) {
+            return $erro;
+        } else {
+            $erro = $this->GetCONTROLLERCartao()->RefreshFaturaByCartaoMesAno($cartao->id, $Mes, $Ano);
+            if ($erro->erro) {
+                return $erro;
+            }
+        }
     }
 
     function RecuperaListaFaturaCorrente(&$list) {

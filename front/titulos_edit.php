@@ -100,12 +100,6 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">Obs</label>
-            <div class="col-sm-10">
-                <input type="text" id="edt_observacao" class="form-control" name="Observacao" placeholder="Obs"  readonly="readonly">
-            </div>
-        </div>
-        <div class="form-group">
             <label class="col-sm-2 control-label">Cl. Financeira</label>
             <div class="col-sm-10">
                 <input type="text" id="edt_id_classificacaofinanceira" class="form-control" name="ID_ClassificacaoFinanceira" placeholder="Cl. Financeira"  readonly="readonly">

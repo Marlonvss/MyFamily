@@ -794,7 +794,7 @@ div#example_wrapper .row > * {
     border-bottom: 0px;
 }
 .table>thead>tr>th, .table>tbody>tr>th, .table>tfoot>tr>th, .table>thead>tr>td, .table>tbody>tr>td, .table>tfoot>tr>td {
-    border-top: 0px;
+/*    border-top: 0px;*/
 }
 .table.dataTable tfoot th, table.dataTable tfoot td {
     padding: 10px;

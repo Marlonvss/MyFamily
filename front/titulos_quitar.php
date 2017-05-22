@@ -105,12 +105,6 @@
                 <input type="text" id="quitar_id_centrocusto" class="form-control" name="ID_CentroCusto" placeholder="C. Custo"  readonly="readonly">
             </div>
         </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Obs</label>
-            <div class="col-sm-10">
-                <input type="text" id="quitar_observacao" class="form-control" name="Observacao" placeholder="Obs"  readonly="readonly">
-            </div>
-        </div>
     </div>
     <div class="modal-footer">
         <button type="submit" onclick="edit()" class="btn btn-primary" data-dismiss="modal">Salvar</button>

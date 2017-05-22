@@ -18,51 +18,110 @@ function MakeLinkOptions($id) {
 }
 ?>
 
-<div class="panel panel-default">
-    <div class="panel-body">
-        <table class="table table-striped table-bordered table-hover">
-            <thead>
-                <tr>
-                    <td>#</td>
-                    <td>Descrição</td>
-                    <td>Vencimento</td>
-                    <td>Valor</td>
-                    <td>Valor pago</td>
-                    <td>Quitado?</td>
-                    <td>Opções</td>
-                </tr>
-            </thead>
-            <tbody>
+<ul class="nav nav-tabs">
+    <li class="active"><a data-toggle="tab" href="#minhas">Minhas despesas</a></li>
+    <li><a data-toggle="tab" href="#outras">Outras despesas</a></li>
+</ul>
 
-                <?php
-                $erro = $Controll->RecuperaListaFaturaCorrente($List);
-                if ($erro->erro) {
-                    echo $erro->mensagem;
-                } else {
+<div class="tab-content">
+    <div id="minhas" class="tab-pane fade in active">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <td class="col-md-1">#</td>
+                            <td class="col-md-4">Descrição</td>
+                            <td class="col-md-1">Vencimento</td>
+                            <td class="col-md-2">Valor</td>
+                            <td class="col-md-2">Valor pago</td>
+                            <td class="col-md-1">Quitado?</td>
+                            <td class="col-md-1">Opções</td>
 
-                    if ($obj->quitado == '0') {
-                        $txtQuitado = 'Não';
-                    } else {
-                        $txtQuitado = 'Sim';
-                    }                    
-                    
-                    foreach ($List as &$obj) {
-                        echo '<tr>'
-                        . '<td>' . $obj->id . '</td>'
-                        . '<td>' . $obj->descricao . '</td>'
-                        . '<td>' . $obj->vencimento . '</td>'
-                        . '<td>' . $obj->valor . '</td>'
-                        . '<td>' . $obj->valorpago . '</td>'
-                        . '<td>' . $txtQuitado . '</td>'
-                        . '<td class="col-md-1">' . MakeLinkOptions($obj->id) . '</td>'
-                        . '</tr>';
-                    }
-                }
-                ?>
-            </tbody>
-        </table>
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <?php
+                        $erro = $Controll->RecuperaListaMeusTitulosCorrente($List);
+                        if ($erro->erro) {
+                            echo $erro->mensagem;
+                        } else {
+                            foreach ($List as &$obj) {
+                                if ($obj->quitado == '0') {
+                                    $txtQuitado = 'Não';
+                                } else {
+                                    $txtQuitado = 'Sim';
+                                }
+
+                                echo '<tr>'
+                                . '<td>' . $obj->id . '</td>'
+                                . '<td>' . $obj->descricao . '</td>'
+                                . '<td>' . date('d/m/Y', strtotime($obj->vencimento)) . '</td>'
+                                . '<td>R$ ' . number_format($obj->valor, 2, ',', '.') . '</td>'
+                                . '<td>R$ ' . number_format($obj->valorpago, 2, ',', '.') . '</td>'
+                                . '<td>' . $txtQuitado . '</td>'
+                                . '<td>' . MakeLinkOptions($obj->id) . '</td>'
+                                . '</tr>';
+                            }
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div id="outras" class="tab-pane fade">
+        <div class="panel panel-default">
+            <div class="panel-body">
+                <table class="table table-striped table-bordered table-hover">
+                    <thead>
+                        <tr>
+                            <td class="col-md-1">#</td>
+                            <td class="col-md-4">Descrição</td>
+                            <td class="col-md-1">Vencimento</td>
+                            <td class="col-md-2">Valor</td>
+                            <td class="col-md-2">Valor pago</td>
+                            <td class="col-md-1">Quitado?</td>
+                            <td class="col-md-1">Opções</td>
+
+                        </tr>
+                    </thead>
+                    <tbody>
+
+                        <?php
+                        $erro = $Controll->RecuperaListaOutrosTitulosCorrente($ListOutras);
+                        if ($erro->erro) {
+                            echo $erro->mensagem;
+                        } else {
+                            foreach ($ListOutras as &$obj) {
+
+                                if ($obj->quitado == '0') {
+                                    $txtQuitado = 'Não';
+                                } else {
+                                    $txtQuitado = 'Sim';
+                                }
+
+                                echo '<tr>'
+                                . '<td>' . $obj->id . '</td>'
+                                . '<td>' . $obj->descricao . '</td>'
+                                . '<td>' . date('d/m/Y', strtotime($obj->vencimento)) . '</td>'
+                                . '<td>R$ ' . number_format($obj->valor, 2, ',', '.') . '</td>'
+                                . '<td>R$ ' . number_format($obj->valorpago, 2, ',', '.') . '</td>'
+                                . '<td>' . $txtQuitado . '</td>'
+                                . '<td>' . MakeLinkOptions($obj->id) . '</td>'
+                                . '</tr>';
+                            }
+                        }
+                        ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
 </div>
+
+
 
 <!-- Modal -->
 <div class="modal fade" data-backdrop="static" id="novo" tabindex="-1" role="dialog" aria-labelledby="novoLabel" aria-hidden="true">

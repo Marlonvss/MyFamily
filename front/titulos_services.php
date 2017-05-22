@@ -1,6 +1,7 @@
 <?php
 
 error_reporting(0);
+session_start();
 
 include_once './autoload.php';
 include_once './../autoload.php';
@@ -25,7 +26,6 @@ if (isset($_POST['metodo'])) {
 
 if ($metodo == 'add') {
     $Obj = new titulos(0, $_DESCRICAO, $_VENCIMENTO, $_VALOR, $_VALORPAGO, $_QUITADO, $_OBSERVACAO, $_ID_CLASSIFICACAOFINANCEIRA, $_ID_CENTROCUSTO, $_ID_FAMILIA);
-    echo json_encode($Obj);
     $erro = $Controll->Save($Obj);
     if ($erro->erro) {
         echo $erro->mensagem;

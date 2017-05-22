@@ -1,91 +1,128 @@
-<?php
-$Controll = new CONTROLLERcartoes_itens();
-error_reporting(E_ERROR);
-session_start();
-
-if (isset($_GET['remove'])) {
-    $erro = $Controll->Remove($_GET['remove']);
-    if ($erro->erro) {
-        echo $erro->mensagem;
+<script>
+    function refresh_cartoes(id_cartao) {
+        $.ajax({
+            url: 'front/cartoes_services.php',
+            type: 'post',
+            dataType: 'text',
+            data: {
+                'id': id_cartao,
+                'metodo': 'refresh_cartoes'
+            }
+        }).done(function (e) {
+            alert(e);
+            location.reload();
+        });
     }
+</script>
+
+<?php
+
+$ControllClassificacao = new CONTROLLERclassificacoesfinanceiras();
+$erro = $ControllClassificacao->RecuperaLista($ListClassificacoes);
+if ($erro->erro) {
+    echo $erro->mensagem;
 }
 
-function MakeLinkOptions($id) {
-    return
-            '<button type="button" class="my_btn btn btn-link btn-md" onclick="loadEdit(' . $id . ')" data-toggle="modal" data-target="#editar"><i class="fa fa-folder-open-o" aria-hidden="true"></i></button>' .
-            '<button type="button" class="my_btnbtn btn-link btn-md" onclick="loadDelete(' . $id . ')" data-toggle="modal" data-target="#deletar"><i class="fa fa-trash-o" aria-hidden="true"></i></button>';
+//Recupera os itens dos cartões
+$ControllItem = new CONTROLLERcartoes_itens();
+$erro = $ControllItem->RecuperaLista($ListItens);
+if ($erro->erro) {
+    echo $erro->mensagem;
+}
+
+//Recupera os itens da fatura
+$erro = $ControllItem->RecuperaListaFaturaCorrente($ListItensFatura);
+if ($erro->erro) {
+    echo $erro->mensagem;
+}
+
+$ControllCartao = new CONTROLLERcartoes();
+$erro = $ControllCartao->RecuperaLista($ListCartoes);
+if ($erro->erro) {
+    echo $erro->mensagem;
+} else {
+    foreach ($ListCartoes as &$cartao) {
+        $TotalCartao = 0;
+        
+        echo '<div class="dashboard_container col-xs-12 col-sm-12 col-md-6">';
+        echo '<div class="panel panel-default">';
+        echo '<div class="panel-heading">';
+        echo '<strong>' . $cartao->descricao . '</strong>';
+        echo '<div class="btn btn-xs pull-right" onclick="refresh_cartoes(' . $cartao->id . ')"><i class="fa fa-refresh" aria-hidden="true"></i></div>';
+        echo '</div>';
+        echo '<div class="table-responsive">';
+        echo '<table class="table table-striped table-bordered table-hover">';
+        echo '<thead>';
+        echo '<tr>';
+        echo '<td class="col-md-3">Data da compra</td>';
+        echo '<td class="col-md-5">Descrição</td>';
+        echo '<td class="col-md-2">Valor</td>';
+        echo '<td class="col-md-1">Parcela</td>';
+        echo '<td class="col-md-1">Opções</td>';
+        echo '</tr>';
+        echo '</thead>';
+        echo '<tbody>';
+
+        // Despesas fixas...
+        foreach ($ListItens as &$obj) {
+            if ($obj->id_cartao == $cartao->id) {
+                if (($obj->parcelas == 0)) {
+                    $ControllClassificacao->LocateIDInList($obj->id_classificacaofinanceira, $ListClassificacoes, $Classificacao);
+                    $txtImagem = '';
+                    if ($obj->id_classificacaofinanceira > 0) {
+                        $txtImagem = '<i class="fa ' . $Classificacao->imagem . '"></i> - ';
+                    };
+                    echo '<tr>'
+                    . '<td>' . date('d/m/Y', strtotime($obj->datacompra)) . '</td>'
+                    . '<td>' . $txtImagem . $obj->descricao . '</td>'
+                    . '<td>' . $obj->valor . '</td>'
+                    . '<td>FIXO</td>'
+                    . '<td></td>'
+                    . '</tr>';
+                    
+                    $TotalCartao = $TotalCartao + $obj->valor;
+                }
+            }
+        }
+        // Despesas parceladas...
+        foreach ($ListItensFatura as &$obj) {
+            $ControllItem->LocateIDInList($obj->id_cartao_item, $ListItens, $cartaoItem);
+            if ($cartaoItem->id_cartao == $cartao->id) {
+                $ControllClassificacao->LocateIDInList($cartaoItem->id_classificacaofinanceira, $ListClassificacoes, $Classificacao);
+                $txtImagem = '';
+                if ($cartaoItem->id_classificacaofinanceira > 0) {
+                        $txtImagem = '<i class="fa ' . $Classificacao->imagem . '"></i> - ';
+                };
+                echo '<tr>'
+                . '<td>' . date('d/m/Y', strtotime($cartaoItem->datacompra)) . '</td>'
+                . '<td>' . $txtImagem . $cartaoItem->descricao . '</td>'
+                . '<td>' . $obj->valor . '</td>'
+                . '<td>' . $obj->parcela_atual . '/' . $obj->parcela_final . '</td>'
+                . '<td></td>'
+                . '</tr>';
+
+                $TotalCartao = $TotalCartao + $obj->valor;
+            }
+        }
+        echo '</tbody>';
+        echo '</table>';
+        echo '</div>';
+        echo '<div class="panel-footer">';
+        echo '<b>Total </b>';
+        echo '<i class="pull-right">R$ '.number_format($TotalCartao, 2, ',', '.').'</i>';
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
+    }
 }
 ?>
 
-
-<div class="row">
-    <div class="col-xs-12">
-        <span class="page-title red"><h2>Movimentações</h2></span>
-    </div>
-</div>
-
-<div class="panel panel-default">
-    <div class="panel-heading">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#novo">Novo</button>
-    </div>
-    <div class="panel-body">
-        <table class="table table-striped table-bordered table-hover">
-            <thead>
-                <tr>
-                    <td>#</td>
-                    <td>Data da compra</td>
-                    <td>Descrição</td>
-                    <td>Valor da parcela</td>
-                    <td>Parcela</td>
-                    <td>Opções</td>
-                </tr>
-            </thead>
-            <tbody>
-
-                <?php
-                $erro = $Controll->RecuperaLista($List,'where id_cartao = '.$_GET['id']);
-                if ($erro->erro) {
-                    echo $erro->mensagem;
-                } else {
-
-                    foreach ($List as &$obj) {
-                        echo '<tr>'
-                        . '<td>' . $obj->id . '</td>'
-                        . '<td>' . $obj->datacompra . '</td>'
-                        . '<td>' . $obj->descricao . '</td>'
-                        . '<td>' . $obj->valor . '</td>'
-                        . '<td>' . $obj->parcelas . '</td>'
-                        . '<td class="col-md-1">' . MakeLinkOptions($obj->id) . '</td>'
-                        . '</tr>';
-                    }
-                }
-                ?>
-            </tbody>
-        </table>
-    </div>
-</div>
-
+<a href="#" class="btn btn-primary btn-circle dashboard-float-button" data-toggle="modal" data-target="#novo"><i class="glyphicon glyphicon-plus"></i></a>
 <!-- Modal -->
 <div class="modal fade" data-backdrop="static" id="novo" tabindex="-1" role="dialog" aria-labelledby="novoLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <?php include 'cartoes_itens_add.php'; ?>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" data-backdrop="static" id="editar" tabindex="-1" role="dialog" aria-labelledby="editarLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <?php include 'cartoes_itens_edit.php'; ?>
-        </div>
-    </div>
-</div>
-
-<div class="modal fade" data-backdrop="static" id="deletar" tabindex="-1" role="dialog" aria-labelledby="deletarLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <?php include 'cartoes_itens_del.php'; ?>
         </div>
     </div>
 </div>

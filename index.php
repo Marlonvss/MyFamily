@@ -24,7 +24,6 @@ if (!isset($_SESSION['userLogged'])) {
 
     <head>
         <title>WebLick Sistemas - Finance</title>
-<!--        <meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1">-->
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="description" content="WebLick">
         <meta name="author" content="Marlon Vitor - WebLick">

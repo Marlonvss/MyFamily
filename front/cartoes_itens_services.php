@@ -23,10 +23,10 @@ if (isset($_POST['metodo'])) {
 
 if ($metodo == 'add') {
     $Obj = new cartoes_itens(0, $_ID_CARTAO, $_DATACOMPRA, $_DESCRICAO, $_VALOR, $_PARCELAS, $_ID_CENTROCUSTO, $_ID_CLASSIFICACAOFINANCEIRA);
-    
+
     //Campo virtual...
     $Obj->mes_fatura_inicio = $_MES_FATURA_INICIO;
-    
+
     $erro = $Controll->Save($Obj);
     if ($erro->erro) {
         echo $erro->mensagem;

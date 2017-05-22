@@ -57,7 +57,10 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">Controla despesa?</label>
             <div class="col-sm-10">
-                <input type="text" id="edt_controladespesa" class="form-control" name="controladespesa" placeholder="Controla despesa?"  readonly="readonly">
+                <select name="controladespesa" class="fonte-fa form-control" id="edt_controladespesa">
+                    <option value="0">Não</option>;
+                    <option value="1">Sim</option>;
+                </select>
             </div>
         </div>
     </div>

@@ -16,6 +16,11 @@ class CONTROLLERtitulos extends CONTROLLERbase {
 
     function RecuperaLista(&$list, $Where = NULL) {
         $model = new titulos();
+        if ($Where == NULL) {
+            $Where = 'where id_familia = ' . unserialize($_SESSION['userLogged'])->id_familia;
+        } else {
+            $Where = $Where . ' and id_familia = ' . unserialize($_SESSION['userLogged'])->id_familia;
+        }
         return $this->GetDAO()->GetList($model, $list, $Where);
     }
 
@@ -31,10 +36,24 @@ class CONTROLLERtitulos extends CONTROLLERbase {
         $model = new titulos($id);
         return $this->GetDAO()->Delete($model);
     }
-    
-    function RecuperaListaFaturaCorrente(&$list) {
+
+    function RecuperaListaMeusTitulosCorrente(&$list) {
         $model = new titulos();
-        $Where = ' where YEAR(vencimento) = 20' . $_SESSION['ano'] . ' and Month(vencimento) = ' . $_SESSION['mes'];
+
+        $Where = ' where YEAR(vencimento) = 20' . $_SESSION['ano']
+                . ' and Month(vencimento) = ' . $_SESSION['mes']
+                . ' and id_familia = ' . unserialize($_SESSION['userLogged'])->id_familia
+                . ' and not exists (select 1 from centroscustos where centroscustos.id = titulos.id_centrocusto and centroscustos.controladespesa = 0)';
+        return $this->GetDAO()->GetList($model, $list, $Where);
+    }
+
+    function RecuperaListaOutrosTitulosCorrente(&$list) {
+        $model = new titulos();
+
+        $Where = ' where YEAR(vencimento) = 20' . $_SESSION['ano']
+                . ' and Month(vencimento) = ' . $_SESSION['mes']
+                . ' and id_familia = ' . unserialize($_SESSION['userLogged'])->id_familia
+                . ' and exists (select 1 from centroscustos where centroscustos.id = titulos.id_centrocusto and centroscustos.controladespesa = 0)';
         return $this->GetDAO()->GetList($model, $list, $Where);
     }
 
