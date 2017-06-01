@@ -19,16 +19,18 @@
                 'metodo': 'load'
             }
         }).done(function (data) {
+            // Não permitir editar quando for título de Cartão.
+            $ReadOnly = data.id_cartao > 0;
             $("#edt_id").val(data.id);
-            $("#edt_descricao").prop('readonly', false).val(data.descricao);
-            $("#edt_vencimento").prop('readonly', false).val(data.vencimento);
-            $("#edt_valor").prop('readonly', false).val(data.valor);
-            $("#edt_valorpago").prop('readonly', false).val(data.valorpago);
-            $("#edt_quitado").prop('readonly', false).val(data.quitado);
-            $("#edt_observacao").prop('readonly', false).val(data.observacao);
-            $("#edt_id_classificacaofinanceira").prop('readonly', false).val(data.id_classificacaofinanceira);
-            $("#edt_id_centrocusto").prop('readonly', false).val(data.id_centrocusto);
-            $("#edt_id_familia").prop('readonly', false).val(data.id_familia);
+            $("#edt_descricao").prop('readonly', $ReadOnly).val(data.descricao);
+            $("#edt_vencimento").prop('readonly', $ReadOnly).val(data.vencimento);
+            $("#edt_valor").prop('readonly', $ReadOnly).val(data.valor);
+            $("#edt_valorpago").prop('readonly', $ReadOnly).val(data.valorpago);
+            $("#edt_quitado").prop('readonly', $ReadOnly).val(data.quitado);
+            $("#edt_observacao").prop('readonly', $ReadOnly).val(data.observacao);
+            $("#edt_id_classificacaofinanceira").prop('readonly', $ReadOnly).val(data.id_classificacaofinanceira);
+            $("#edt_id_centrocusto").prop('readonly', $ReadOnly).val(data.id_centrocusto);
+            $("#edt_id_familia").prop('readonly', $ReadOnly).val(data.id_familia);
         });
     }
     
@@ -50,7 +52,6 @@
                 'metodo': 'edit'
             }
         }).done(function(e){
-            alert(e);
             location.reload();
         });
     }
@@ -102,13 +103,39 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">Cl. Financeira</label>
             <div class="col-sm-10">
-                <input type="text" id="edt_id_classificacaofinanceira" class="form-control" name="ID_ClassificacaoFinanceira" placeholder="Cl. Financeira"  readonly="readonly">
+                <select name="id_classificacaofinanceira" class="form-control" id="edt_id_classificacaofinanceira">
+                    <?php
+                    $Controll = new CONTROLLERclassificacoesfinanceiras;
+                    $erro = $Controll->RecuperaLista($List);
+                    if ($erro->erro) {
+                        echo $erro->mensagem;
+                    } else {
+                        echo '<option value="0"></option>';
+                        foreach ($List as &$obj) {
+                            echo '<option value="' . $obj->id . '">' . $obj->descricao . '</option>';
+                        }
+                    }
+                    ?>
+                </select>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">C. Custo</label>
             <div class="col-sm-10">
-                <input type="text" id="edt_id_centrocusto" class="form-control" name="ID_CentroCusto" placeholder="C. Custo"  readonly="readonly">
+                <select name="id_centrocusto" class="form-control" id="edt_id_centrocusto">
+                    <?php
+                    $Controll = new CONTROLLERcentroscustos;
+                    $erro = $Controll->RecuperaLista($List);
+                    if ($erro->erro) {
+                        echo $erro->mensagem;
+                    } else {
+                        echo '<option value="0"></option>';
+                        foreach ($List as &$obj) {
+                            echo '<option value="' . $obj->id . '">' . $obj->descricao . '</option>';
+                        }
+                    }
+                    ?>
+                </select>
             </div>
         </div>
     </div>

@@ -16,6 +16,13 @@ function MakeLinkOptions($id) {
             '<button type="button" class="my_btn btn btn-link btn-md" onclick="loadQuitar(' . $id . ')" data-toggle="modal" data-target="#quitar"><i class="fa fa-usd" aria-hidden="true"></i></button>' .
             '<button type="button" class="my_btnbtn btn-link btn-md" onclick="loadDelete(' . $id . ')" data-toggle="modal" data-target="#deletar"><i class="fa fa-trash-o" aria-hidden="true"></i></button>';
 }
+
+//Recupera todos Centros de custos
+$ctrlCentroCusto = new CONTROLLERcentroscustos();
+$erro = $ctrlCentroCusto->RecuperaLista($listCentroCusto);
+if ($erro->erro) {
+    echo $erro->mensagem;
+}
 ?>
 
 <ul class="nav nav-tabs">
@@ -32,12 +39,12 @@ function MakeLinkOptions($id) {
                         <tr>
                             <td class="col-md-1">#</td>
                             <td class="col-md-4">Descrição</td>
+                            <td class="col-md-2">C.Custo</td>
                             <td class="col-md-1">Vencimento</td>
-                            <td class="col-md-2">Valor</td>
-                            <td class="col-md-2">Valor pago</td>
+                            <td class="col-md-1">Valor</td>
+                            <td class="col-md-1">Valor pago</td>
                             <td class="col-md-1">Quitado?</td>
                             <td class="col-md-1">Opções</td>
-
                         </tr>
                     </thead>
                     <tbody>
@@ -48,6 +55,13 @@ function MakeLinkOptions($id) {
                             echo $erro->mensagem;
                         } else {
                             foreach ($List as &$obj) {
+
+                                $ctrlCentroCusto->LocateIDInList($obj->id_centrocusto, $listCentroCusto, $centroCusto);
+                                $txtCentroCusto = '';
+                                if ($centroCusto->id > 0) {
+                                    $txtCentroCusto = $centroCusto->descricao;
+                                }                                
+
                                 if ($obj->quitado == '0') {
                                     $txtQuitado = 'Não';
                                 } else {
@@ -57,6 +71,7 @@ function MakeLinkOptions($id) {
                                 echo '<tr>'
                                 . '<td>' . $obj->id . '</td>'
                                 . '<td>' . $obj->descricao . '</td>'
+                                . '<td>' . $txtCentroCusto . '</td>'
                                 . '<td>' . date('d/m/Y', strtotime($obj->vencimento)) . '</td>'
                                 . '<td>R$ ' . number_format($obj->valor, 2, ',', '.') . '</td>'
                                 . '<td>R$ ' . number_format($obj->valorpago, 2, ',', '.') . '</td>'
@@ -79,12 +94,12 @@ function MakeLinkOptions($id) {
                         <tr>
                             <td class="col-md-1">#</td>
                             <td class="col-md-4">Descrição</td>
+                            <td class="col-md-2">C.Custo</td>
                             <td class="col-md-1">Vencimento</td>
-                            <td class="col-md-2">Valor</td>
-                            <td class="col-md-2">Valor pago</td>
+                            <td class="col-md-1">Valor</td>
+                            <td class="col-md-1">Valor pago</td>
                             <td class="col-md-1">Quitado?</td>
                             <td class="col-md-1">Opções</td>
-
                         </tr>
                     </thead>
                     <tbody>
@@ -96,6 +111,12 @@ function MakeLinkOptions($id) {
                         } else {
                             foreach ($ListOutras as &$obj) {
 
+                                $ctrlCentroCusto->LocateIDInList($obj->id_centrocusto, $listCentroCusto, $centroCusto);
+                                $txtCentroCusto = '';
+                                if ($centroCusto->id > 0) {
+                                    $txtCentroCusto = $centroCusto->descricao;
+                                }                                
+
                                 if ($obj->quitado == '0') {
                                     $txtQuitado = 'Não';
                                 } else {
@@ -105,6 +126,7 @@ function MakeLinkOptions($id) {
                                 echo '<tr>'
                                 . '<td>' . $obj->id . '</td>'
                                 . '<td>' . $obj->descricao . '</td>'
+                                . '<td>' . $txtCentroCusto . '</td>'
                                 . '<td>' . date('d/m/Y', strtotime($obj->vencimento)) . '</td>'
                                 . '<td>R$ ' . number_format($obj->valor, 2, ',', '.') . '</td>'
                                 . '<td>R$ ' . number_format($obj->valorpago, 2, ',', '.') . '</td>'

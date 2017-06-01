@@ -7,6 +7,7 @@
         $("#edt_parcelas").prop('readonly', true).val('Carregando...');
         $("#edt_id_centrocusto").prop('readonly', true).val('Carregando...');
         $("#edt_id_classificacaofinanceira").prop('readonly', true).val('Carregando...');
+        $("#edt_cartao").prop('readonly', true).val('Carregando...');
         $.ajax({
             url: 'front/cartoes_itens_services.php',
             type: 'post',
@@ -23,9 +24,10 @@
             $("#edt_parcelas").prop('readonly', false).val(data.parcelas);
             $("#edt_id_centrocusto").prop('readonly', false).val(data.id_centrocusto);
             $("#edt_id_classificacaofinanceira").prop('readonly', false).val(data.id_classificacaofinanceira);
+            $("#edt_cartao").prop('readonly', true).val(data.id_cartao);
         });
     }
-    
+
     function edit() {
         $.ajax({
             url: 'front/cartoes_itens_services.php',
@@ -39,9 +41,11 @@
                 'parcelas': $('#edt_parcelas').val(),
                 'id_centrocusto': $('#edt_id_centrocusto').val(),
                 'id_classificacaofinanceira': $('#edt_id_classificacaofinanceira').val(),
+                'id_cartao': $('#edt_cartao').val(),
                 'metodo': 'edit'
             }
-        }).done(function(){
+        }).done(function (e) {
+            alert(e);
             location.reload();
         });
     }
@@ -61,9 +65,27 @@
             </div>
         </div>
         <div class="form-group">
+            <label class="col-sm-2 control-label">Cartão</label>
+            <div class="col-sm-10">
+                <select name="cartoes" class="form-control" id="edt_cartao">
+                    <?php
+                    $Controll = new CONTROLLERCartoes;
+                    $erro = $Controll->RecuperaLista($List);
+                    if ($erro->erro) {
+                        echo $erro->mensagem;
+                    } else {
+                        foreach ($List as &$obj) {
+                            echo '<option value="' . $obj->id . '">' . $obj->descricao . '</option>';
+                        }
+                    }
+                    ?>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
             <label class="col-sm-2 control-label">Data da compra</label>
             <div class="col-sm-10">
-                <input type="text" id="edt_datacompra" class="form-control" name="datacompra" placeholder="Data da compra"  readonly="readonly">
+                <input type="text" id="edt_datacompra" class="form-control datepicker" name="datacompra" placeholder="Data da compra" readonly="readonly">
             </div>
         </div>
         <div class="form-group">
@@ -85,18 +107,43 @@
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">Centro de Custo</label>
+            <label class="col-sm-2 control-label">Classificação financeira</label>
             <div class="col-sm-10">
-                <input type="text" id="edt_id_centrocusto" class="form-control" name="id_centrocusto" placeholder="Centro de Custo"  readonly="readonly">
+                <select name="id_classificacaofinanceira" class="form-control" id="edt_id_classificacaofinanceira">
+                    <?php
+                    $Controll = new CONTROLLERclassificacoesfinanceiras;
+                    $erro = $Controll->RecuperaLista($List);
+                    if ($erro->erro) {
+                        echo $erro->mensagem;
+                    } else {
+                        echo '<option value="0"></option>';
+                        foreach ($List as &$obj) {
+                            echo '<option value="' . $obj->id . '">' . $obj->descricao . '</option>';
+                        }
+                    }
+                    ?>
+                </select>
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">Classificação</label>
+            <label class="col-sm-2 control-label">Centro de custo</label>
             <div class="col-sm-10">
-                <input type="text" id="edt_id_classificacaofinanceira" class="form-control" name="id_classificacaofinanceira" placeholder="Classificação"  readonly="readonly">
+                <select name="id_centrocusto" class="form-control" id="edt_id_centrocusto">
+                    <?php
+                    $Controll = new CONTROLLERcentroscustos;
+                    $erro = $Controll->RecuperaLista($List);
+                    if ($erro->erro) {
+                        echo $erro->mensagem;
+                    } else {
+                        echo '<option value="0"></option>';
+                        foreach ($List as &$obj) {
+                            echo '<option value="' . $obj->id . '">' . $obj->descricao . '</option>';
+                        }
+                    }
+                    ?>
+                </select>
             </div>
         </div>
-	
     </div>
     <div class="modal-footer">
         <button type="submit" onclick="edit()" class="btn btn-primary" data-dismiss="modal">Salvar</button>

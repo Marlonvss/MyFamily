@@ -10,6 +10,7 @@
                 'limite': $('#add_limite').val(),
                 'dia_fechamento': $('#add_dia_fechamento').val(),
                 'dia_vencimento': $('#add_dia_vencimento').val(),
+                'id_classificacaofinanceira': $('#add_id_classificacaofinanceira').val(),
                 'metodo': 'add'
             }
         }).done(function(){
@@ -54,6 +55,25 @@
             <label class="col-sm-2 control-label">Dia de vencimento</label>
             <div class="col-sm-10">
                 <input type="text" id="add_dia_vencimento" class="form-control" name="dia_vencimento" placeholder="Dia de vencimento" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Cl. Financeira</label>
+            <div class="col-sm-10">
+                <select name="id_classificacaofinanceira" class="form-control" id="add_id_classificacaofinanceira">
+                    <?php
+                    $Controll = new CONTROLLERclassificacoesfinanceiras;
+                    $erro = $Controll->RecuperaLista($List);
+                    if ($erro->erro) {
+                        echo $erro->mensagem;
+                    } else {
+                        echo '<option value="0"></option>';
+                        foreach ($List as &$obj) {
+                            echo '<option value="' . $obj->id . '">' . $obj->descricao . '</option>';
+                        }
+                    }
+                    ?>
+                </select>
             </div>
         </div>
     </div>

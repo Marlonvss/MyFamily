@@ -43,7 +43,7 @@ if (!isset($_SESSION['userLogged'])) {
 
         <?php
         header('Content-Type: text/html; charset=UTF-8');
-        
+
         if ($GLOBALS['IsLocal']) {
             echo '<script type="text/javascript" src="js/jquery-2.1.3.min.js"></script>';
             echo '<script type="text/javascript" src="js/bootstrap.min.js"></script>';
@@ -96,6 +96,57 @@ if (!isset($_SESSION['userLogged'])) {
                             <span class="menu-title">Faturas dos cartões</span>
                         </div>
                     </a>
+                </li>
+                <li class="submenu dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+
+                        <div>
+                            <i class="menu-icon fa fa-print"></i>
+                            <span class="menu-title">Relatórios</span>
+                        </div>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li>
+                            <a>
+                                <div>
+                                    <i class="menu-icon fa fa-cogs"></i>
+                                    <span class="menu-sub-title">Em breve...</span>
+                                </div>
+                            <a/>
+                        </li>
+                        <!--                        <li>
+                                                    <a href="?pag=<?php echo $pag_usuarios ?>">
+                                                        <div>
+                                                            <i class="menu-icon fa fa-user"></i>
+                                                            <span class="menu-sub-title">Usuários</span>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="?pag=<?php echo $pag_cartoes ?>">
+                                                        <div>
+                                                            <i class="menu-icon fa fa-credit-card fa-fw"></i>
+                                                            <span class="menu-sub-title">Cartões de crédito</span>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="?pag=<?php echo $pag_classificacoes ?>">
+                                                        <div>
+                                                            <i class="menu-icon fa fa-list-alt"></i>
+                                                            <span class="menu-sub-title">Classificações Financeiras</span>
+                                                        </div>
+                                                    </a>
+                                                </li>
+                                                <li>
+                                                    <a href="?pag=<?php echo $pag_centroscustos ?>">
+                                                        <div>
+                                                            <i class="menu-icon fa fa-list-alt"></i>
+                                                            <span class="menu-sub-title">Centro de Custo</span>
+                                                        </div>
+                                                    </a>
+                                                </li>-->
+                    </ul>
                 </li>
                 <li class="submenu dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">

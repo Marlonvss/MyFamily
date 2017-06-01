@@ -10,6 +10,10 @@ class CONTROLLERcartoes extends CONTROLLERbase {
         return new DAOcartoes();
     }
 
+    private function GetDAOCartoesItens() {
+        return new DAOcartoes_itens();
+    }
+
     private function GetDAOItemFatura() {
         return new DAOcartoes_itens_fatura();
     }
@@ -48,6 +52,7 @@ class CONTROLLERcartoes extends CONTROLLERbase {
 
     function RefreshFaturaByCartaoMesAno($id_cartao, $mes = 0, $ano = 0) {
 
+        // Se os valores não foram definidos por parâmetro seta os valores da Sessao
         if ($mes == 0) {
             $mes = $_SESSION['mes'];
         }
@@ -56,44 +61,65 @@ class CONTROLLERcartoes extends CONTROLLERbase {
         }
 
         // Recupera os dados do cartão
-        $model = new cartoes($id_cartao);
-        $error = $this->GetDAO()->GetByID($model);
+        $cartao = new cartoes($id_cartao);
+        $error = $this->GetDAO()->GetByID($cartao);
         if ($error->erro) {
             return $error;
         }
 
-        // Recupera os dados dos itens do cartão
-        $error = $this->GetDAOItemFatura()->GetListByCartaoMesAno($model->id, $mes, $ano, $list);
+        // Recupera os dados dos itens da fatura
+        $error = $this->GetDAOItemFatura()->GetListByCartaoMesAno($cartao->id, $mes, $ano, $listItensFatura);
+        if ($error->erro) {
+            return $error;
+        }
+
+        // Recupera os dados dos itens do cartão by lista de itens por fatura
+        $error = $this->GetDAOCartoesItens()->GetListByListFatura($listItensFatura, $listCartaoItens);
         if ($error->erro) {
             return $error;
         }
 
         // Calcula o valor total dos itens
         $valorTotal = 0;
-        foreach ($list as $item) {
-            $valorTotal = $valorTotal + $item->valor;
+        $arr = array();
+        foreach ($listItensFatura as $itemFatura) {
+            $this->LocateIDInList($itemFatura->id_cartao_item, $listCartaoItens, $cartaoItens);
+            $arr[$cartaoItens->id_centrocusto] = $arr[$cartaoItens->id_centrocusto] + $itemFatura->valor;
         }
 
-        // Recupera os dados do título (se existir)
-        $Titulo = new titulos();
-        $error = $this->GetDAOTitulos()->GetTituloByCartaoMesAno($model->id, $mes, $ano, $Titulo);
+        // Recupera os titulos
+        $error = $this->GetDAOTitulos()->GetListTituloByCartaoMesAno($cartao->id, $mes, $ano, $listTitulo);
         if ($error->erro) {
             return $error;
         }
 
-        if ($Titulo->id == 0) {
-            $Titulo = new titulos(0, $model->descricao, $ano . '-' . $mes . '-' . $model->dia_vencimento, $valorTotal, 0, 0, '', 0, 0, $model->id_familia, $model->id);
+        //return new CONSTerro(true, implode("|", $arr), __CLASS__, __FUNCTION__);
+        // Loop no array de CentroCusto por Valor
+        foreach ($arr as $key => $val) {
 
-            $error = $this->GetDAOTitulos()->Add($Titulo);
-            if ($error->erro) {
-                return $error;
+            // Localiza o titulo com o mesmo CentroCusto
+            foreach ($listTitulo as &$obj) {
+                if ($obj->id_centrocusto == $key) {
+                    $titulo = $obj;
+                    break;
+                }
             }
-        } else {
-            $Titulo->valor = $valorTotal;
 
-            $error = $this->GetDAOTitulos()->Update($Titulo);
-            if ($error->erro) {
-                return $error;
+            // Se não encontrou o titulo, então cria um novo
+            if ($titulo->id == 0) {
+                $titulo = new titulos(0, $cartao->descricao, $ano . '-' . $mes . '-' . $cartao->dia_vencimento, $val, 0, 0, '', $cartao->id_classificacaofinanceira, $key, $cartao->id_familia, $cartao->id);
+                $error = $this->GetDAOTitulos()->Add($titulo);
+                if ($error->erro) {
+                    return $error;
+                }
+            } else {
+                $titulo->valor = $val;
+                $titulo->id_centrocusto = $key;
+
+                $error = $this->GetDAOTitulos()->Update($titulo);
+                if ($error->erro) {
+                    return $error;
+                }
             }
         }
     }

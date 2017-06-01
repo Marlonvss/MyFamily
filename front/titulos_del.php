@@ -42,7 +42,6 @@
                 'id': $('#del_id').val()
             }
         }).done(function (e) {
-            alert(e);
             location.reload();
         });
     }

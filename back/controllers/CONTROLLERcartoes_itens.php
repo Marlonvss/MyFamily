@@ -19,8 +19,14 @@ class CONTROLLERcartoes_itens extends CONTROLLERbase {
         return new CONTROLLERcartoes();
     }
 
+    private function GetDAOCartoes() {
+        return new DAOcartoes();
+    }
+
     function RecuperaByID(&$model) {
+        //return 
         return $this->GetDAO()->GetByID($model);
+        //return new CONSTerro(true, $model, __CLASS__, __FUNCTION__);
     }
 
     function RecuperaLista(&$list, $Where = NULL) {
@@ -29,16 +35,14 @@ class CONTROLLERcartoes_itens extends CONTROLLERbase {
     }
 
     function Save(&$model) {
-        $DAOcartoes_itens_fatura = new DAOcartoes_itens_fatura();
-        $DAOcartoes = new DAOcartoes();
 
         // Recupera o cartão do item...
-        $cartao = new cartoes();
-        $cartao->id = $model->id_cartao;
-        $erro = $DAOcartoes->GetByID($cartao);
+        $cartao = new cartoes($model->id_cartao);
+        $erro = $this->GetDAOCartoes()->GetByID($cartao);
         if ($erro->erro) {
             return $erro;
         }
+
 
         // Salva o item
         if ($model->id == 0) {
@@ -51,25 +55,27 @@ class CONTROLLERcartoes_itens extends CONTROLLERbase {
             if ($erro->erro) {
                 return $erro;
             }
-            $erro = $DAOcartoes_itens_fatura->DeleteFromItem($model);
+            $erro = $this->GetDAOItemFatura()->DeleteFromItem($model);
             if ($erro->erro) {
                 return $erro;
             }
         }
 
-        // Aplica regra de negócio para salvar os itens da fatura
-        // mes_fatura_inicio
-        $MesBase = date('Y-m-d', strtotime(str_replace('/', '-', $model->datacompra)));
+        // Formata para o primeiro dia e aplica regra de negócio para salvar os itens da fatura
+        $MesBase = date('Y-m-01', strtotime(str_replace('/', '-', $model->datacompra)));
+
+        $MesBase = date('Y-m-d', strtotime("+1 months", strtotime($MesBase)));
         if ($model->mes_fatura_inicio == "1") {
             $MesBase = date('Y-m-d', strtotime("+1 months", strtotime($MesBase)));
         };
         $Mes = date('m', strtotime($MesBase));
         $Ano = date('Y', strtotime($MesBase));
 
-        if ($model->parcelas > 0) { // Se Parcelas for = 0 significa que o item é parcelamento fixo...
+        // Se Parcelas for = 0 significa que o item é parcelamento fixo...
+        if ($model->parcelas > 0) {
             for ($i = 1; $i <= $model->parcelas; $i++) {
                 $itemFatura = new cartoes_itens_fatura(0, $model->id, $Mes, $Ano, $i, $model->parcelas, $model->valor);
-                $erro = $DAOcartoes_itens_fatura->Add($itemFatura);
+                $erro = $this->GetDAOItemFatura()->Add($itemFatura);
                 if ($erro->erro) {
                     return $erro;
                 } else {
@@ -89,13 +95,22 @@ class CONTROLLERcartoes_itens extends CONTROLLERbase {
 
     function Remove($id) {
         $model = new cartoes_itens($id);
-        $erro = $this->GetDAO()->Delete($model);
+        $erro = $this->GetDAOItemFatura()->DeleteFromItem($model);
         if ($erro->erro) {
             return $erro;
         } else {
-            $erro = $this->GetCONTROLLERCartao()->RefreshFaturaByCartaoMesAno($cartao->id, $Mes, $Ano);
+            $erro = $this->GetDAO()->Delete($model);
             if ($erro->erro) {
                 return $erro;
+            } else {
+
+                $Mes = date('m', strtotime($model->datacompra));
+                $Ano = date('Y', strtotime($model->datacompra));
+
+                $erro = $this->GetCONTROLLERCartao()->RefreshFaturaByCartaoMesAno($model->id_cartao, $Mes, $Ano);
+                if ($erro->erro) {
+                    return $erro;
+                }
             }
         }
     }

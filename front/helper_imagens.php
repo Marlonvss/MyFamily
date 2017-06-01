@@ -84,6 +84,7 @@ $MyArrImagens = array(
     "fa-cc-paypal" => "&#xf1f4",
     "fa-cc-stripe" => "&#xf1f5",
     "fa-cc-visa" => "&#xf1f0",
+    "fa-cc-master" => "&#xf1f1",
     "fa-chain" => "&#xf0c1",
     "fa-check" => "&#xf00c",
     "fa-chevron-left" => "&#xf053",

@@ -10,7 +10,7 @@ class DAOtitulos extends DAObase {
         return (get_class($model) == 'titulos');
     }
 
-    public function GetTituloByCartaoMesAno($id_cartao, $mes, $ano, &$model) {
+    public function GetListTituloByCartaoMesAno($id_cartao, $mes, $ano, &$list) {
         $model = new titulos();
         $Where = ' where YEAR(vencimento) = ' . $ano .
                 '   and Month(vencimento) = ' . $mes .
@@ -18,9 +18,6 @@ class DAOtitulos extends DAObase {
         $error = $this->GetList($model, $list, $Where);
         if ($error->erro) {
             return $error;
-        }
-        if (!empty($list)) {
-            $model = array_shift($list);
         }
     }
 

@@ -17,7 +17,6 @@
                 'metodo': 'add'
             }
         }).done(function(e){
-            alert(e);
             location.reload();
         });
     }

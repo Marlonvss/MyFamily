@@ -20,4 +20,24 @@ class DAOcartoes_itens_fatura extends DAObase {
         return $this->GetList($model, $list, $Where);
     }
 
+    function DeleteFromItem($itemCartao) {
+        $model = new cartoes_itens_fatura();
+        
+        if ($this->ModelValid($model)) {
+            $this->Conect();
+
+            $strsql = 'delete '
+                    . '  from ' . strtolower($model->getTable())
+                    . ' where id_cartao_item = ' . $itemCartao->id;
+
+            if (!mysql_query($strsql)) {
+                return new CONSTerro(true, mysql_error(), __CLASS__, __FUNCTION__);
+            } else {
+                return new CONSTerro(false, '', __CLASS__, __FUNCTION__);
+            }
+        } else {
+            return new CONSTerro(true, 'Modelo inválido', __CLASS__, __FUNCTION__);
+        }
+    }
+
 }

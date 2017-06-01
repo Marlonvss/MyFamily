@@ -15,6 +15,13 @@ function MakeLinkOptions($id) {
             '<button type="button" class="my_btn btn btn-link btn-md" onclick="loadEdit(' . $id . ')" data-toggle="modal" data-target="#editar"><i class="fa fa-folder-open-o" aria-hidden="true"></i></button>' .
             '<button type="button" class="my_btnbtn btn-link btn-md" onclick="loadDelete(' . $id . ')" data-toggle="modal" data-target="#deletar"><i class="fa fa-trash-o" aria-hidden="true"></i></button>';
 }
+
+//Recupera todos Classificacoes FInanceiras
+$ctrlClassificacaoFinanceira = new CONTROLLERclassificacoesfinanceiras();
+$erro = $ctrlClassificacaoFinanceira->RecuperaLista($listClassificacaoFinanceira);
+if ($erro->erro) {
+    echo $erro->mensagem;
+}
 ?>
 
 <div class="row">
@@ -38,6 +45,7 @@ function MakeLinkOptions($id) {
                         <td>Limite</td>
                         <td>Dia de fechamento</td>
                         <td>Dia de vencimento</td>
+                        <td>Classificação Financeira</td>
                         <td>Opções</td>
                     </tr>
                 </thead>
@@ -50,6 +58,13 @@ function MakeLinkOptions($id) {
                     } else {
 
                         foreach ($List as &$obj) {
+
+                            $ctrlClassificacaoFinanceira->LocateIDInList($obj->id_classificacaofinanceira, $listClassificacaoFinanceira, $classificacaoFinanceira);
+                            $txtClassificacaoFinanceira = '';
+                            if ($classificacaoFinanceira->id > 0) {
+                                $txtClassificacaoFinanceira = '<i class="fa ' . $classificacaoFinanceira->imagem . '"></i> - '.$classificacaoFinanceira->descricao;
+                            }
+
                             echo '<tr>'
                             . '<td>' . $obj->id . '</td>'
                             . '<td>' . $obj->descricao . '</td>'
@@ -57,6 +72,7 @@ function MakeLinkOptions($id) {
                             . '<td>' . $obj->limite . '</td>'
                             . '<td>' . $obj->dia_fechamento . '</td>'
                             . '<td>' . $obj->dia_vencimento . '</td>'
+                            . '<td>' . $txtClassificacaoFinanceira . '</td>'
                             . '<td class="col-md-1">' . MakeLinkOptions($obj->id) . '</td>'
                             . '</tr>';
                         }

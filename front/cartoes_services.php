@@ -15,13 +15,14 @@ $_LIMITE = ($_POST['limite']);
 $_DIA_FECHAMENTO = ($_POST['dia_fechamento']);
 $_DIA_VENCIMENTO = ($_POST['dia_vencimento']);
 $_ID_FAMILIA = unserialize($_SESSION['userLogged'])->id_familia;
+$_ID_CLASSIFICACAOFINANCEIRA = ($_POST['id_classificacaofinanceira']);
 
 if (isset($_POST['metodo'])) {
     $metodo = $_POST['metodo'];
 }
 
 if ($metodo == 'add') {
-    $Obj = new cartoes(0, $_DESCRICAO, $_NUMERO, $_LIMITE, $_DIA_FECHAMENTO, $_DIA_VENCIMENTO, $_ID_FAMILIA);
+    $Obj = new cartoes(0, $_DESCRICAO, $_NUMERO, $_LIMITE, $_DIA_FECHAMENTO, $_DIA_VENCIMENTO, $_ID_FAMILIA, $_ID_CLASSIFICACAOFINANCEIRA);
     $erro = $Controll->Save($Obj);
     if ($erro->erro) {
         echo $erro->mensagem;
@@ -29,7 +30,7 @@ if ($metodo == 'add') {
 }
 
 if ($metodo == "edit") {
-    $Obj = new cartoes($_ID, $_DESCRICAO, $_NUMERO, $_LIMITE, $_DIA_FECHAMENTO, $_DIA_VENCIMENTO, $_ID_FAMILIA);
+    $Obj = new cartoes($_ID, $_DESCRICAO, $_NUMERO, $_LIMITE, $_DIA_FECHAMENTO, $_DIA_VENCIMENTO, $_ID_FAMILIA, $_ID_CLASSIFICACAOFINANCEIRA);
     $erro = $Controll->Save($Obj);
     if ($erro->erro) {
         echo $erro->mensagem;

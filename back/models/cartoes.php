@@ -8,8 +8,9 @@ class cartoes {
     public $dia_fechamento;
     public $dia_vencimento;
     public $id_familia;
+    public $id_classificacaofinanceira;
 
-    function __construct($_id = 0, $_descricao = '', $_numero = 0, $_limite = 0, $_dia_fechamento = 0, $_dia_vencimento = 0, $_id_familia = 0) {
+    function __construct($_id = 0, $_descricao = '', $_numero = 0, $_limite = 0, $_dia_fechamento = 0, $_dia_vencimento = 0, $_id_familia = 0, $_id_classificacaofinanceira = 0) {
         $this->id = (int)$_id;
         $this->descricao = (string)$_descricao;
         $this->numero = (int)$_numero;
@@ -17,6 +18,7 @@ class cartoes {
         $this->dia_fechamento = (int)$_dia_fechamento;
         $this->dia_vencimento = (int)$_dia_vencimento;
         $this->id_familia = (int)$_id_familia;
+        $this->id_classificacaofinanceira = (int)$_id_classificacaofinanceira;
     }
 
     function RefreshByRow($row) {
@@ -27,6 +29,7 @@ class cartoes {
         $this->dia_fechamento = (int)$row['dia_fechamento'];
         $this->dia_vencimento = (int)$row['dia_vencimento'];
         $this->id_familia = (int)$row['id_familia'];
+        $this->id_classificacaofinanceira = (int)$row['id_classificacaofinanceira'];
     }
 
     // FieldsForCrud
@@ -46,6 +49,7 @@ class cartoes {
         $arr['dia_fechamento'] = $this->dia_fechamento;
         $arr['dia_vencimento'] = $this->dia_vencimento;
         $arr['id_familia'] = $this->id_familia;
+        $arr['id_classificacaofinanceira'] = $this->id_classificacaofinanceira;
 
         return $arr;
     }

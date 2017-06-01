@@ -15,8 +15,7 @@
                 'id_cartao': $('#add_cartao').val(),
                 'metodo': 'add'
             }
-        }).done(function (e) {
-            alert(e);
+        }).done(function(e) {
             location.reload();
         });
     }
@@ -76,8 +75,8 @@
             <label class="col-sm-2 control-label">Mês da 1ª parcela</label>
             <div class="col-sm-10">
                 <select class="form-control" name="mes_fatura_inicio" id="add_mes_fatura_inicio">
-                    <option value="0">Mês da compra</option>
-                    <option value="1">Mês após a compra</option>
+                    <option value="0">1 Mês após a compra</option>
+                    <option value="1">2 Meses após a compra</option>
                 </select>
             </div>
         </div>

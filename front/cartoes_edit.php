@@ -6,6 +6,7 @@
         $("#edt_limite").prop('readonly', true).val('Carregando...');
         $("#edt_dia_fechamento").prop('readonly', true).val('Carregando...');
         $("#edt_dia_vencimento").prop('readonly', true).val('Carregando...');
+        $("#edt_id_classificacaofinanceira").prop('readonly', true).val('Carregando...');
         $.ajax({
             url: 'front/cartoes_services.php',
             type: 'post',
@@ -21,6 +22,7 @@
             $("#edt_limite").prop('readonly', false).val(data.limite);
             $("#edt_dia_fechamento").prop('readonly', false).val(data.dia_fechamento);
             $("#edt_dia_vencimento").prop('readonly', false).val(data.dia_vencimento);
+            $("#edt_id_classificacaofinanceira").prop('readonly', false).val(data.id_classificacaofinanceira);
         });
     }
     
@@ -36,6 +38,7 @@
                 'limite': $('#edt_limite').val(),
                 'dia_fechamento': $('#edt_dia_fechamento').val(),
                 'dia_vencimento': $('#edt_dia_vencimento').val(),
+                'id_classificacaofinanceira': $('#edt_id_classificacaofinanceira').val(),
                 'metodo': 'edit'
             }
         }).done(function(){
@@ -85,6 +88,25 @@
             <label class="col-sm-2 control-label">Dia de vencimento</label>
             <div class="col-sm-10">
                 <input type="text" id="edt_dia_vencimento" class="form-control" name="dia_vencimento" placeholder="Dia de vencimento"  readonly="readonly">
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Cl. Financeira</label>
+            <div class="col-sm-10">
+                <select name="id_classificacaofinanceira" class="form-control" id="edt_id_classificacaofinanceira">
+                    <?php
+                    $Controll = new CONTROLLERclassificacoesfinanceiras;
+                    $erro = $Controll->RecuperaLista($List);
+                    if ($erro->erro) {
+                        echo $erro->mensagem;
+                    } else {
+                        echo '<option value="0"></option>';
+                        foreach ($List as &$obj) {
+                            echo '<option value="' . $obj->id . '">' . $obj->descricao . '</option>';
+                        }
+                    }
+                    ?>
+                </select>
             </div>
         </div>
     </div>

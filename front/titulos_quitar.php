@@ -50,7 +50,6 @@
                 'metodo': 'edit'
             }
         }).done(function(e){
-            alert(e);
             location.reload();
         });
     }

@@ -9,18 +9,22 @@
                 'metodo': 'refresh_cartoes'
             }
         }).done(function (e) {
-            alert(e);
             location.reload();
         });
     }
 </script>
 
 <?php
-
 $ControllClassificacao = new CONTROLLERclassificacoesfinanceiras();
 $erro = $ControllClassificacao->RecuperaLista($ListClassificacoes);
 if ($erro->erro) {
     echo $erro->mensagem;
+}
+
+function MakeLinkOptions($id) {
+    return
+            '<button type="button" class="my_btn btn btn-link btn-md" onclick="loadEdit(' . $id . ')" data-toggle="modal" data-target="#editar"><i class="fa fa-folder-open-o" aria-hidden="true"></i></button>' .
+            '<button type="button" class="my_btnbtn btn-link btn-md" onclick="loadDelete(' . $id . ')" data-toggle="modal" data-target="#deletar"><i class="fa fa-trash-o" aria-hidden="true"></i></button>';
 }
 
 //Recupera os itens dos cartões
@@ -43,7 +47,7 @@ if ($erro->erro) {
 } else {
     foreach ($ListCartoes as &$cartao) {
         $TotalCartao = 0;
-        
+
         echo '<div class="dashboard_container col-xs-12 col-sm-12 col-md-6">';
         echo '<div class="panel panel-default">';
         echo '<div class="panel-heading">';
@@ -77,9 +81,9 @@ if ($erro->erro) {
                     . '<td>' . $txtImagem . $obj->descricao . '</td>'
                     . '<td>' . $obj->valor . '</td>'
                     . '<td>FIXO</td>'
-                    . '<td></td>'
+                    . '<td>' . MakeLinkOptions($obj->id) . '</td>'
                     . '</tr>';
-                    
+
                     $TotalCartao = $TotalCartao + $obj->valor;
                 }
             }
@@ -91,14 +95,14 @@ if ($erro->erro) {
                 $ControllClassificacao->LocateIDInList($cartaoItem->id_classificacaofinanceira, $ListClassificacoes, $Classificacao);
                 $txtImagem = '';
                 if ($cartaoItem->id_classificacaofinanceira > 0) {
-                        $txtImagem = '<i class="fa ' . $Classificacao->imagem . '"></i> - ';
+                    $txtImagem = '<i class="fa ' . $Classificacao->imagem . '"></i> - ';
                 };
                 echo '<tr>'
                 . '<td>' . date('d/m/Y', strtotime($cartaoItem->datacompra)) . '</td>'
                 . '<td>' . $txtImagem . $cartaoItem->descricao . '</td>'
                 . '<td>' . $obj->valor . '</td>'
                 . '<td>' . $obj->parcela_atual . '/' . $obj->parcela_final . '</td>'
-                . '<td></td>'
+                . '<td>' . MakeLinkOptions($cartaoItem->id) . '</td>'
                 . '</tr>';
 
                 $TotalCartao = $TotalCartao + $obj->valor;
@@ -109,7 +113,7 @@ if ($erro->erro) {
         echo '</div>';
         echo '<div class="panel-footer">';
         echo '<b>Total </b>';
-        echo '<i class="pull-right">R$ '.number_format($TotalCartao, 2, ',', '.').'</i>';
+        echo '<i class="pull-right">R$ ' . number_format($TotalCartao, 2, ',', '.') . '</i>';
         echo '</div>';
         echo '</div>';
         echo '</div>';
@@ -123,6 +127,22 @@ if ($erro->erro) {
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <?php include 'cartoes_itens_add.php'; ?>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" data-backdrop="static" id="editar" tabindex="-1" role="dialog" aria-labelledby="editarLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <?php include 'cartoes_itens_edit.php'; ?>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade" data-backdrop="static" id="deletar" tabindex="-1" role="dialog" aria-labelledby="deletarLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <?php include 'cartoes_itens_del.php'; ?>
         </div>
     </div>
 </div>
