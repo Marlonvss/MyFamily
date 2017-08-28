@@ -60,9 +60,11 @@ if ($erro->erro) {
                         foreach ($List as &$obj) {
 
                             $ctrlClassificacaoFinanceira->LocateIDInList($obj->id_classificacaofinanceira, $listClassificacaoFinanceira, $classificacaoFinanceira);
-                            $txtClassificacaoFinanceira = '';
+                            
                             if ($classificacaoFinanceira->id > 0) {
                                 $txtClassificacaoFinanceira = '<i class="fa ' . $classificacaoFinanceira->imagem . '"></i> - '.$classificacaoFinanceira->descricao;
+                            } else {
+                                $txtClassificacaoFinanceira = '';
                             }
 
                             echo '<tr>'
