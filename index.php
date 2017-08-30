@@ -97,6 +97,14 @@ if (!isset($_SESSION['userLogged'])) {
                         </div>
                     </a>
                 </li>
+                <li class="submenu">
+                    <a href="?pag=<?php echo $pag_lancamentos ?>">
+                        <div>
+                            <i class="menu-icon fa fa-credit-card fa-fw"></i>
+                            <span class="menu-title">Lançamentos</span>
+                        </div>
+                    </a>
+                </li>
                 <li class="submenu dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
 

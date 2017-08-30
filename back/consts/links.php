@@ -7,3 +7,4 @@ $pag_classificacoes = 'classificacoesfinanceiras';
 $pag_centroscustos = 'centroscustos';
 $pag_cartoes = 'cartoes';
 $pag_dashboard_cartoes = 'dashboard_cartoes';
+$pag_lancamentos = 'lancamentos';
