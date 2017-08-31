@@ -10,8 +10,14 @@ include_once './../autoload.php';
 $Controll = new CONTROLLERlancamentos();
 $_ID = ($_POST['id']);
 $_DESCRICAO = ($_POST['descricao']);
+$_DATA = ($_POST['data']);
+$_VALOR = ($_POST['valor']);
+$_SINAL = ($_POST['sinal']);
+$_OBSERVACAO = ($_POST['observacao']);
+$_ID_CLASSIFICACAOFINANCEIRA = ($_POST['id_classificacaofinanceira']);
+$_ID_CENTROCUSTO = ($_POST['id_centrocusto']);
 $_ID_FAMILIA = unserialize($_SESSION['userLogged'])->id_familia;
-$_IMAGEM = ($_POST['imagem']);
+$_ID_TITULO = ($_POST['id_titulo']);
 
 
 if (isset($_POST['metodo'])) {
@@ -19,7 +25,7 @@ if (isset($_POST['metodo'])) {
 }
 
 if ($metodo == 'add') {
-    $Obj = new lancamentos(0, $_DESCRICAO, $_ID_FAMILIA, $_IMAGEM);
+    $Obj = new lancamentos(0, $_DESCRICAO, $_DATA, $_VALOR, $_ID_TITULO, $_SINAL, $_OBSERVACAO, $_ID_CLASSIFICACAOFINANCEIRA, $_ID_CENTROCUSTO, $_ID_FAMILIA);
     $erro = $Controll->Save($Obj);
     if ($erro->erro) {
         echo $erro->mensagem;
@@ -27,7 +33,7 @@ if ($metodo == 'add') {
 }
 
 if ($metodo == "edit") {
-    $Obj = new lancamentos($_ID, $_DESCRICAO, $_ID_FAMILIA, $_IMAGEM);
+    $Obj = new lancamentos($_ID, $_DESCRICAO, $_DATA, $_VALOR, $_ID_TITULO, $_SINAL, $_OBSERVACAO, $_ID_CLASSIFICACAOFINANCEIRA, $_ID_CENTROCUSTO, $_ID_FAMILIA);
     $erro = $Controll->Save($Obj);
     if ($erro->erro) {
         echo $erro->mensagem;
