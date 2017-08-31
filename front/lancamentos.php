@@ -41,11 +41,10 @@ if ($erro->erro) {
                     <tr>
                         <td>#</td>
                         <td>Descrição</td>
-                        <td>Num. Cartão</td>
-                        <td>Limite</td>
-                        <td>Dia de fechamento</td>
-                        <td>Dia de vencimento</td>
-                        <td>Classificação Financeira</td>
+                        <td>Data</td>
+                        <td>Valor</td>
+                        <td>Sinal</td>
+                        <td>Centro custo</td>
                         <td>Opções</td>
                     </tr>
                 </thead>
@@ -61,20 +60,28 @@ if ($erro->erro) {
 
                             $ctrlClassificacaoFinanceira->LocateIDInList($obj->id_classificacaofinanceira, $listClassificacaoFinanceira, $classificacaoFinanceira);
                             
-                            if ($classificacaoFinanceira->id > 0) {
-                                $txtClassificacaoFinanceira = '<i class="fa ' . $classificacaoFinanceira->imagem . '"></i> - '.$classificacaoFinanceira->descricao;
+                            if ($obj->id_classificacaofinanceira> 0) {
+                                $txtDescricao = '<i class="fa ' . $classificacaoFinanceira->imagem . '"></i> - '.$obj->descricao;
                             } else {
-                                $txtClassificacaoFinanceira = '';
+                                $txtDescricao = $obj->descricao;
                             }
+
+
+                        <td>#</td>
+                        <td>Descrição</td>
+                        <td>Data</td>
+                        <td>Valor</td>
+                        <td>Sinal</td>
+                        <td>Centro custo</td>
+                        <td>Opções</td>
 
                             echo '<tr>'
                             . '<td>' . $obj->id . '</td>'
-                            . '<td>' . $obj->descricao . '</td>'
-                            . '<td>' . $obj->numero . '</td>'
-                            . '<td>' . $obj->limite . '</td>'
-                            . '<td>' . $obj->dia_fechamento . '</td>'
-                            . '<td>' . $obj->dia_vencimento . '</td>'
-                            . '<td>' . $txtClassificacaoFinanceira . '</td>'
+                            . '<td>' . txtDescricao . '</td>'
+                            . '<td>' . $obj->data . '</td>'
+                            . '<td>' . $obj->valor . '</td>'
+                            . '<td>' . $obj->sinal . '</td>'
+                            . '<td>' . $obj->id_centrocusto . '</td>'
                             . '<td class="col-md-1">' . MakeLinkOptions($obj->id) . '</td>'
                             . '</tr>';
                         }
