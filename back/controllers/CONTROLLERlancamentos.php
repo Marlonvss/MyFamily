@@ -38,4 +38,14 @@ class CONTROLLERlancamentos extends CONTROLLERbase {
         return $this->GetDAO()->Delete($model);
     }
 
+    function RecuperaListaMesCorrente(&$list) {
+        $model = new lancamentos();
+
+        $Where = ' where YEAR(data) = 20' . $_SESSION['ano']
+                . ' and Month(data) = ' . $_SESSION['mes']
+                . ' and id_familia = ' . unserialize($_SESSION['userLogged'])->id_familia;
+
+                return $this->GetDAO()->GetList($model, $list, $Where);
+    }
+
 }

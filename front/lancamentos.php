@@ -52,7 +52,7 @@ if ($erro->erro) {
                 <tbody>
 
                     <?php
-                    $erro = $Controll->RecuperaLista($List);
+                    $erro = $Controll->RecuperaListaMesCorrente($List);
                     if ($erro->erro) {
                         echo $erro->mensagem;
                     } else {
