@@ -18,6 +18,7 @@ if (!isset($_COOKIE["myfamily"])) {
 if (!isset($_SESSION['userLogged'])) {
     header('location:./login.php');
 }
+
 ?>
 <!DOCTYPE html>
 <html>
@@ -100,7 +101,7 @@ if (!isset($_SESSION['userLogged'])) {
                 <li class="submenu">
                     <a href="?pag=<?php echo $pag_lancamentos ?>">
                         <div>
-                            <i class="menu-icon fa fa-credit-card fa-fw"></i>
+                            <i class="menu-icon fa fa-calculator fa-fw"></i>
                             <span class="menu-title">Lançamentos</span>
                         </div>
                     </a>
