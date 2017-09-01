@@ -45,7 +45,7 @@ class CONTROLLERlancamentos extends CONTROLLERbase {
                 . ' and Month(data) = ' . $_SESSION['mes']
                 . ' and id_familia = ' . unserialize($_SESSION['userLogged'])->id_familia;
 
-                return $this->GetDAO()->GetList($model, $list, $Where);
+        return $this->GetDAO()->GetList($model, $list, $Where);
     }
 
 }

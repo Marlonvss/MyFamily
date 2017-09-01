@@ -52,12 +52,12 @@ session_destroy();
                     <i class="fa fa-warning"></i> Usuário desconectado por falta de atividade.
                 </div>
                 <div class="box">
-                    <form id="login-form" autocomplete="off">
+                    <form id="login-form">
                         <div class="control">
                             <div class="label">Email</div>
                             <input type="text" id="email" class="form-control" placeholder="fulano@weblick.com.br" />
                         </div>
-                        <div class="control">
+                        <div class="control" autocomplete="off">
                             <div class="label">Senha</div>
                             <input type="password" id="senha" class="form-control" placeholder="123456" />
                         </div>

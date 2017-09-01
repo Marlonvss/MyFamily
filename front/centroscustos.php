@@ -33,10 +33,10 @@ function MakeLinkOptions($id) {
             <table class="table table-striped table-bordered table-hover">
                 <thead>
                     <tr>
-                        <td>#</td>
-                        <td>Descrição</td>
-                        <td>Meu custos?</td>
-                        <td>Opções</td>
+                        <td class="col-md-2">#</td>
+                        <td class="col-md-6">Descrição</td>
+                        <td class="col-md-3">Controla Despesa?</td>
+                        <td class="col-md-1">Opções</td>
                     </tr>
                 </thead>
                 <tbody>

@@ -16,82 +16,78 @@ function MakeLinkOptions($id) {
             '<button type="button" class="my_btnbtn btn-link btn-md" onclick="loadDelete(' . $id . ')" data-toggle="modal" data-target="#deletar"><i class="fa fa-trash-o" aria-hidden="true"></i></button>';
 }
 
-//Recupera todos Classificacoes FInanceiras
-$ctrlClassificacaoFinanceira = new CONTROLLERclassificacoesfinanceiras();
-$erro = $ctrlClassificacaoFinanceira->RecuperaLista($listClassificacaoFinanceira);
+//Recupera todos Centros de custos
+$ctrlCentroCusto = new CONTROLLERcentroscustos();
+$erro = $ctrlCentroCusto->RecuperaLista($listCentroCusto);
 if ($erro->erro) {
     echo $erro->mensagem;
 }
+
+//Recupera todas Classificações financeiras
+$ControllClassificacao = new CONTROLLERclassificacoesfinanceiras();
+$erro = $ControllClassificacao->RecuperaLista($listClassificacoes);
+if ($erro->erro) {
+    echo $erro->mensagem;
+}
+
 ?>
 
-<div class="row">
-    <div class="col-xs-12">
-        <span class="page-title red"><h2>Lançamentos</h2></span>
-    </div>
-</div>
-
 <div class="panel panel-default">
-    <div class="panel-heading">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#novo">Novo</button>
-    </div>
     <div class="panel-body">
-        <div class="table-responsive">
-            <table class="table table-striped table-bordered table-hover">
-                <thead>
-                    <tr>
-                        <td>#</td>
-                        <td>Descrição</td>
-                        <td>Data</td>
-                        <td>Valor</td>
-                        <td>Sinal</td>
-                        <td>Centro custo</td>
-                        <td>Opções</td>
-                    </tr>
-                </thead>
-                <tbody>
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <td class="col-md-1">#</td>
+                    <td class="col-md-4">Descrição</td>
+                    <td class="col-md-1">Data</td>
+                    <td class="col-md-1">Valor</td>
+                    <td class="col-md-2">C.Custo</td>
+                    <td class="col-md-1">Opções</td>
+                </tr>
+            </thead>
+            <tbody>
 
-                    <?php
-                    $erro = $Controll->RecuperaListaMesCorrente($List);
-                    if ($erro->erro) {
-                        echo $erro->mensagem;
-                    } else {
+                <?php
+                $erro = $Controll->RecuperaListaMesCorrente($List);
+                if ($erro->erro) {
+                    echo $erro->mensagem;
+                } else {
+                    foreach ($List as &$obj) {
 
-                        foreach ($List as &$obj) {
-
-                            $ctrlClassificacaoFinanceira->LocateIDInList($obj->id_classificacaofinanceira, $listClassificacaoFinanceira, $classificacaoFinanceira);
-                            
-                            if ($obj->id_classificacaofinanceira> 0) {
-                                $txtDescricao = '<i class="fa ' . $classificacaoFinanceira->imagem . '"></i> - '.$obj->descricao;
-                            } else {
-                                $txtDescricao = $obj->descricao;
-                            }
-
-
-                        <td>#</td>
-                        <td>Descrição</td>
-                        <td>Data</td>
-                        <td>Valor</td>
-                        <td>Sinal</td>
-                        <td>Centro custo</td>
-                        <td>Opções</td>
-
-                            echo '<tr>'
-                            . '<td>' . $obj->id . '</td>'
-                            . '<td>' . txtDescricao . '</td>'
-                            . '<td>' . $obj->data . '</td>'
-                            . '<td>' . $obj->valor . '</td>'
-                            . '<td>' . $obj->sinal . '</td>'
-                            . '<td>' . $obj->id_centrocusto . '</td>'
-                            . '<td class="col-md-1">' . MakeLinkOptions($obj->id) . '</td>'
-                            . '</tr>';
+                        $txtCentroCusto = '';
+                        if ($obj->id_centrocusto > 0) {
+                            $ctrlCentroCusto->LocateIDInList($obj->id_centrocusto, $listCentroCusto, $centroCusto);
+                            $txtCentroCusto = $centroCusto->descricao;
                         }
+
+                        $txtImagem = '';
+                        if ($obj->id_classificacaofinanceira > 0) {
+                            $ControllClassificacao->LocateIDInList($obj->id_classificacaofinanceira, $listClassificacoes, $Classificacao);
+                            $txtImagem = '<i class="fa ' . $Classificacao->imagem . '"></i> - ';
+                        };
+
+                        $txtValor = $obj->valor;
+                        if ($obj->sinal == 0) {
+                            $txtValor = $obj->valor * -1;
+                        };
+
+                        echo '<tr>'
+                        . '<td>' . $obj->id . '</td>'
+                        . '<td>' . $txtImagem . $obj->descricao . '</td>'
+                        . '<td>' . date('d/m/Y', strtotime($obj->data)) . '</td>'
+                        . '<td>R$ ' . number_format($txtValor, 2, ',', '.') . '</td>'
+                        . '<td>' . $txtCentroCusto . '</td>'
+                        . '<td>' . MakeLinkOptions($obj->id) . '</td>'
+                        . '</tr>';
                     }
-                    ?>
-                </tbody>
-            </table>
-        </div>
+                }
+                ?>
+            </tbody>
+        </table>
     </div>
 </div>
+
+
 
 <!-- Modal -->
 <div class="modal fade" data-backdrop="static" id="novo" tabindex="-1" role="dialog" aria-labelledby="novoLabel" aria-hidden="true">
@@ -117,3 +113,5 @@ if ($erro->erro) {
         </div>
     </div>
 </div>
+
+<a href="#" class="btn btn-primary btn-circle dashboard-float-button" data-toggle="modal" data-target="#novo"><i class="glyphicon glyphicon-plus"></i></a>

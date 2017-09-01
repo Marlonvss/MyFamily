@@ -101,7 +101,7 @@ if (!isset($_SESSION['userLogged'])) {
                 <li class="submenu">
                     <a href="?pag=<?php echo $pag_lancamentos ?>">
                         <div>
-                            <i class="menu-icon fa fa-credit-card fa-fw"></i>
+                            <i class="menu-icon fa fa-calculator fa-fw"></i>
                             <span class="menu-title">Lançamentos</span>
                         </div>
                     </a>
@@ -116,12 +116,20 @@ if (!isset($_SESSION['userLogged'])) {
                     </a>
                     <ul class="dropdown-menu">
                         <li>
-                            <a>
+                            <a href="?pag=<?php echo $pag_relat_demostrativo ?>">
                                 <div>
-                                    <i class="menu-icon fa fa-cogs"></i>
-                                    <span class="menu-sub-title">Em breve...</span>
+                                    <i class="menu-icon fa fa-file-text-o "></i>
+                                    <span class="menu-sub-title">Demonstrativos de despesas</span>
                                 </div>
-                            <a/>
+                            </a>
+                        </li>
+                        <li>
+                            <a href="?pag=<?php echo $pag_relat_fluxo ?>">
+                                <div>
+                                    <i class="menu-icon fa fa-file-text-o "></i>
+                                    <span class="menu-sub-title">Fluxo de movimentos</span>
+                                </div>
+                            </a>
                         </li>
                         <!--                        <li>
                                                     <a href="?pag=<?php echo $pag_usuarios ?>">
@@ -248,7 +256,7 @@ if (!isset($_SESSION['userLogged'])) {
                 if (isset($_GET['pag'])) {
                     $_SESSION['pag'] = $_GET['pag'];
                 } else {
-                    $_SESSION['pag'] = 'dashboard';
+                    $_SESSION['pag'] = $pag_dashboard;
                 }
 
 
