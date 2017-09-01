@@ -131,43 +131,10 @@ if (!isset($_SESSION['userLogged'])) {
                                 </div>
                             </a>
                         </li>
-                        <!--                        <li>
-                                                    <a href="?pag=<?php echo $pag_usuarios ?>">
-                                                        <div>
-                                                            <i class="menu-icon fa fa-user"></i>
-                                                            <span class="menu-sub-title">Usuários</span>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="?pag=<?php echo $pag_cartoes ?>">
-                                                        <div>
-                                                            <i class="menu-icon fa fa-credit-card fa-fw"></i>
-                                                            <span class="menu-sub-title">Cartões de crédito</span>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="?pag=<?php echo $pag_classificacoes ?>">
-                                                        <div>
-                                                            <i class="menu-icon fa fa-list-alt"></i>
-                                                            <span class="menu-sub-title">Classificações Financeiras</span>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                                <li>
-                                                    <a href="?pag=<?php echo $pag_centroscustos ?>">
-                                                        <div>
-                                                            <i class="menu-icon fa fa-list-alt"></i>
-                                                            <span class="menu-sub-title">Centro de Custo</span>
-                                                        </div>
-                                                    </a>
-                                                </li>-->
                     </ul>
                 </li>
                 <li class="submenu dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-
                         <div>
                             <i class="menu-icon fa fa-list-ol"></i>
                             <span class="menu-title">Cadastros</span>
@@ -213,7 +180,6 @@ if (!isset($_SESSION['userLogged'])) {
         <div class="content-container wrap">
             <nav class="navbar navbar-default">
                 <div>
-
                     <!-- Collect the nav links, forms, and other content for toggling -->
                     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                         <div class="navbar-header">
@@ -236,7 +202,7 @@ if (!isset($_SESSION['userLogged'])) {
                                         <div class="navbar-login">
                                             <h4 class="user-name"><?php echo (unserialize($_SESSION['userLogged'])->nome); ?></h4>
                                             <p><?php echo (unserialize($_SESSION['userLogged'])->email); ?></p>
-                                            <p><?php echo (unserialize($_SESSION['userLogged'])->familia); ?></p>
+                                            <p><button type="button" class="my_btn btn btn-link btn-md" onclick="loadEdit(' . <?php echo (unserialize($_SESSION['userLogged'])->id_familia); ?> . ')" data-toggle="modal" data-target="#familia"><?php echo (unserialize($_SESSION['userLogged'])->id_familia); ?></button></p>
                                             <div class="btn-group margin-bottom-2x" role="group">
                                                 <a href="login.php"><button type="button" class="btn btn-default"><i class="fa fa-sign-out"></i> Sair</button></a>
                                             </div>
@@ -274,7 +240,15 @@ if (!isset($_SESSION['userLogged'])) {
         <footer class="footer">
             <span><i class="fa fa-copyright"></i> WebLick Sistemas, 2017</span>
         </footer>
+
     </body>
 
+<div class="modal fade" data-backdrop="static" id="familia" tabindex="-1" role="dialog" aria-labelledby="editarLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <?php include 'familia_edit.php'; ?>
+        </div>
+    </div>
+</div>
 
 </html>

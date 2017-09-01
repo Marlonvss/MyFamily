@@ -25,124 +25,59 @@ if ($erro->erro) {
 }
 ?>
 
-<ul class="nav nav-tabs">
-    <li class="active"><a data-toggle="tab" href="#minhas">Minhas despesas</a></li>
-    <li><a data-toggle="tab" href="#outras">Outras despesas</a></li>
-</ul>
+<div class="panel panel-default">
+    <div class="panel-body">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <td class="col-md-1">#</td>
+                    <td class="col-md-4">Descrição</td>
+                    <td class="col-md-2">C.Custo</td>
+                    <td class="col-md-1">Vencimento</td>
+                    <td class="col-md-1">Valor</td>
+                    <td class="col-md-1">Valor pago</td>
+                    <td class="col-md-1">Quitado?</td>
+                    <td class="col-md-1">Opções</td>
+                </tr>
+            </thead>
+            <tbody>
 
-<div class="tab-content">
-    <div id="minhas" class="tab-pane fade in active">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <table class="table table-striped table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <td class="col-md-1">#</td>
-                            <td class="col-md-4">Descrição</td>
-                            <td class="col-md-2">C.Custo</td>
-                            <td class="col-md-1">Vencimento</td>
-                            <td class="col-md-1">Valor</td>
-                            <td class="col-md-1">Valor pago</td>
-                            <td class="col-md-1">Quitado?</td>
-                            <td class="col-md-1">Opções</td>
-                        </tr>
-                    </thead>
-                    <tbody>
+                <?php
+                $erro = $Controll->RecuperaListaMeusTitulosCorrente($List);
+                if ($erro->erro) {
+                    echo $erro->mensagem;
+                } else {
+                    foreach ($List as &$obj) {
 
-                        <?php
-                        $erro = $Controll->RecuperaListaMeusTitulosCorrente($List);
-                        if ($erro->erro) {
-                            echo $erro->mensagem;
+                        $ctrlCentroCusto->LocateIDInList($obj->id_centrocusto, $listCentroCusto, $centroCusto);
+                        $txtCentroCusto = '';
+                        if ($centroCusto->id > 0) {
+                            $txtCentroCusto = $centroCusto->descricao;
+                        }                                
+
+                        if ($obj->quitado == '0') {
+                            $txtQuitado = 'Não';
                         } else {
-                            foreach ($List as &$obj) {
-
-                                $ctrlCentroCusto->LocateIDInList($obj->id_centrocusto, $listCentroCusto, $centroCusto);
-                                $txtCentroCusto = '';
-                                if ($centroCusto->id > 0) {
-                                    $txtCentroCusto = $centroCusto->descricao;
-                                }                                
-
-                                if ($obj->quitado == '0') {
-                                    $txtQuitado = 'Não';
-                                } else {
-                                    $txtQuitado = 'Sim';
-                                }
-
-                                echo '<tr>'
-                                . '<td>' . $obj->id . '</td>'
-                                . '<td>' . $obj->descricao . '</td>'
-                                . '<td>' . $txtCentroCusto . '</td>'
-                                . '<td>' . date('d/m/Y', strtotime($obj->vencimento)) . '</td>'
-                                . '<td>R$ ' . number_format($obj->valor, 2, ',', '.') . '</td>'
-                                . '<td>R$ ' . number_format($obj->valorpago, 2, ',', '.') . '</td>'
-                                . '<td>' . $txtQuitado . '</td>'
-                                . '<td>' . MakeLinkOptions($obj->id) . '</td>'
-                                . '</tr>';
-                            }
+                            $txtQuitado = 'Sim';
                         }
-                        ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <div id="outras" class="tab-pane fade">
-        <div class="panel panel-default">
-            <div class="panel-body">
-                <table class="table table-striped table-bordered table-hover">
-                    <thead>
-                        <tr>
-                            <td class="col-md-1">#</td>
-                            <td class="col-md-4">Descrição</td>
-                            <td class="col-md-2">C.Custo</td>
-                            <td class="col-md-1">Vencimento</td>
-                            <td class="col-md-1">Valor</td>
-                            <td class="col-md-1">Valor pago</td>
-                            <td class="col-md-1">Quitado?</td>
-                            <td class="col-md-1">Opções</td>
-                        </tr>
-                    </thead>
-                    <tbody>
 
-                        <?php
-                        $erro = $Controll->RecuperaListaOutrosTitulosCorrente($ListOutras);
-                        if ($erro->erro) {
-                            echo $erro->mensagem;
-                        } else {
-                            foreach ($ListOutras as &$obj) {
-
-                                $ctrlCentroCusto->LocateIDInList($obj->id_centrocusto, $listCentroCusto, $centroCusto);
-                                $txtCentroCusto = '';
-                                if ($centroCusto->id > 0) {
-                                    $txtCentroCusto = $centroCusto->descricao;
-                                }                                
-
-                                if ($obj->quitado == '0') {
-                                    $txtQuitado = 'Não';
-                                } else {
-                                    $txtQuitado = 'Sim';
-                                }
-
-                                echo '<tr>'
-                                . '<td>' . $obj->id . '</td>'
-                                . '<td>' . $obj->descricao . '</td>'
-                                . '<td>' . $txtCentroCusto . '</td>'
-                                . '<td>' . date('d/m/Y', strtotime($obj->vencimento)) . '</td>'
-                                . '<td>R$ ' . number_format($obj->valor, 2, ',', '.') . '</td>'
-                                . '<td>R$ ' . number_format($obj->valorpago, 2, ',', '.') . '</td>'
-                                . '<td>' . $txtQuitado . '</td>'
-                                . '<td>' . MakeLinkOptions($obj->id) . '</td>'
-                                . '</tr>';
-                            }
-                        }
-                        ?>
-                    </tbody>
-                </table>
-            </div>
-        </div>
+                        echo '<tr>'
+                        . '<td>' . $obj->id . '</td>'
+                        . '<td>' . $obj->descricao . '</td>'
+                        . '<td>' . $txtCentroCusto . '</td>'
+                        . '<td>' . date('d/m/Y', strtotime($obj->vencimento)) . '</td>'
+                        . '<td>R$ ' . number_format($obj->valor, 2, ',', '.') . '</td>'
+                        . '<td>R$ ' . number_format($obj->valorpago, 2, ',', '.') . '</td>'
+                        . '<td>' . $txtQuitado . '</td>'
+                        . '<td>' . MakeLinkOptions($obj->id) . '</td>'
+                        . '</tr>';
+                    }
+                }
+                ?>
+            </tbody>
+        </table>
     </div>
 </div>
-
 
 
 <!-- Modal -->
