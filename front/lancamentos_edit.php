@@ -2,10 +2,9 @@
     function loadEdit(id) {
         $("#edt_id").prop('readonly', true).val('Carregando...');
         $("#edt_descricao").prop('readonly', true).val('Carregando...');
-        $("#edt_vencimento").prop('readonly', true).val('Carregando...');
+        $("#edt_data").prop('readonly', true).val('Carregando...');
         $("#edt_valor").prop('readonly', true).val('Carregando...');
         $("#edt_sinal").prop('readonly', true).val('Carregando...');
-        $("#edt_observacao").prop('readonly', true).val('Carregando...');
         $("#edt_id_classificacaofinanceira").prop('readonly', true).val('Carregando...');
         $("#edt_id_centrocusto").prop('readonly', true).val('Carregando...');
         $("#edt_id_familia").prop('readonly', true).val('Carregando...');
@@ -19,18 +18,17 @@
                 'metodo': 'load'
             }
         }).done(function (data) {
-            // Não permitir editar quando for título de Cartão.
-            $ReadOnly = data.id_cartao > 0;
+            // Não permitir editar quando for lançamento de titulo.
+            $ReadOnly = data.id_titulo > 0;
             $("#edt_id").val(data.id);
-            $("#edt_descricao").prop('readonly', $ReadOnly).val(data.descricao);
-            $("#edt_data").prop('readonly', $ReadOnly).val(data.data);
-            $("#edt_valor").prop('readonly', $ReadOnly).val(data.valor);
-            $("#edt_sinal").prop('readonly', $ReadOnly).val(data.sinal);
-            $("#edt_observacao").prop('readonly', $ReadOnly).val(data.observacao);
-            $("#edt_id_classificacaofinanceira").prop('readonly', $ReadOnly).val(data.id_classificacaofinanceira);
-            $("#edt_id_centrocusto").prop('readonly', $ReadOnly).val(data.id_centrocusto);
-            $("#edt_id_familia").prop('readonly', $ReadOnly).val(data.id_familia);
-            $("#edt_id_titulo").prop('readonly', $ReadOnly).val(data.id_titulo);
+            $("#edt_descricao").prop('readonly', false).val(data.descricao);
+            $("#edt_data").prop('readonly', false).val(data.data);
+            $("#edt_valor").prop('readonly', false).val(data.valor);
+            $("#edt_sinal").prop('readonly', false).val(data.sinal);
+            $("#edt_id_classificacaofinanceira").prop('readonly', false).val(data.id_classificacaofinanceira);
+            $("#edt_id_centrocusto").prop('readonly', false).val(data.id_centrocusto);
+            $("#edt_id_familia").prop('readonly', false).val(data.id_familia);
+            $("#edt_id_titulo").prop('readonly', false).val(data.id_titulo);
         });
     }
     
@@ -44,14 +42,14 @@
                 'descricao': $('#edt_descricao').val(),
                 'data': $('#edt_data').val(),
                 'valor': $('#edt_valor').val(),
-                'id_titulo': $('#edt_id_titulo').val(),
                 'sinal': $('#edt_sinal').val(),
-                'observacao': $('#edt_observacao').val(),
                 'id_classificacaofinanceira': $('#edt_id_classificacaofinanceira').val(),
                 'id_centrocusto': $('#edt_id_centrocusto').val(),
+                'id_familia': $('#edt_id_familia').val(),
+                'id_titulo': $('#edt_id_titulo').val(),
                 'metodo': 'edit'
             }
-        }).done(function(e){
+        }).done(function(){
             location.reload();
         });
     }
@@ -73,35 +71,30 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">Descrição</label>
             <div class="col-sm-10">
-                <input type="text" id="edt_descricao" class="form-control" name="Descricao" placeholder="Descrição"  readonly="readonly">
+                <input type="text" id="edt_descricao" class="form-control" name="descricao" placeholder="Descrição"  readonly="readonly">
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">Vencimento</label>
+            <label class="col-sm-2 control-label">Data</label>
             <div class="col-sm-10">
-                <input type="text" id="edt_data" class="form-control datepicker" name="Vencimento" placeholder="Vencimento"  readonly="readonly">
+                <input type="text" id="edt_data" class="form-control" name="data" placeholder="Data"  readonly="readonly">
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">Valor</label>
             <div class="col-sm-10">
-                <input type="text" id="edt_valor" class="form-control" name="Valor" placeholder="Valor"  readonly="readonly">
+                <input type="text" id="edt_valor" class="form-control" name="valor" placeholder="Valor"  readonly="readonly">
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">Valor pago</label>
+            <label class="col-sm-2 control-label">Sinal</label>
             <div class="col-sm-10">
-                <input type="text" id="edt_id_titulo" class="form-control" name="id_titulo" placeholder="Valor pago"  readonly="readonly">
+                <input type="radio" id="edt_sinal" name="sinal" value="0"> Débito<br>
+                <input type="radio" id="edt_sinal" name="sinal" value="1"> Crédito<br>                
             </div>
         </div>
         <div class="form-group">
-            <label class="col-sm-2 control-label">sinal?</label>
-            <div class="col-sm-10">
-                <input type="text" id="edt_sinal" class="form-control" name="sinal" placeholder="sinal?"  readonly="readonly">
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="col-sm-2 control-label">Cl. Financeira</label>
+            <label class="col-sm-2 control-label">Class. Financeira</label>
             <div class="col-sm-10">
                 <select name="id_classificacaofinanceira" class="form-control" id="edt_id_classificacaofinanceira">
                     <?php
@@ -137,6 +130,9 @@
                     ?>
                 </select>
             </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label"></label>
         </div>
     </div>
     <div class="modal-footer">

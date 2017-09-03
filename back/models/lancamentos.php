@@ -11,7 +11,6 @@ class lancamentos {
     public $id_familia;
     public $id_titulo;
 
-
     function __construct($_id = 0, $_descricao = '', $_data = '', $_valor = 0, $_sinal = 0, $_id_classificacaofinanceira = 0, $_id_centrocusto = 0, $_id_familia = 0, $_id_titulo = 0) {
         $this->id = (int)$_id;
         $this->descricao = (string)$_descricao;

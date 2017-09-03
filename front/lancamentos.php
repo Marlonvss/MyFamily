@@ -38,10 +38,11 @@ if ($erro->erro) {
             <thead>
                 <tr>
                     <td class="col-md-1">#</td>
-                    <td class="col-md-4">Descrição</td>
+                    <td class="col-md-5">Descrição</td>
                     <td class="col-md-1">Data</td>
                     <td class="col-md-1">Valor</td>
-                    <td class="col-md-2">C.Custo</td>
+                    <td class="col-md-2">C. Custo</td>
+                    <td class="col-md-1">Título</td>
                     <td class="col-md-1">Opções</td>
                 </tr>
             </thead>
@@ -77,6 +78,7 @@ if ($erro->erro) {
                         . '<td>' . date('d/m/Y', strtotime($obj->data)) . '</td>'
                         . '<td>R$ ' . number_format($txtValor, 2, ',', '.') . '</td>'
                         . '<td>' . $txtCentroCusto . '</td>'
+                        . '<td>' . $obj->id_titulo . '</td>'
                         . '<td>' . MakeLinkOptions($obj->id) . '</td>'
                         . '</tr>';
                     }
