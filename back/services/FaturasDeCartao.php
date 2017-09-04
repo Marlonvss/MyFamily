@@ -2,7 +2,7 @@
 
 session_start();
 
-function RefreshFaturaByCartaoMesAno($id_cartao, $mes = 0, $ano = 0) {
+function RefreshFaturaByCartaoMesAno($id_cartao = 0, $mes = 0, $ano = 0) {
 
     // Se os valores não foram definidos por parâmetro seta os valores da Sessao
     if ($mes == 0) {
@@ -19,8 +19,8 @@ function RefreshFaturaByCartaoMesAno($id_cartao, $mes = 0, $ano = 0) {
         return $error;
     }
 
-    // Recupera os dados dos itens da fatura
-    $error = $this->GetDAOItemFatura()->GetListByCartaoMesAno($cartao->id, $mes, $ano, $listItensFatura);
+    // Recupera os dados dos itens da fatura por Cartão/Mês/Ano
+    $error = $this->GetDAOItemFatura()->GetListByCartaoMesAno($id_cartao, $mes, $ano, $listItensFatura);
     if ($error->erro) {
         return $error;
     }
@@ -30,6 +30,12 @@ function RefreshFaturaByCartaoMesAno($id_cartao, $mes = 0, $ano = 0) {
     if ($error->erro) {
         return $error;
     }
+
+    //////////////////////////////////////
+    Separar ParValor (Cartão / ValorTotal)
+    Setar ClassFin do cartão
+    Setar Centro Custo default da Familia
+    //////////////////////////////////////
 
     // Calcula o valor total dos itens
     $valorTotal = 0;
@@ -45,7 +51,6 @@ function RefreshFaturaByCartaoMesAno($id_cartao, $mes = 0, $ano = 0) {
     if ($error->erro) {
         return $error;
     }
-
 
     // ===>  Mudar para "Deletar titulos desse cartão" para sempre criar um novo
 
