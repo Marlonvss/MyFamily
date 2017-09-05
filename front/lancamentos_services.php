@@ -18,7 +18,6 @@ $_ID_CENTROCUSTO = ($_POST['id_centrocusto']);
 $_ID_FAMILIA = unserialize($_SESSION['userLogged'])->id_familia;
 $_ID_TITULO = ($_POST['id_titulo']);
 
-
 if (isset($_POST['metodo'])) {
     $metodo = $_POST['metodo'];
 }

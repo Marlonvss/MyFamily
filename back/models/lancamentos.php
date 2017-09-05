@@ -41,13 +41,15 @@ class lancamentos {
 
         if ($Formatado) {
             $Separador = '"';
+            $FormatoData = 'Y-m-d';
         } else {
             $Separador = '';
+            $FormatoData = 'd/m/Y';
         }
 
         $arr['id'] = $this->id;
         $arr['descricao'] = $Separador . $this->descricao . $Separador;
-        $arr['data'] = $Separador . $this->data . $Separador;
+        $arr['data'] = $Separador . date($FormatoData, strtotime(str_replace('/', '-', $this->data))) . $Separador;
         $arr['valor'] = $this->valor;
         $arr['sinal'] = $this->sinal;
         $arr['id_classificacaofinanceira'] = $this->id_classificacaofinanceira;

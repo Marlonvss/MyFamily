@@ -19,6 +19,7 @@
             }
         }).done(function (data) {
             // Não permitir editar quando for lançamento de titulo.
+            alert(data.sinal);
             $ReadOnly = data.id_titulo > 0;
             $("#edt_id").val(data.id);
             $("#edt_descricao").prop('readonly', false).val(data.descricao);
@@ -77,7 +78,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">Data</label>
             <div class="col-sm-10">
-                <input type="text" id="edt_data" class="form-control" name="data" placeholder="Data"  readonly="readonly">
+                <input type="text" data-format="dd/MM/yyyy" id="edt_data" class="form-control datepicker" name="data" placeholder="Data" value="<?php echo date('d/m/Y') ?>" required>
             </div>
         </div>
         <div class="form-group">
@@ -89,8 +90,10 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">Sinal</label>
             <div class="col-sm-10">
-                <input type="radio" id="edt_sinal" name="sinal" value="0"> Débito<br>
-                <input type="radio" id="edt_sinal" name="sinal" value="1"> Crédito<br>                
+                <select name="sinal" class="form-control" id="edt_sinal">
+                    <option value="0">Débito</option>
+                    <option value="1">Crédito</option>
+                </select>
             </div>
         </div>
         <div class="form-group">

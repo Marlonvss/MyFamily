@@ -38,13 +38,22 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">Data</label>
             <div class="col-sm-10">
-                <input type="text" data-format="dd/MM/yyyy" id="add_data" class="form-control" name="data" placeholder="Data" required>
+                <input type="text" data-format="dd/MM/yyyy" id="add_data" class="form-control datepicker" name="data" placeholder="Data" value="<?php echo date('d/m/Y') ?>" required>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">Valor</label>
             <div class="col-sm-10">
                 <input type="text" id="add_valor" class="form-control" name="valor" placeholder="Valor" required>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="col-sm-2 control-label">Sinal</label>
+            <div class="col-sm-10">
+                <select name="sinal" class="form-control" id="edt_sinal">
+                    <option value="0" selected>Débito</option>
+                    <option value="1">Crédito</option>
+                </select>
             </div>
         </div>
         <div class="form-group">
