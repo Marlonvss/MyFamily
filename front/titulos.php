@@ -51,9 +51,9 @@ if ($erro->erro) {
 
                         $ctrlCentroCusto->LocateIDInList($obj->id_centrocusto, $listCentroCusto, $centroCusto);
                         $txtCentroCusto = '';
-                        if ($centroCusto->id > 0) {
+                        if ($obj->id_centrocusto > 0) {
                             $txtCentroCusto = $centroCusto->descricao;
-                        }                                
+                        }
 
                         if ($obj->quitado == '0') {
                             $txtQuitado = 'Não';

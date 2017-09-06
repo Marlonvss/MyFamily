@@ -14,9 +14,26 @@
     }
 </script>
 
+<div class="panel panel-default">
+    <div class="panel-heading">
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#novo">Novo</button>
+        <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#novo">Atualizar faturas</button>
+    </div>
+    <div class="panel-body">
+        <div class="table-responsive">
+
 <?php
-$ControllClassificacao = new CONTROLLERclassificacoesfinanceiras();
-$erro = $ControllClassificacao->RecuperaLista($ListClassificacoes);
+
+//Recupera todas Classificações
+$ctrlClassificacao = new CONTROLLERclassificacoesfinanceiras();
+$erro = $ctrlClassificacao->RecuperaLista($listClassificacoes);
+if ($erro->erro) {
+    echo $erro->mensagem;
+}
+
+//Recupera todos Centros de custos
+$ctrlCentroCusto = new CONTROLLERcentroscustos();
+$erro = $ctrlCentroCusto->RecuperaLista($listCentroCusto);
 if ($erro->erro) {
     echo $erro->mensagem;
 }
@@ -45,23 +62,34 @@ $erro = $ControllCartao->RecuperaLista($ListCartoes);
 if ($erro->erro) {
     echo $erro->mensagem;
 } else {
+    echo '<ul class="nav nav-tabs">';
+    foreach ($ListCartoes as &$cartao) {
+        if ($ListCartoes[0]->id == $cartao->id) {
+            echo '<li class="active"><a data-toggle="tab" href="#cartao_'. $cartao->id .'">' . $cartao->descricao . '</a></li>';
+        } else {
+            echo '<li><a data-toggle="tab" href="#cartao_'. $cartao->id .'">' . $cartao->descricao . '</a></li>';
+        }
+    }
+    echo '</ul>';
+
+    echo '<div class="tab-content">';
     foreach ($ListCartoes as &$cartao) {
         $TotalCartao = 0;
-
-        echo '<div class="dashboard_container col-xs-12 col-sm-12 col-md-6">';
+        if ($ListCartoes[0]->id == $cartao->id) {
+            echo '<div id="cartao_'. $cartao->id .'" class="tab-pane fade in active">';
+        } else {
+            echo '<div id="cartao_'. $cartao->id .'" class="tab-pane fade">';
+        }
         echo '<div class="panel panel-default">';
-        echo '<div class="panel-heading">';
-        echo '<strong>' . $cartao->descricao . '</strong>';
-        echo '<div class="btn btn-xs pull-right" onclick="refresh_cartoes(' . $cartao->id . ')"><i class="fa fa-refresh" aria-hidden="true"></i></div>';
-        echo '</div>';
         echo '<div class="table-responsive">';
         echo '<table class="table table-striped table-bordered table-hover">';
         echo '<thead>';
         echo '<tr>';
-        echo '<td class="col-md-3">Data da compra</td>';
-        echo '<td class="col-md-5">Descrição</td>';
+        echo '<td class="col-md-2">Data da compra</td>';
+        echo '<td class="col-md-4">Descrição</td>';
         echo '<td class="col-md-2">Valor</td>';
         echo '<td class="col-md-1">Parcela</td>';
+        echo '<td class="col-md-2">C. Custo</td>';
         echo '<td class="col-md-1">Opções</td>';
         echo '</tr>';
         echo '</thead>';
@@ -71,16 +99,24 @@ if ($erro->erro) {
         foreach ($ListItens as &$obj) {
             if ($obj->id_cartao == $cartao->id) {
                 if (($obj->parcelas == 0)) {
-                    $ControllClassificacao->LocateIDInList($obj->id_classificacaofinanceira, $ListClassificacoes, $Classificacao);
+                    $ctrlClassificacao->LocateIDInList($obj->id_classificacaofinanceira, $listClassificacoes, $Classificacao);
                     $txtImagem = '';
                     if ($obj->id_classificacaofinanceira > 0) {
                         $txtImagem = '<i class="fa ' . $Classificacao->imagem . '"></i> - ';
                     };
+
+                    $ctrlCentroCusto->LocateIDInList($obj->id_centrocusto, $listCentroCusto, $centroCusto);
+                    $txtCentroCusto = '';
+                    if ($obj->id_centrocusto > 0) {
+                        $txtCentroCusto = $centroCusto->descricao;
+                    }
+
                     echo '<tr>'
                     . '<td>' . date('d/m/Y', strtotime($obj->datacompra)) . '</td>'
                     . '<td>' . $txtImagem . $obj->descricao . '</td>'
-                    . '<td>' . $obj->valor . '</td>'
+                    . '<td>' . number_format($obj->valor, 2, ',', '.') . '</td>'
                     . '<td>FIXO</td>'
+                    . '<td>' . $txtCentroCusto . '</td>'
                     . '<td>' . MakeLinkOptions($obj->id) . '</td>'
                     . '</tr>';
 
@@ -92,16 +128,25 @@ if ($erro->erro) {
         foreach ($ListItensFatura as &$obj) {
             $ControllItem->LocateIDInList($obj->id_cartao_item, $ListItens, $cartaoItem);
             if ($cartaoItem->id_cartao == $cartao->id) {
-                $ControllClassificacao->LocateIDInList($cartaoItem->id_classificacaofinanceira, $ListClassificacoes, $Classificacao);
+
+                $ctrlClassificacao->LocateIDInList($cartaoItem->id_classificacaofinanceira, $listClassificacoes, $Classificacao);
                 $txtImagem = '';
                 if ($cartaoItem->id_classificacaofinanceira > 0) {
                     $txtImagem = '<i class="fa ' . $Classificacao->imagem . '"></i> - ';
                 };
+
+                $ctrlCentroCusto->LocateIDInList($obj->id_centrocusto, $listCentroCusto, $centroCusto);
+                $txtCentroCusto = '';
+                if ($obj->id_centrocusto > 0) {
+                    $txtCentroCusto = $centroCusto->descricao;
+                }
+
                 echo '<tr>'
                 . '<td>' . date('d/m/Y', strtotime($cartaoItem->datacompra)) . '</td>'
                 . '<td>' . $txtImagem . $cartaoItem->descricao . '</td>'
-                . '<td>' . $obj->valor . '</td>'
+                . '<td>' . number_format($obj->valor, 2, ',', '.') . '</td>'
                 . '<td>' . $obj->parcela_atual . '/' . $obj->parcela_final . '</td>'
+                . '<td>' . $txtCentroCusto . '</td>'
                 . '<td>' . MakeLinkOptions($cartaoItem->id) . '</td>'
                 . '</tr>';
 
@@ -118,10 +163,16 @@ if ($erro->erro) {
         echo '</div>';
         echo '</div>';
     }
+    echo '</div>';
 }
 ?>
 
-<a href="#" class="btn btn-primary btn-circle dashboard-float-button" data-toggle="modal" data-target="#novo"><i class="glyphicon glyphicon-plus"></i></a>
+        </div>
+    </div>
+</div>
+
+
+<!-- <a href="#" class="btn btn-primary btn-circle dashboard-float-button" data-toggle="modal" data-target="#novo"><i class="glyphicon glyphicon-plus"></i></a> -->
 <!-- Modal -->
 <div class="modal fade" data-backdrop="static" id="novo" tabindex="-1" role="dialog" aria-labelledby="novoLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
