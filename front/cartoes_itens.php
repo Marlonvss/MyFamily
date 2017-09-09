@@ -38,7 +38,7 @@ if ($erro->erro) {
     echo $erro->mensagem;
 }
 
-function MakeLinkOptions($id) {
+function MakeLinkOptionsCartoes($id) {
     return
             '<button type="button" class="my_btn btn btn-link btn-md" onclick="loadEdit(' . $id . ')" data-toggle="modal" data-target="#editar"><i class="fa fa-folder-open-o" aria-hidden="true"></i></button>' .
             '<button type="button" class="my_btnbtn btn-link btn-md" onclick="loadDelete(' . $id . ')" data-toggle="modal" data-target="#deletar"><i class="fa fa-trash-o" aria-hidden="true"></i></button>';
@@ -117,7 +117,7 @@ if ($erro->erro) {
                     . '<td>' . number_format($obj->valor, 2, ',', '.') . '</td>'
                     . '<td>FIXO</td>'
                     . '<td>' . $txtCentroCusto . '</td>'
-                    . '<td>' . MakeLinkOptions($obj->id) . '</td>'
+                    . '<td>' . MakeLinkOptionsCartoes($obj->id) . '</td>'
                     . '</tr>';
 
                     $TotalCartao = $TotalCartao + $obj->valor;
@@ -147,7 +147,7 @@ if ($erro->erro) {
                 . '<td>' . number_format($obj->valor, 2, ',', '.') . '</td>'
                 . '<td>' . $obj->parcela_atual . '/' . $obj->parcela_final . '</td>'
                 . '<td>' . $txtCentroCusto . '</td>'
-                . '<td>' . MakeLinkOptions($cartaoItem->id) . '</td>'
+                . '<td>' . MakeLinkOptionsCartoes($cartaoItem->id) . '</td>'
                 . '</tr>';
 
                 $TotalCartao = $TotalCartao + $obj->valor;

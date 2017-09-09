@@ -18,7 +18,6 @@ if (!isset($_COOKIE["myfamily"])) {
 if (!isset($_SESSION['userLogged'])) {
     header('location:./login.php');
 }
-
 ?>
 <!DOCTYPE html>
 <html>
@@ -40,6 +39,9 @@ if (!isset($_SESSION['userLogged'])) {
         <link rel="stylesheet" type="text/css" href="css/style.css">
         <link rel="stylesheet" type="text/css" href="css/theme.css">
         <link rel="stylesheet" type="text/css" href="css/mystyle.css">
+        <!-- Morris Charts CSS -->
+        <link href="css/morris.css" rel="stylesheet">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.css">
 
 
         <?php
@@ -52,11 +54,15 @@ if (!isset($_SESSION['userLogged'])) {
             // JQuery
             echo '<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>';
 
+
             //Bootstrap Core JavaScript
             echo '<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>';
         }
         ?>
 
+        <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/morris.js/0.5.1/morris.min.js"></script>
+        <script src="//cdnjs.cloudflare.com/ajax/libs/raphael/2.1.0/raphael-min.js"></script>
         <script type="text/javascript" src="js/Chart.min.js"></script>
         <script type="text/javascript" src="js/bootstrap-select.min.js"></script>
         <script type="text/javascript" src="js/main.js"></script> <!--Responsável pelo menu-->
@@ -65,12 +71,38 @@ if (!isset($_SESSION['userLogged'])) {
         <link rel="stylesheet" type="text/css" href="css/bootstrap-datepicker.css">
         <script type="text/javascript" src="js/bootstrap-datepicker.js"></script>
         <script type="text/javascript" src="js/bootstrap-datepicker.pt-BR.js"></script>
+
+        <!-- Morris Charts JavaScript -->
+        <script src="js/raphael-min.js"></script>
+        <script src="js/morris.min.js"></script>
+        <script src="js/morris-data.js"></script>
+
         <script>
             $(document).ready(function () {
                 $('.datepicker').datepicker({
                     language: 'pt-BR',
                     format: 'dd/mm/yyyy'
                 });
+            });
+            new Morris.Line({
+                // ID of the element in which to draw the chart.
+                element: 'myfirstchart',
+                // Chart data records -- each entry in this array corresponds to a point on
+                // the chart.
+                data: [
+                    {year: '2008', value: 20},
+                    {year: '2009', value: 10},
+                    {year: '2010', value: 5},
+                    {year: '2011', value: 5},
+                    {year: '2012', value: 20}
+                ],
+                // The name of the data record attribute that contains x-values.
+                xkey: 'year',
+                // A list of names of data record attributes that contain y-values.
+                ykeys: ['value'],
+                // Labels for the ykeys -- will be displayed when you hover over the
+                // chart.
+                labels: ['Value']
             });
         </script>        
     </head>
@@ -87,6 +119,14 @@ if (!isset($_SESSION['userLogged'])) {
                         <div>
                             <i class="menu-icon fa fa-th-large"></i>
                             <span class="menu-title">Dashboard</span>
+                        </div>
+                    </a>
+                </li>
+                <li class="submenu">
+                    <a href="?pag=<?php echo $pag_dashboard_titulos ?>">
+                        <div>
+                            <i class="menu-icon fa fa-barcode"></i>
+                            <span class="menu-title">Títulos</span>
                         </div>
                     </a>
                 </li>
@@ -243,12 +283,12 @@ if (!isset($_SESSION['userLogged'])) {
 
     </body>
 
-<div class="modal fade" data-backdrop="static" id="familia" tabindex="-1" role="dialog" aria-labelledby="editarLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <?php include 'familia_edit.php'; ?>
+    <div class="modal fade" data-backdrop="static" id="familia" tabindex="-1" role="dialog" aria-labelledby="editarLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <?php include 'familia_edit.php'; ?>
+            </div>
         </div>
     </div>
-</div>
 
 </html>
