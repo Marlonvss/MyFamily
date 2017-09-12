@@ -12,9 +12,9 @@ if (isset($_GET['remove'])) {
 
 function MakeLinkOptionsTitulo($id) {
     return
-            '<button type="button" class="my_btn btn btn-link btn-md" onclick="loadEdit(' . $id . ')" data-toggle="modal" data-target="#titulo_editar"><i class="fa fa-folder-open-o" aria-hidden="true"></i></button>' .
-            '<button type="button" class="my_btn btn btn-link btn-md" onclick="loadQuitar(' . $id . ')" data-toggle="modal" data-target="#titulo_quitar"><i class="fa fa-usd" aria-hidden="true"></i></button>' .
-            '<button type="button" class="my_btnbtn btn-link btn-md" onclick="loadDelete(' . $id . ')" data-toggle="modal" data-target="#titulo_deletar"><i class="fa fa-trash-o" aria-hidden="true"></i></button>';
+            '<button type="button" class="my_btn btn btn-link btn-md" onclick="loadEdit(' . $id . ')" data-toggle="modal" data-target="#editar"><i class="fa fa-folder-open-o" aria-hidden="true"></i></button>' .
+            '<button type="button" class="my_btn btn btn-link btn-md" onclick="loadQuitar(' . $id . ')" data-toggle="modal" data-target="#quitar"><i class="fa fa-usd" aria-hidden="true"></i></button>' .
+            '<button type="button" class="my_btnbtn btn-link btn-md" onclick="loadDelete(' . $id . ')" data-toggle="modal" data-target="#deletar"><i class="fa fa-trash-o" aria-hidden="true"></i></button>';
 }
 
 //Recupera todos Centros de custos
@@ -27,7 +27,7 @@ if ($erro->erro) {
 
 <div class="panel panel-default">
     <div class="panel-heading">
-        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#titulo_novo">Novo</button>
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#novo">Novo</button>
     </div>
     <div class="panel-body">
         <div class="table-responsive">
@@ -87,7 +87,7 @@ if ($erro->erro) {
 
 
 <!-- Modal -->
-<div class="modal fade" data-backdrop="static" id="titulo_novo" tabindex="-1" role="dialog" aria-labelledby="novoLabel" aria-hidden="true">
+<div class="modal fade" data-backdrop="static" id="novo" tabindex="-1" role="dialog" aria-labelledby="novoLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <?php include 'titulos_add.php'; ?>
@@ -95,7 +95,7 @@ if ($erro->erro) {
     </div>
 </div>
 
-<div class="modal fade" data-backdrop="static" id="titulo_editar" tabindex="-1" role="dialog" aria-labelledby="editarLabel" aria-hidden="true">
+<div class="modal fade" data-backdrop="static" id="editar" tabindex="-1" role="dialog" aria-labelledby="editarLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <?php include 'titulos_edit.php'; ?>
@@ -103,7 +103,7 @@ if ($erro->erro) {
     </div>
 </div>
 
-<div class="modal fade" data-backdrop="static" id="titulo_deletar" tabindex="-1" role="dialog" aria-labelledby="deletarLabel" aria-hidden="true">
+<div class="modal fade" data-backdrop="static" id="deletar" tabindex="-1" role="dialog" aria-labelledby="deletarLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <?php include 'titulos_del.php'; ?>
@@ -111,7 +111,7 @@ if ($erro->erro) {
     </div>
 </div>
 
-<div class="modal fade" data-backdrop="static" id="titulo_quitar" tabindex="-1" role="dialog" aria-labelledby="deletarLabel" aria-hidden="true">
+<div class="modal fade" data-backdrop="static" id="quitar" tabindex="-1" role="dialog" aria-labelledby="deletarLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <?php include 'titulos_quitar.php'; ?>

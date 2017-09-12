@@ -42,16 +42,20 @@ class cartoes_itens {
         if ($Formatado) {
             $Separador = '"';
             $FormatoData = 'Y-m-d';
+            $DecimalFormatFrom = ',';
+            $DecimalFormatTo = '.';
         } else {
             $Separador = '';
             $FormatoData = 'd/m/Y';
+            $DecimalFormatFrom = '.';
+            $DecimalFormatTo = ',';
         }
 
         $arr['id'] = $this->id;
         $arr['id_cartao'] = $this->id_cartao;
         $arr['datacompra'] = $Separador . date($FormatoData, strtotime(str_replace('/', '-', $this->datacompra))) . $Separador;
         $arr['descricao'] = $Separador . $this->descricao . $Separador;
-        $arr['valor'] = $this->valor;
+        $arr['valor'] = str_replace($DecimalFormatFrom, $DecimalFormatTo, $this->valor);
         $arr['parcelas'] = $this->parcelas;
         $arr['id_centrocusto'] = $this->id_centrocusto;
         $arr['id_classificacaofinanceira'] = $this->id_classificacaofinanceira;

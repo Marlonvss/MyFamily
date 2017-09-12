@@ -5,15 +5,15 @@
             type: 'post',
             dataType: 'text',
             data: {
-                'descricao': $('#add_titulo_descricao').val(),
-                'vencimento': $('#add_titulo_vencimento').val(),
-                'valor': $('#add_titulo_valor').val(),
-                'valorpago': $('#add_titulo_valorpago').val(),
-                'quitado': $('#add_titulo_quitado').val(),
-                'observacao': $('#add_titulo_observacao').val(),
-                'id_classificacaofinanceira': $('#add_titulo_id_classificacaofinanceira').val(),
-                'id_centrocusto': $('#add_titulo_id_centrocusto').val(),
-                'id_familia': $('#add_titulo_id_familia').val(),
+                'descricao': $('#add_descricao').val(),
+                'vencimento': $('#add_vencimento').val(),
+                'valor': $('#add_valor').val(),
+                'valorpago': $('#add_valorpago').val(),
+                'quitado': $('#add_quitado').val(),
+                'observacao': $('#add_observacao').val(),
+                'id_classificacaofinanceira': $('#add_id_classificacaofinanceira').val(),
+                'id_centrocusto': $('#add_id_centrocusto').val(),
+                'id_familia': $('#add_id_familia').val(),
                 'metodo': 'add'
             }
         }).done(function(e){
@@ -33,25 +33,25 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">Descrição</label>
             <div class="col-sm-10">
-                <input type="text" id="add_titulo_descricao" class="form-control" name="Descricao" placeholder="Descrição" required>
+                <input type="text" id="add_descricao" class="form-control" name="Descricao" placeholder="Descrição" required>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">Vencimento</label>
             <div class="col-sm-10">
-                <input type="text" data-format="dd/MM/yyyy" id="add_titulo_vencimento" class="form-control datepicker" name="Vencimento" placeholder="Vencimento" value="<?php echo date('d/m/Y') ?>" required>
+                <input type="text" data-format="dd/MM/yyyy" id="add_vencimento" class="form-control datepicker" name="Vencimento" placeholder="Vencimento" value="<?php echo date('d/m/Y') ?>" required>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">Valor</label>
             <div class="col-sm-10">
-                <input type="text" id="add_titulo_valor" class="form-control" name="Valor" placeholder="Valor" required>
+                <input type="text" id="add_valor" class="form-control" name="Valor" placeholder="Valor" required>
             </div>
         </div>
         <div class="form-group">
             <label class="col-sm-2 control-label">Cl. Financeira</label>
             <div class="col-sm-10">
-                <select name="id_classificacaofinanceira" class="form-control" id="add_titulo_id_classificacaofinanceira">
+                <select name="id_classificacaofinanceira" class="form-control" id="add_id_classificacaofinanceira">
                     <?php
                     $Controll = new CONTROLLERclassificacoesfinanceiras;
                     $erro = $Controll->RecuperaLista($List);
@@ -70,7 +70,7 @@
         <div class="form-group">
             <label class="col-sm-2 control-label">C. Custo</label>
             <div class="col-sm-10">
-                <select name="id_centrocusto" class="form-control" id="add_titulo_id_centrocusto">
+                <select name="id_centrocusto" class="form-control" id="add_id_centrocusto">
                     <?php
                     $Controll = new CONTROLLERcentroscustos;
                     $erro = $Controll->RecuperaLista($List);

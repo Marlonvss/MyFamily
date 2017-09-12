@@ -16,7 +16,7 @@ class cartoes_itens_fatura {
         $this->ano_fatura = (int)$_ano_fatura;
         $this->parcela_atual = (int)$_parcela_atual;
         $this->parcela_final = (string)$_parcela_final;
-        $this->valor = (int)$_valor;
+        $this->valor = (float)$_valor;
     }
 
     function RefreshByRow($row) {
@@ -26,7 +26,7 @@ class cartoes_itens_fatura {
         $this->ano_fatura = (int)$row['ano_fatura'];
         $this->parcela_atual = (int)$row['parcela_atual'];
         $this->parcela_final = (string)$row['parcela_final'];
-        $this->valor = (int)$row['valor'];
+        $this->valor = (float)$row['valor'];
     }
 
     // FieldsForCrud
@@ -35,8 +35,12 @@ class cartoes_itens_fatura {
 
         if ($Formatado) {
             $Separador = '"';
+            $DecimalFormatFrom = ',';
+            $DecimalFormatTo = '.';
         } else {
             $Separador = '';
+            $DecimalFormatFrom = '.';
+            $DecimalFormatTo = ',';
         }
 
         $arr['id'] = $this->id;
@@ -45,7 +49,7 @@ class cartoes_itens_fatura {
         $arr['ano_fatura'] = $this->ano_fatura;
         $arr['parcela_atual'] = $this->parcela_atual;
         $arr['parcela_final'] = $Separador . $this->parcela_final . $Separador;
-        $arr['valor'] = $this->valor;
+        $arr['valor'] = str_replace($DecimalFormatFrom, $DecimalFormatTo, $this->valor);
 
         return $arr;
     }
