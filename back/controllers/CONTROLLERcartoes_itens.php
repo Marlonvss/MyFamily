@@ -4,6 +4,7 @@ error_reporting(E_ERROR);
 session_start();
 
 include_once './autoload.php';
+include '../services/FaturasDeCartao.php';
 
 class CONTROLLERcartoes_itens extends CONTROLLERbase {
 
@@ -14,13 +15,9 @@ class CONTROLLERcartoes_itens extends CONTROLLERbase {
     private function GetDAOItemFatura() {
         return new DAOcartoes_itens_fatura();
     }
-
-    private function GetCONTROLLERCartao() {
-        return new CONTROLLERcartoes();
-    }
-
-    private function GetDAOCartoes() {
-        return new DAOcartoes();
+    
+    private function GetServiceFatura(){
+        return new ServiceFaturasCartoes;
     }
 
     function RecuperaByID(&$model) {
@@ -42,7 +39,6 @@ class CONTROLLERcartoes_itens extends CONTROLLERbase {
         if ($erro->erro) {
             return $erro;
         }
-
 
         // Salva o item
         if ($model->id == 0) {
@@ -79,10 +75,7 @@ class CONTROLLERcartoes_itens extends CONTROLLERbase {
                 if ($erro->erro) {
                     return $erro;
                 } else {
-                    $erro = $this->GetCONTROLLERCartao()->RefreshFaturaByCartaoMesAno($cartao->id, $Mes, $Ano);
-                    if ($erro->erro) {
-                        return $erro;
-                    }
+                    $this->GetServiceFatura()->RefreshFaturaByCartaoMesAno($cartao->id, $Mes, $Ano);
                 }
 
                 // Avança um mês para gravar o próximo registro...
@@ -107,10 +100,7 @@ class CONTROLLERcartoes_itens extends CONTROLLERbase {
                 $Mes = date('m', strtotime($model->datacompra));
                 $Ano = date('Y', strtotime($model->datacompra));
 
-                $erro = $this->GetCONTROLLERCartao()->RefreshFaturaByCartaoMesAno($model->id_cartao, $Mes, $Ano);
-                if ($erro->erro) {
-                    return $erro;
-                }
+                $this->GetServiceFatura()->RefreshFaturaByCartaoMesAno($model->id_cartao, $Mes, $Ano);
             }
         }
     }

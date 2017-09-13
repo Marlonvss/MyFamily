@@ -57,3 +57,13 @@ if ($metodo == "load") {
     header('Content-Type: application/json');
     echo json_encode($Obj->getFields(false));
 }
+
+if ($metodo == "refresh_faturas") {
+    //include_once 'back/services/FaturasCartoes.php';
+    //include_once '../back/services/FaturasCartoes.php';
+    include_once '../../back/services/FaturasCartoes.php';
+    //$service = new ServiceFaturasCartoes();
+    //$variavel = $service->nome();
+    echo '2';
+    //var_dump($variavel);
+}

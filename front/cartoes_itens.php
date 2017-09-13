@@ -1,15 +1,15 @@
 <script>
-    function refresh_cartoes(id_cartao) {
+    function refresh_faturas() {
         $.ajax({
-            url: 'front/cartoes_services.php',
+            url: 'front/cartoes_itens_services.php',
             type: 'post',
             dataType: 'text',
             data: {
-                'id': id_cartao,
-                'metodo': 'refresh_cartoes'
+                'metodo': 'refresh_faturas'
             }
         }).done(function (e) {
-            location.reload();
+            alert(e);
+            //location.reload();
         });
     }
 </script>
@@ -17,7 +17,7 @@
 <div class="panel panel-default">
     <div class="panel-heading">
         <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#novo">Novo</button>
-        <button type="button" class="btn btn-default btn-sm" data-toggle="modal" data-target="#novo">Atualizar faturas</button>
+        <button type="button" class="btn btn-default btn-sm" onclick="refresh_faturas()">Atualizar faturas</button>
     </div>
     <div class="panel-body">
         <div class="table-responsive">
