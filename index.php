@@ -215,6 +215,15 @@ if (!isset($_SESSION['userLogged'])) {
                         </li>
                     </ul>
                 </li>
+                <li class="submenu">
+                    <a href="?pag=<?php echo $pag_config ?>">
+                        <div>
+                            <i class="menu-icon fa fa-cogs"></i>
+                            <span class="menu-title">Configuração</span>
+                        </div>
+                    </a>
+                </li>
+
             </ul>
         </div>
         <div class="content-container wrap">

@@ -9,6 +9,7 @@ $pag_centroscustos = 'centroscustos';
 $pag_cartoes = 'cartoes';
 $pag_dashboard_cartoes = 'dashboard_cartoes';
 $pag_lancamentos = 'dashboard_lancamentos';
+$pag_config = 'config';
 
 $pag_relat_demostrativo = 'relat_demostrativo';
 $pag_relat_fluxo = 'relat_fluxomovimento';
